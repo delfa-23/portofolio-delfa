@@ -5,8 +5,28 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Portofolio Saya</title>
   <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    @keyframes jelly {
+      0%, 100% {
+        transform: scale(1, 1);
+      }
+      25% {
+        transform: scale(1.1, 0.9);
+      }
+      50% {
+        transform: scale(0.9, 1.1);
+      }
+      75% {
+        transform: scale(1.05, 0.95);
+      }
+    }
+
+    .animate-jelly {
+      animation: jelly 0.6s ease;
+    }
+  </style>
 </head>
-<body class="bg-gray-100 text-gray-800">
+<body class="text-gray-800">
 
   <!-- Navbar -->
   <header class="bg-white shadow-md sticky top-0 z-50">
@@ -20,33 +40,33 @@
     </div>
   </header>
 
-  <!-- Hero -->
-  <section class="text-center py-16 bg-gradient-to-br from-indigo-500 to-purple-600 text-white">
+  <!-- Hero Section -->
+  <section class="text-center py-16 text-white" style="background-color: #8DBCC7;">
     <img src="https://via.placeholder.com/150" alt="Foto Saya" class="w-32 h-32 mx-auto rounded-full mb-4 shadow-lg">
-    <h2 class="text-3xl font-bold mb-2">Nama Anda</h2>
+    <h2 class="text-3xl font-bold mb-2 animate-jelly">Nama Anda</h2>
     <p class="text-lg">Web Developer | Pelajar SMK | Freelancer</p>
   </section>
 
   <!-- About -->
-  <section id="about" class="py-16 px-6 max-w-4xl mx-auto">
-    <h3 class="text-2xl font-bold mb-4 text-center text-indigo-600">Tentang Saya</h3>
-    <p class="text-center text-gray-700 leading-relaxed">
+  <section id="about" class="py-16 px-6" style="background-color: #A4CCD9;">
+    <h3 class="text-2xl font-bold mb-4 text-center text-gray-800">Tentang Saya</h3>
+    <p class="text-center text-gray-700 leading-relaxed max-w-3xl mx-auto">
       Saya adalah pelajar SMK yang tertarik di bidang pengembangan web, khususnya front-end menggunakan Tailwind CSS dan JavaScript. Saya suka membangun website yang simpel namun fungsional.
     </p>
   </section>
 
   <!-- Projects -->
-  <section id="projects" class="bg-white py-16 px-6">
-    <h3 class="text-2xl font-bold text-center text-indigo-600 mb-8">Projek</h3>
+  <section id="projects" class="py-16 px-6" style="background-color: #C4E1E6;">
+    <h3 class="text-2xl font-bold text-center text-gray-800 mb-8">Projek</h3>
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
       <!-- Project 1 -->
-      <div class="bg-gray-100 p-6 rounded-lg shadow-md">
+      <div class="bg-white p-6 rounded-lg shadow-md">
         <img src="https://via.placeholder.com/300x200" class="rounded mb-4" alt="Project 1" />
         <h4 class="text-xl font-semibold mb-2">Aplikasi Pengajuan Barang</h4>
         <p class="text-sm text-gray-600">Web app sederhana untuk pengajuan pembelian barang di sekolah.</p>
       </div>
       <!-- Project 2 -->
-      <div class="bg-gray-100 p-6 rounded-lg shadow-md">
+      <div class="bg-white p-6 rounded-lg shadow-md">
         <img src="https://via.placeholder.com/300x200" class="rounded mb-4" alt="Project 2" />
         <h4 class="text-xl font-semibold mb-2">Portofolio Pribadi</h4>
         <p class="text-sm text-gray-600">Situs portofolio untuk menampilkan karya dan profil saya.</p>
@@ -55,8 +75,8 @@
   </section>
 
   <!-- Contact -->
-  <section id="contact" class="py-16 px-6 bg-gray-100">
-    <h3 class="text-2xl font-bold text-center text-indigo-600 mb-4">Kontak</h3>
+  <section id="contact" class="py-16 px-6" style="background-color: #EBFFD8;">
+    <h3 class="text-2xl font-bold text-center text-gray-800 mb-4">Kontak</h3>
     <p class="text-center text-gray-700 mb-6">Hubungi saya melalui email atau media sosial di bawah ini.</p>
     <div class="text-center space-x-4">
       <a href="mailto:emailkamu@example.com" class="text-indigo-600 hover:underline">Email</a>
