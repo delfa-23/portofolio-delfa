@@ -5,89 +5,215 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Portofolio Saya</title>
   <script src="https://cdn.tailwindcss.com"></script>
-  <style>
-    @keyframes jelly {
-      0%, 100% {
-        transform: scale(1, 1);
-      }
-      25% {
-        transform: scale(1.1, 0.9);
-      }
-      50% {
-        transform: scale(0.9, 1.1);
-      }
-      75% {
-        transform: scale(1.05, 0.95);
-      }
-    }
-
-    .animate-jelly {
-      animation: jelly 0.6s ease;
-    }
-  </style>
+  <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css">
 </head>
-<body class="text-gray-800">
+<body class="text-gray-800 font-sans bg-gradient-to-br from-[#6247aa] via-[#836fff] to-[#c1bfff]">
 
-  <!-- Navbar -->
-  <header class="bg-white shadow-md sticky top-0 z-50">
-    <div class="max-w-7xl mx-auto px-4 py-4 flex justify-between items-center">
-      <h1 class="text-xl font-bold text-indigo-600">Portofolio</h1>
-      <nav class="space-x-4">
-        <a href="#about" class="hover:text-indigo-500">Tentang</a>
-        <a href="#projects" class="hover:text-indigo-500">Projek</a>
-        <a href="#contact" class="hover:text-indigo-500">Kontak</a>
-      </nav>
-    </div>
-  </header>
+<header id="navbar" class="bg-black/20 backdrop-blur-md text-white sticky top-0 z-50 shadow-md transition-transform duration-300 ease-in-out">
+  <div class="max-w-7xl mx-auto px-4 py-4 flex justify-between items-center">
+    <h1 class="text-xl font-bold">Portofolio</h1>
+    <nav class="space-x-6">
+      <a href="#about" class="hover:text-indigo-200">About Me</a>
+      <a href="#skills" class="hover:text-indigo-200">Skills</a>
+      <a href="#projects" class="hover:text-indigo-200">Project</a>
+      <a href="#certificates" class="hover:text-indigo-200">Sertifikat</a>
+      <a href="#contact" class="hover:text-indigo-200">Contact</a>
+    </nav>
+  </div>
+</header>
 
-  <!-- Hero Section -->
-  <section class="text-center py-16 text-white" style="background-color: #8DBCC7;">
-    <img src="https://via.placeholder.com/150" alt="Foto Saya" class="w-32 h-32 mx-auto rounded-full mb-4 shadow-lg">
-    <h2 class="text-3xl font-bold mb-2 animate-jelly">Nama Anda</h2>
-    <p class="text-lg">Web Developer | Pelajar SMK | Freelancer</p>
-  </section>
+<section class="h-screen text-white flex flex-col items-center justify-center relative overflow-hidden">
+  <div class="z-10 text-center">
+    <h1 class="text-4xl md:text-6xl font-bold drop-shadow-xl">Welcome To My Portofolio!</h1>
+    <p class="text-xl mt-4"><span class="typing" id="typing"></span></p><br><br>
+    <a href="#contact" class="hire">Hire Me!</a>
+    
+  </div>
+  <div class="absolute top-10 left-10 w-16 h-16 bg-white/30 rounded-full animate-jelly"></div>
+  <div class="absolute bottom-20 right-20 w-20 h-20 bg-white/20 rounded-full animate-jelly"></div>
+</section>
 
-  <!-- About -->
-  <section id="about" class="py-16 px-6" style="background-color: #A4CCD9;">
-    <h3 class="text-2xl font-bold mb-4 text-center text-gray-800">Tentang Saya</h3>
-    <p class="text-center text-gray-700 leading-relaxed max-w-3xl mx-auto">
-      Saya adalah pelajar SMK yang tertarik di bidang pengembangan web, khususnya front-end menggunakan Tailwind CSS dan JavaScript. Saya suka membangun website yang simpel namun fungsional.
+<section id="about" class="py-16 px-6 bg-white text-gray-800" data-aos="fade-up">
+  <h3 class="text-2xl font-bold mb-8 text-center">About Me</h3>
+  <div class="max-w-4xl mx-auto flex flex-col md:flex-row items-center gap-8">
+  <img src="foto.png" alt="Foto" class="w-40 md:w-60 rounded-full shadow-lg mb-4 md:mb-0">
+
+  <div class="text-center md:text-left">
+    <h4 class="text-xl font-semibold mb-2">Delfa Tamerawan</h4>
+    <p class="leading-relaxed mb-2">Full-Stack Developer</p>
+    <p class="leading-relaxed">
+      I live in Cibubur. I am a vocational high school student passionate about web development
     </p>
-  </section>
+  </div>
+</div>
+</section>
 
-  <!-- Projects -->
-  <section id="projects" class="py-16 px-6" style="background-color: #C4E1E6;">
-    <h3 class="text-2xl font-bold text-center text-gray-800 mb-8">Projek</h3>
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
-      <!-- Project 1 -->
-      <div class="bg-white p-6 rounded-lg shadow-md">
-        <img src="https://via.placeholder.com/300x200" class="rounded mb-4" alt="Project 1" />
-        <h4 class="text-xl font-semibold mb-2">Aplikasi Pengajuan Barang</h4>
-        <p class="text-sm text-gray-600">Web app sederhana untuk pengajuan pembelian barang di sekolah.</p>
-      </div>
-      <!-- Project 2 -->
-      <div class="bg-white p-6 rounded-lg shadow-md">
-        <img src="https://via.placeholder.com/300x200" class="rounded mb-4" alt="Project 2" />
-        <h4 class="text-xl font-semibold mb-2">Portofolio Pribadi</h4>
-        <p class="text-sm text-gray-600">Situs portofolio untuk menampilkan karya dan profil saya.</p>
+<section id="skills" class="py-16 px-6 bg-[#B2A5FF] text-[#2D3E50]" data-aos="fade-up">
+  <h3 class="text-2xl font-bold mb-8 text-center">Skills</h3>
+  <div class="max-w-3xl mx-auto space-y-6">
+    <div>
+      <p class="mb-1 font-medium">HTML</p>
+      <div class="w-full bg-gray-200 rounded-full h-5">
+        <div class="bg-indigo-600 h-5 rounded-full text-sm text-white text-right pr-2" style="width: 85%">85%</div>
       </div>
     </div>
-  </section>
-
-  <!-- Contact -->
-  <section id="contact" class="py-16 px-6" style="background-color: #EBFFD8;">
-    <h3 class="text-2xl font-bold text-center text-gray-800 mb-4">Kontak</h3>
-    <p class="text-center text-gray-700 mb-6">Hubungi saya melalui email atau media sosial di bawah ini.</p>
-    <div class="text-center space-x-4">
-      <a href="mailto:emailkamu@example.com" class="text-indigo-600 hover:underline">Email</a>
-      <a href="https://instagram.com/" class="text-indigo-600 hover:underline">Instagram</a>
-      <a href="https://github.com/" class="text-indigo-600 hover:underline">GitHub</a>
+    <div>
+      <p class="mb-1 font-medium">PHP</p>
+      <div class="w-full bg-gray-200 rounded-full h-5">
+        <div class="bg-indigo-600 h-5 rounded-full text-sm text-white text-right pr-2" style="width: 80%">80%</div>
+      </div>
     </div>
-  </section>
+    <div>
+      <p class="mb-1 font-medium">JavaScript</p>
+      <div class="w-full bg-gray-200 rounded-full h-5">
+        <div class="bg-indigo-600 h-5 rounded-full text-sm text-white text-right pr-2" style="width: 50%">50%</div>
+      </div>
+    </div>
+    <div>
+      <p class="mb-1 font-medium">Laravel</p>
+      <div class="w-full bg-gray-200 rounded-full h-5">
+        <div class="bg-indigo-600 h-5 rounded-full text-sm text-white text-right pr-2" style="width: 70%">70%</div>
+      </div>
+    </div>
+    <div>
+      <p class="mb-1 font-medium">Flutter</p>
+      <div class="w-full bg-gray-200 rounded-full h-5">
+        <div class="bg-indigo-600 h-5 rounded-full text-sm text-white text-right pr-2" style="width: 2%">2%</div>
+      </div>
+    </div>
+  </div>
+</section>
 
-  <!-- Footer -->
-  <footer class="bg-white py-4 text-center text-sm text-gray-500">
-    © 2025 Nama Anda. Dibuat dengan TailwindCSS.
-  </footer>
+<!-- Projects -->
+<section id="projects" class="py-16 px-6 bg-[#F0F4FF]" data-aos="fade-up">
+  <h3 class="text-2xl font-bold text-center text-gray-800 mb-8">Projects</h3>
+  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
+    <!-- Project 1 -->
+    <div class="bg-white p-6 rounded-lg shadow-md">
+      <img src="proyek1.png" class="rounded mb-4" alt="Project 1" />
+      <h4 class="text-xl font-semibold mb-2">FastReq</h4>
+      <p class="text-sm text-gray-600">Simple web app for submitting purchase requests for goods in companies.</p>
+    </div>
+    <!-- Project 2 -->
+    <div class="bg-white p-6 rounded-lg shadow-md">
+      <img src="proyek2.png" class="rounded mb-4" alt="Project 2" />
+      <h4 class="text-xl font-semibold mb-2">Personal Portfolio</h4>
+      <p class="text-sm text-gray-600">Portfolio site to showcase my work and profile.</p>
+    </div>
+    <div class="bg-white p-6 rounded-lg shadow-md">
+      <img src="proyek3.png" class="rounded mb-4" alt="Project 3" />
+      <h4 class="text-xl font-semibold mb-2">PKL Web</h4>
+      <p class="text-sm text-gray-600">PKL</p>
+    </div>
+  </div>
+</section>
+
+<!-- Certificates -->
+<section id="certificates" class="py-16 px-6 bg-[#DAD2FF]" data-aos="fade-up">
+  <h3 class="text-2xl font-bold text-center text-gray-800 mb-8">Certificates</h3>
+  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
+    <div class="bg-[#E3F6F5] p-4 rounded-lg shadow">
+      <img src="https://via.placeholder.com/300x200" class="rounded mb-2" alt="Certificate 1">
+      <p class="text-center text-sm font-medium text-gray-700">Tes</p>
+    </div>
+    <div class="bg-[#E3F6F5] p-4 rounded-lg shadow">
+      <img src="https://via.placeholder.com/300x200" class="rounded mb-2" alt="Certificate 2">
+      <p class="text-center text-sm font-medium text-gray-700">Tes</p>
+    </div>
+    <div class="bg-[#E3F6F5] p-4 rounded-lg shadow">
+      <img src="https://via.placeholder.com/300x200" class="rounded mb-2" alt="Certificate 3">
+      <p class="text-center text-sm font-medium text-gray-700">Tes</p>
+    </div>
+  </div>
+</section>
+
+<!-- Contact -->
+<section id="contact" class="py-16 px-6 bg-[#EBEAFF]" data-aos="fade-up">
+  <h3 class="text-2xl font-bold text-center text-gray-800 mb-4">Contact</h3>
+  <p class="text-center text-gray-700 mb-6">Reach me via social media below.</p>
+
+    <div class="flex justify-center gap-6">
+      <!-- Email -->
+      
+
+    <!-- Instagram -->
+    <a href="https://www.instagram.com/delfa_tamerawan/" target="_blank">
+      <img src="instagram.png" alt="Instagram" class="w-8 h-8 hover:scale-110 transition-transform">
+    </a>
+
+    <!-- GitHub -->
+    <a href="https://github.com/delfa-23" target="_blank">
+      <img src="github.png" alt="GitHub" class="w-8 h-8 hover:scale-110 transition-transform">
+    </a>
+
+    <!-- LinkedIn -->
+    <a href="https://linkedin.com/" target="_blank">
+      <img src="linkedin.png" alt="LinkedIn" class="w-8 h-8 hover:scale-110 transition-transform">
+    </a>
+  </div><br>
+
+  <div class="flex justify-center gap-6">
+
+    <div class="flex items-center space-x-2">
+      <img src="email.png" alt="Email" class="w-8 h-8">
+      <span class="text-sm text-gray-700">degatamerawan@gmail.com</span>
+    </div>
+  </div>
+</section>
+
+
+<!-- Footer -->
+<footer class="bg-[#F8FAFC] py-4 text-center text-sm text-gray-500">
+  © 2025 Delfa Tamerawan. Built with TailwindCSS.
+</footer>
+
+
+<!-- Section Project, Certificate, Contact, Footer tetap seperti sebelumnya -->
+
+<script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+<script>
+  AOS.init();
+
+  // Navbar auto-hide on scroll
+  let lastScroll = 0;
+  const navbar = document.getElementById('navbar');
+  window.addEventListener('scroll', () => {
+    const currentScroll = window.pageYOffset;
+    navbar.style.transform = currentScroll > lastScroll ? 'translateY(-100%)' : 'translateY(0)';
+    lastScroll = currentScroll;
+  });
+
+  // Typing effect
+  const words = ["Hey there! Welcome to my space on the web — feel free to explore my portfolio"];
+  let wordIndex = 0;
+  let charIndex = 0;
+  const typingElement = document.getElementById("typing");
+
+  function type() {
+    if (charIndex < words[wordIndex].length) {
+      typingElement.textContent += words[wordIndex].charAt(charIndex);
+      charIndex++;
+      setTimeout(type, 100);
+    } else {
+      setTimeout(erase, 3000);
+    }
+  }
+
+  function erase() {
+    if (charIndex > 0) {
+      typingElement.textContent = words[wordIndex].substring(0, charIndex - 1);
+      charIndex--;
+      setTimeout(erase, 30);
+    } else {
+      wordIndex = (wordIndex + 1) % words.length;
+      setTimeout(type, 500);
+    }
+  }
+
+  document.addEventListener("DOMContentLoaded", () => {
+    setTimeout(type, 1000);
+  });
+</script>
 </body>
 </html>
