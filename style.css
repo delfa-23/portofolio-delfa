@@ -15,6 +15,18 @@
       0%, 100% { opacity: 1; }
       50% { opacity: 0; }
     }
+
+    @keyframes float {
+  0%   { transform: translate(50px, 0px); }
+  50%  { transform: translate(-10px, -10px); }
+  100% { transform: translate(50px, 0px); }
+}
+
+.animate-float {
+  animation: float 5s ease-in-out infinite;
+}
+
+
 .hire {
   position: relative;
   padding: 10px 20px;
