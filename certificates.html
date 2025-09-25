@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Certificates</title>
+  <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+</head>
+<body class="bg-gray-100 text-gray-800">
+
+  <!-- Navbar -->
+  <nav class="bg-white shadow-md p-4">
+    <div class="max-w-6xl mx-auto flex justify-between items-center">
+      <h1 class="font-bold text-lg">My Portfolio</h1>
+      <a href="index.html" class="text-indigo-600 hover:underline">Back to Home</a>
+    </div>
+  </nav>
+
+  <!-- Certificates Page -->
+  <section class="py-16 px-6" 
+           x-data="{ 
+             open: false, 
+             active: null, 
+             certifs: [
+               { name: 'Internet Introduction', file: '23. SERTIFIKAT INTERNET INTRODUCTION-1.png' },
+               { name: 'Front-End Development Introduction', file: '24. SERTIFIKAT FRONT-END DEVELOPMENT INTRODUCTION-1.png' },
+               { name: 'Back-End Development Introduction', file: '25. SERTIFIKAT BACK END DEVELOPMENT INTRODUCTION-1.png' },
+               { name: 'API Introduction', file: '26. SERTIFIKAT API INTRODUCTION-1.png' },
+               { name: 'How WebDev Works', file: '27. SERTIFIKAT HOW WEBDEV WORKS-1.png' },
+               { name: 'Figma Community', file: 'SERTIFIKAT FIGMA COMMUNITY-1.png' },
+               { name: 'Operating FigJam', file: 'SERTIFIKAT OPERATING FIGJAM-1.png' },
+               { name: 'UI Design Improvement', file: 'SERTIFIKAT UI DESIGN IMPROVEMENT-1.png' },
+               { name: 'Variant and Layout', file: 'SERTIFIKAT VARIANT AND LAYOUT-1.png' },
+               { name: 'Belajar Wireframing', file: 'SERTIFIKAT BELAJAR WIREFRAMING-1.png' },
+               { name: 'Collaboration', file: 'SERTIFIKAT COLLABORATION-1.png' },
+               { name: 'Design Documentation', file: 'SERTIFIKAT DESIGN DOCUMENTATION-1.png' },
+               { name: 'Design System', file: 'SERTIFIKAT DESIGN SYSTEM-1.png' },
+               { name: 'Designing Checkout Process', file: 'SERTIFIKAT DESIGNING CHECKOUT PROCESS-1.png' },
+               { name: 'Designing Dashboard UI', file: 'SERTIFIKAT DESIGNING DASHBOARD UI-1.png' },
+               { name: 'Designing Landing Page', file: 'SERTIFIKAT DESIGNING LANDING PAGE-1.png' },
+               { name: 'Designing Onboarding', file: 'SERTIFIKAT DESIGNING ONBOARDING-1.png' },
+               { name: 'FigJam Brainstorming & Ideation', file: 'SERTIFIKAT FIGJAM BRAINSTORMING & IDEATION-1.png' },
+               { name: 'FigJam', file: 'SERTIFIKAT FIGJAM-1.png' },
+               { name: 'Figma Tools', file: 'SERTIFIKAT FIGMA TOOLS-1.png' },
+               { name: 'Hi-Fi', file: 'SERTIFIKAT HI-FI-1.png' },
+               { name: 'Introduction Figma', file: 'SERTIFIKAT INTRODUCTION FIGMA-1.png' },
+               { name: 'Plugin', file: 'SERTIFIKAT PLUGIN-1.png' },
+               { name: 'Profil Page', file: 'SERTIFIKAT PROFIL PAGE-1.png' },
+               { name: 'Prototyping FigJam Mirror', file: 'SERTIFIKAT PROTOTYPING FIGMA MIRROR-1.png' },
+               { name: 'Prototyping', file: 'SERTIFIKAT PROTOTYPING-1.png' },
+               { name: 'Style Guide', file: 'SERTIFIKAT STYLE GUIDE-1.png' }
+             ] 
+           }">
+
+    <h2 class="text-3xl font-bold text-center mb-10">My Certificates</h2>
+
+    <!-- Grid -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 max-w-6xl mx-auto">
+      <template x-for="(cert, index) in certifs" :key="index">
+        <div class="bg-white p-6 rounded-lg shadow-md text-center">
+          <h4 class="text-lg font-semibold mb-4" x-text="cert.name"></h4>
+          <button 
+            @click="open = true; active = cert.file" 
+            class="bg-indigo-600 text-white px-4 py-2 rounded hover:bg-indigo-700 transition">
+            View
+          </button>
+        </div>
+      </template>
+    </div>
+
+    <!-- Modal -->
+    <div x-show="open" 
+         class="fixed inset-0 bg-black bg-opacity-70 flex items-center justify-center z-50"
+         @click="open = false">
+      <div class="bg-white rounded-lg p-4 max-w-4xl w-full h-[90vh] relative"
+           @click.stop>
+        <button class="absolute top-2 right-2 text-gray-600 hover:text-red-500"
+                @click="open = false">✕</button>
+        <img :src="'assets/certificates/' + active" 
+             alt="Certificate" class="w-full h-full object-contain rounded">
+      </div>
+    </div>
+
+  </section>
+</body>
+</html>

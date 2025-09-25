@@ -36,7 +36,7 @@
 <section id="about" class="py-16 px-6 bg-white text-gray-800" data-aos="fade-up">
   <h3 class="text-2xl font-bold mb-8 text-center">About Me</h3>
   <div class="max-w-4xl mx-auto flex flex-col md:flex-row items-center gap-8">
-  <img src="foto.png" alt="Foto" class="w-40 md:w-60 rounded-full shadow-lg mb-4 md:mb-0">
+  <img src="assets/images/foto.png" alt="Foto" class="w-40 md:w-60 rounded-full shadow-lg mb-4 md:mb-0">
 
   <div class="text-center md:text-left">
     <h4 class="text-xl font-semibold mb-2">Delfa Tamerawan</h4>
@@ -48,36 +48,132 @@
 </div>
 </section>
 
-  <section id="projects" class="py-16 px-6 bg-[#B2A5FF] text-[#2D3E50]" data-aos="fade-up">
-    <h3 class="text-2xl font-bold text-center text-gray-800 mb-8">Projects</h3>
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
-      
-      <!-- Project 1 -->
-      <div class="bg-white p-6 rounded-lg shadow-md text-center">
-        <img src="proyek1.png" class="rounded mb-4 mx-auto" alt="Project 1" />
-        <h4 class="text-xl font-semibold mb-2">FastReq</h4>
-        <p class="text-sm text-gray-600 mb-4">Simple web app for submitting purchase requests for goods in companies.</p>
-        <p class="text-sm text-gray-600 mb-4">Laravel</p>
-        <a href="https://delfa-23.github.io/fastreq-ui/" target="_blank"
-          class="inline-block bg-indigo-600 text-white px-4 py-2 rounded hover:bg-indigo-700 transition">
-          View Project
-        </a>
-      </div>
+  <section id="projects" class="py-16 px-6 bg-[#B2A5FF] text-[#2D3E50]" 
+         x-data="{ filter: 'all', open:false, video:null }">
+  <h3 class="text-2xl font-bold text-center text-gray-800 mb-8">Projects</h3>
 
-      <!-- Project 2 -->
-      <div class="bg-white p-6 rounded-lg shadow-md text-center">
-        <img src="proyek2.png" class="rounded mb-4 mx-auto" alt="Project 2" />
-        <h4 class="text-xl font-semibold mb-2">Personal Portfolio</h4>
-        <p class="text-sm text-gray-600 mb-4">Portfolio site to showcase my work and profile.</p>
-        <a href="https://delfa-23.github.io/portofolio-delfa/" target="_blank"
-          class="inline-block bg-indigo-600 text-white px-4 py-2 rounded hover:bg-indigo-700 transition">
-          View Project
-        </a>
-      </div>
+  <!-- Filter Buttons -->
+  <div class="flex justify-center gap-4 mb-8">
+    <button @click="filter='all'" 
+            :class="filter==='all' ? 'bg-indigo-600 text-white' : 'bg-white text-gray-700'"
+            class="px-4 py-2 rounded shadow hover:bg-indigo-100 transition">
+      All
+    </button>
+    <button @click="filter='web'" 
+            :class="filter==='web' ? 'bg-indigo-600 text-white' : 'bg-white text-gray-700'"
+            class="px-4 py-2 rounded shadow hover:bg-indigo-100 transition">
+      Web
+    </button>
+    <button @click="filter='mobile'" 
+            :class="filter==='mobile' ? 'bg-indigo-600 text-white' : 'bg-white text-gray-700'"
+            class="px-4 py-2 rounded shadow hover:bg-indigo-100 transition">
+      Mobile
+    </button>
+  </div>
 
+  <!-- Projects Grid -->
+  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
+
+    <!-- Project 1: FastReq (Web) -->
+    <div x-show="filter==='all' || filter==='web'" 
+         class="bg-white p-6 rounded-lg shadow-md text-center">
+      <img src="assets/images/project1.png" class="rounded mb-4 mx-auto" alt="FastReq" />
+      <h4 class="text-xl font-semibold mb-2">FastReq</h4>
+      <p class="text-sm text-gray-600 mb-4">Simple web app for submitting purchase requests for goods in companies.</p>
+      <p class="text-sm text-gray-600 mb-4">Laravel</p>
+      <a href="https://delfa-23.github.io/fastreq-ui/" target="_blank"
+        class="inline-block bg-indigo-600 text-white px-4 py-2 rounded hover:bg-indigo-700 transition">
+        View Project
+      </a>
     </div>
-  </section>
+
+    <!-- Project 2: Portfolio (Web) -->
+    <div x-show="filter==='all' || filter==='web'" 
+         class="bg-white p-6 rounded-lg shadow-md text-center">
+      <img src="assets/images/project2.png" class="rounded mb-4 mx-auto" alt="Portfolio" />
+      <h4 class="text-xl font-semibold mb-2">Personal Portfolio</h4>
+      <p class="text-sm text-gray-600 mb-4">Portfolio site to showcase my work and profile.</p>
+      <p class="text-sm text-gray-600 mb-4">HTML • CSS • JavaScript</p>
+      <a href="https://delfa-23.github.io/portofolio-delfa/" target="_blank"
+        class="inline-block bg-indigo-600 text-white px-4 py-2 rounded hover:bg-indigo-700 transition">
+        View Project
+      </a>
+    </div>
+
+    <!-- Project 3: Web PKL (Web) -->
+    <div x-show="filter==='all' || filter==='web'" 
+         class="bg-white p-6 rounded-lg shadow-md text-center">
+      <img src="assets/images/project3.png" class="rounded mb-4 mx-auto" alt="Web PKL" />
+      <h4 class="text-xl font-semibold mb-2">PKL Management Web</h4>
+      <p class="text-sm text-gray-600 mb-4">Web app for managing students internship (PKL) data and activities.</p>
+      <p class="text-sm text-gray-600 mb-4">Laravel</p>
+      <a href="https://delfa-23.github.io/web-pkl-ui/" target="_blank"
+        class="inline-block bg-indigo-600 text-white px-4 py-2 rounded hover:bg-indigo-700 transition">
+        View Project
+      </a>
+    </div>
+
+    <!-- Project 4: Health Apps (Mobile) -->
+    <div x-show="filter==='all' || filter==='mobile'" 
+         class="bg-white p-6 rounded-lg shadow-md text-center">
+      <div class="relative mx-auto w-40 mb-4">
+        <img src="assets/images/mockup-health.png" alt="Phone Mockup" class="w-full">
+      </div>
+      <h4 class="text-xl font-semibold mb-2">Health Apps</h4>
+      <p class="text-sm text-gray-600 mb-4">Mobile health app built with Flutter to help track daily habits.</p>
+      <p class="text-sm text-gray-600 mb-4">Flutter • Firebase</p>
+      <button @click="open=true; video='https://www.youtube.com/embed/LmdeaMrXF9E'"
+        class="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600 transition">
+        ▶ Demo
+      </button>
+    </div>
+
+    <!-- Project 5: Electronic Store App (Mobile) -->
+    <div x-show="filter==='all' || filter==='mobile'" 
+         class="bg-white p-6 rounded-lg shadow-md text-center">
+      <div class="relative mx-auto w-40 mb-4">
+        <img src="assets/images/mockup-electronic.png" alt="Phone Mockup" class="w-full">
+      </div>
+      <h4 class="text-xl font-semibold mb-2">Electronic Store App</h4>
+      <p class="text-sm text-gray-600 mb-4">Flutter mobile app for managing electronic store products and sales.</p>
+      <p class="text-sm text-gray-600 mb-4">Flutter • Firebase</p>
+      <button @click="open=true; video='https://www.youtube.com/embed/Hxzso_9Bps0'"
+        class="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600 transition">
+        ▶ Demo
+      </button>
+    </div>
+
+  </div>
+
+  <!-- Modal Video -->
+  <div x-show="open" class="fixed inset-0 bg-black bg-opacity-80 flex items-center justify-center z-50"
+       @click="open=false; video=null">
+    <div class="bg-white rounded-lg p-4 max-w-2xl w-full relative" @click.stop>
+      <button class="absolute top-2 right-2 text-gray-600 hover:text-red-500"
+              @click="open=false; video=null">✕</button>
+      <div class="aspect-w-16 aspect-h-9">
+        <iframe :src="video" class="w-full h-96 rounded-lg" frameborder="0" allowfullscreen></iframe>
+      </div>
+    </div>
+  </div>
+</section>
+
 </div>
+<!-- Certificates Section (di index.html) -->
+<section id="certificate" class="py-16 px-6 bg-white text-gray-800">
+  <h3 class="text-2xl font-bold mb-6 text-center">Certificates</h3>
+  <p class="text-center text-gray-600 mb-6">
+    Some of my certificates
+  </p>
+  
+  <div class="text-center">
+    <a href="certificates.html" 
+       class="bg-indigo-600 text-white px-6 py-3 rounded-lg shadow hover:bg-indigo-700 transition">
+      View All Certificates
+    </a>
+  </div>
+</section>
+
 
 <section id="contact" class="py-16 px-6 bg-[#EBEAFF]" data-aos="fade-up">
   <h3 class="text-2xl font-bold text-center text-gray-800 mb-4">Contact</h3>
@@ -86,20 +182,20 @@
   <!-- Social Media -->
   <div class="flex justify-center gap-6 mb-8">
     <a href="https://www.instagram.com/delfa_tamerawan/" target="_blank">
-      <img src="instagram.png" alt="Instagram" class="w-8 h-8 hover:scale-110 transition-transform">
+      <img src="assets/images/instagram.png" alt="Instagram" class="w-8 h-8 hover:scale-110 transition-transform">
     </a>
     <a href="https://github.com/delfa-23" target="_blank">
-      <img src="github.png" alt="GitHub" class="w-8 h-8 hover:scale-110 transition-transform">
+      <img src="assets/images/github.png" alt="GitHub" class="w-8 h-8 hover:scale-110 transition-transform">
     </a>
     <a href="https://linkedin.com/" target="_blank">
-      <img src="linkedin.png" alt="LinkedIn" class="w-8 h-8 hover:scale-110 transition-transform">
+      <img src="assets/images/linkedin.png" alt="LinkedIn" class="w-8 h-8 hover:scale-110 transition-transform">
     </a>
   </div>
 
   <div class="flex justify-center gap-6">
 
     <div class="flex items-center space-x-2">
-      <img src="email.png" alt="Email" class="w-8 h-8">
+      <img src="assets/images/email.png" alt="Email" class="w-8 h-8">
     </div>
   </div><br>
 
@@ -130,6 +226,8 @@
 
 <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
+
 <script>
   (function(){
     emailjs.init("LDgu6mHW1D5eaafDq"); // Public Key kamu
