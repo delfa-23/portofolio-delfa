@@ -50,7 +50,8 @@
                { name: 'Prototyping FigJam Mirror', file: 'SERTIFIKAT PROTOTYPING FIGMA MIRROR-1.png' },
                { name: 'Prototyping', file: 'SERTIFIKAT PROTOTYPING-1.png' },
                { name: 'Style Guide', file: 'SERTIFIKAT STYLE GUIDE-1.png' },
-               { name: 'Intro to Data Analytics', file: 'data_analyst.png'}
+               { name: 'Intro to Data Analytics', file: 'data_analyst.png'},
+               { name: 'Flutter', file: 'flutter_sanbercode-1.png'},
              ] 
            }">
 
@@ -59,13 +60,16 @@
     <!-- Grid -->
     <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 max-w-6xl mx-auto">
       <template x-for="(cert, index) in certifs" :key="index">
-        <div class="bg-white p-6 rounded-lg shadow-md text-center">
-          <h4 class="text-lg font-semibold mb-4" x-text="cert.name"></h4>
-          <button 
-            @click="open = true; active = cert.file" 
-            class="bg-indigo-600 text-white px-4 py-2 rounded hover:bg-indigo-700 transition">
-            View
-          </button>
+        <div class="bg-white p-4 rounded-lg shadow-md text-center">
+          <h4 class="text-lg font-semibold mb-2" x-text="cert.name"></h4>
+          
+          <!-- Thumbnail Certificate -->
+          <img 
+            :src="'assets/certificates/' + cert.file" 
+            :alt="cert.name" 
+            class="w-full h-40 object-contain rounded cursor-pointer hover:scale-105 transition-transform duration-200"
+            @click="open = true; active = cert.file"
+          >
         </div>
       </template>
     </div>
