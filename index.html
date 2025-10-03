@@ -12,34 +12,77 @@
 </head>
 <body class="text-gray-800 font-sans bg-gradient-to-br from-[#6247aa] via-[#836fff] to-[#c1bfff]">
 
-<header id="navbar" class="bg-black/20 backdrop-blur-md text-white sticky top-0 z-50 shadow-md transition-transform duration-300 ease-in-out">
+<header x-data="{open:false}" 
+  class="bg-black/20 backdrop-blur-md text-white sticky top-0 z-50 shadow-md">
   <div class="max-w-7xl mx-auto px-4 py-4 flex justify-between items-center">
     <h1 class="text-xl font-bold">Portofolio</h1>
-    <nav class="space-x-6 flex items-center">
+
+    <!-- Desktop Menu -->
+    <nav class="hidden md:flex space-x-6 items-center">
       <a href="#about" class="hover:text-indigo-200">About Me</a>
       <a href="#projects" class="hover:text-indigo-200">Project</a>
       <a href="#certificates" class="hover:text-indigo-200">Certificate</a>
       <a href="#contact" class="hover:text-indigo-200">Contact</a>
-
-      <!-- Download CV Button -->
-      <a href="assets/cv.pdf" target="_blank" 
-        class="ml-4 px-4 py-2 bg-indigo-600 hover:bg-indigo-700 text-white font-medium rounded-lg shadow-md transition">
-        Download CV
+      <a href="assets/cv.pdf" target="_blank"
+        class="ml-4 px-4 py-2 bg-indigo-600 hover:bg-indigo-700 rounded-lg shadow-md">
+        View CV
       </a>
     </nav>
+
+    <!-- Mobile Hamburger -->
+    <button @click="open=!open" class="md:hidden focus:outline-none">
+      ☰
+    </button>
+  </div>
+
+  <!-- Mobile Menu -->
+  <div x-show="open" class="md:hidden bg-black/90 text-white px-6 py-4 space-y-4">
+    <a href="#about" class="block">About Me</a>
+    <a href="#projects" class="block">Project</a>
+    <a href="#certificates" class="block">Certificate</a>
+    <a href="#contact" class="block">Contact</a>
+    <a href="assets/cv.pdf" target="_blank"
+      class="block bg-indigo-600 hover:bg-indigo-700 text-center py-2 rounded-lg">
+      View CV
+    </a>
   </div>
 </header>
+
 
 <section class="h-screen text-white flex flex-col items-center justify-center relative overflow-hidden">
   <div class="z-10 text-center">
     <h1 class="text-4xl md:text-6xl font-bold drop-shadow-xl">Welcome To My Portofolio!</h1>
     <p class="text-xl mt-4"><span class="typing" id="typing"></span></p><br><br>
-    <a href="#contact" class="hire">Hire Me!</a>
-    
+
+    <!-- CTA Buttons -->
+    <div class="flex flex-col sm:flex-row gap-4 justify-center">
+      <!-- LinkedIn -->
+      <a href="https://www.linkedin.com/in/delfa-tamerawan/" target="_blank"
+         class="flex items-center gap-2 px-5 py-3 bg-blue-600 hover:bg-blue-700 rounded-lg shadow-md transition">
+        <!-- LinkedIn Icon -->
+        <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+          <path d="M4.98 3.5C4.98 5.43 3.43 7 1.5 7S-2 5.43-2 3.5 0.57 0 2.5 0s2.48 1.57 2.48 3.5zM0 8h5v16H0V8zm7.5 0h4.7v2.2h.1c.65-1.2 2.2-2.5 4.5-2.5 4.8 0 5.7 3.2 5.7 7.3V24h-5v-7.5c0-1.8 0-4.2-2.6-4.2s-3 2-3 4.1V24h-5V8z"/>
+        </svg>
+        Hire Me
+      </a>
+
+      <!-- GitHub -->
+      <a href="https://github.com/delfa-23" target="_blank"
+         class="flex items-center gap-2 px-5 py-3 bg-gray-800 hover:bg-gray-900 rounded-lg shadow-md transition">
+        <!-- GitHub Icon -->
+        <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+          <path d="M12 0C5.37 0 0 5.37 0 12a12 12 0 008.21 11.44c.6.11.82-.26.82-.58v-2.17c-3.34.73-4.04-1.61-4.04-1.61-.55-1.4-1.34-1.77-1.34-1.77-1.1-.74.09-.72.09-.72 1.22.09 1.86 1.26 1.86 1.26 1.08 1.85 2.83 1.32 3.52 1 .11-.79.42-1.32.76-1.62-2.67-.3-5.48-1.33-5.48-5.93 0-1.31.47-2.39 1.24-3.24-.12-.3-.54-1.52.12-3.16 0 0 1-.32 3.3 1.23a11.3 11.3 0 016 0c2.3-1.55 3.3-1.23 3.3-1.23.66 1.64.24 2.86.12 3.16.77.85 1.24 1.93 1.24 3.24 0 4.61-2.81 5.63-5.49 5.93.43.37.81 1.1.81 2.22v3.29c0 .32.22.7.83.58A12 12 0 0024 12c0-6.63-5.37-12-12-12z"/>
+        </svg>
+        GitHub
+      </a>
+    </div>
   </div>
+
+  <!-- Background Circles -->
   <div class="absolute top-10 left-10 w-16 h-16 bg-white/30 rounded-full animate-jelly"></div>
   <div class="absolute bottom-20 right-20 w-20 h-20 bg-white/20 rounded-full animate-jelly"></div>
 </section>
+
 
 <section id="about" class="py-16 px-6 bg-white text-gray-800" data-aos="fade-up">
   <h3 class="text-2xl font-bold mb-8 text-center">About Me</h3>
@@ -47,7 +90,7 @@
     <img src="assets/images/foto.png" alt="Foto" class="w-40 md:w-60 rounded-full shadow-lg mb-4 md:mb-0">
 
     <div class="text-center md:text-left">
-      <h4 class="text-xl font-semibold mb-2">Delfa Tamerawan</h4>
+      <h4 class="text-xl font-semibold mb-2">Muhammad Delfa Tamerawan</h4>
       <p class="leading-relaxed mb-2">Full-Stack Developer</p>
       <p class="leading-relaxed">
         I am passionate about building web applications that are not only functional but also user-friendly. 
