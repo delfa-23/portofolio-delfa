@@ -154,7 +154,7 @@
          class="bg-white p-6 rounded-lg shadow-md text-center">
       <img src="assets/images/project2.png" class="rounded mb-4 mx-auto" alt="Portfolio" />
       <h4 class="text-xl font-semibold mb-2">Personal Portfolio</h4>
-      <p class="text-sm text-gray-600 mb-4">Portfolio site to showcase my work and profile.</p>
+      <p class="text-sm text-gray-600 mb-4">Portfolio site to showcase my work and profile.</p><br>
       <p class="text-sm text-gray-600 mb-4">HTML • CSS • JavaScript</p>
       <div class="flex gap-2 justify-center">
         <a href="https://delfa-23.github.io/portofolio-delfa/" target="_blank"
@@ -170,23 +170,30 @@
 
     <!-- Project 3: Web PKL (Web) -->
     <div x-show="filter==='all' || filter==='web'" 
-         class="bg-white p-6 rounded-lg shadow-md text-center">
-      <img src="assets/images/project3.png" class="rounded mb-4 mx-auto" alt="Web PKL" />
-      <h4 class="text-xl font-semibold mb-2">PKL Management Web</h4>
-      <p class="text-sm text-gray-600 mb-4">Web app for managing students internship (PKL) data and activities.</p>
-      <p class="text-sm text-gray-600 mb-4">Laravel</p>
-      <div class="flex gap-2 justify-center">
-        <a href="https://delfa-23.github.io/web-pkl-ui/" target="_blank"
-          class="bg-indigo-600 text-white px-4 py-2 rounded hover:bg-indigo-700 transition">
-          View Project
-        </a>
-        <button 
-          @click="open=true; video=null; desc=`The PKL Management System is a web-based application used to manage vocational high school students' Field Work Practice (PKL) activities. This system has three main roles: administrator, teacher, and student. The administrator manages primary data, teachers monitor and evaluate students, and students can record daily PKL activities and report evidence. With an interactive dashboard feature, this system helps schools improve order and accountability in PKL implementation.`"
-          class="bg-gray-600 text-white px-4 py-2 rounded hover:bg-gray-700 transition">
-          📄 Description
-        </button>
-      </div>
-    </div>
+     class="bg-white p-6 rounded-lg shadow-md text-center">
+  <img src="assets/images/project3.png" class="rounded mb-4 mx-auto" alt="Web PKL" />
+  <h4 class="text-xl font-semibold mb-2">PKL Management Web</h4>
+  <p class="text-sm text-gray-600 mb-2">Web app for managing students internship (PKL) data and activities.</p>
+  <p class="text-sm text-gray-600 mb-2">Laravel</p>
+  
+  <!-- On Progress Badge -->
+  <span class="inline-block bg-yellow-100 text-yellow-800 text-xs font-semibold px-3 py-1 rounded-full mb-4">
+    🚧 On Progress
+  </span>
+
+  <div class="flex gap-2 justify-center">
+    <a href="https://delfa-23.github.io/web-pkl-ui/" target="_blank"
+      class="bg-indigo-600 text-white px-4 py-2 rounded hover:bg-indigo-700 transition">
+      View Project
+    </a>
+    <button 
+      @click="open=true; video=null; desc=`The PKL Management System is a web-based application used to manage vocational high school students' Field Work Practice (PKL) activities. This system has three main roles: administrator, teacher, and student. The administrator manages primary data, teachers monitor and evaluate students, and students can record daily PKL activities and report evidence. With an interactive dashboard feature, this system helps schools improve order and accountability in PKL implementation.`"
+      class="bg-gray-600 text-white px-4 py-2 rounded hover:bg-gray-700 transition">
+      📄 Description
+    </button>
+  </div>
+</div>
+
 
     <!-- Project 4: Health Apps (Mobile) -->
     <div x-show="filter==='all' || filter==='mobile'" 
