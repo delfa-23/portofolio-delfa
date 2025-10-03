@@ -105,7 +105,7 @@
 
 
   <section id="projects" class="py-16 px-6 bg-[#B2A5FF] text-[#2D3E50]" 
-         x-data="{ filter: 'all', open:false, video:null }">
+         x-data="{ filter: 'all', open:false, video:null, desc:null }">
   <h3 class="text-2xl font-bold text-center text-gray-800 mb-8">Projects</h3>
 
   <!-- Filter Buttons -->
@@ -137,10 +137,16 @@
       <h4 class="text-xl font-semibold mb-2">FastReq</h4>
       <p class="text-sm text-gray-600 mb-4">Simple web app for submitting purchase requests for goods in companies.</p>
       <p class="text-sm text-gray-600 mb-4">Laravel</p>
-      <a href="https://delfa-23.github.io/fastreq-ui/" target="_blank"
-        class="inline-block bg-indigo-600 text-white px-4 py-2 rounded hover:bg-indigo-700 transition">
-        View Project
-      </a>
+      <div class="flex gap-2 justify-center">
+        <a href="https://delfa-23.github.io/fastreq-ui/" target="_blank"
+          class="bg-indigo-600 text-white px-4 py-2 rounded hover:bg-indigo-700 transition">
+          View Project
+        </a>
+        <button @click="open=true; video=null; desc='FastReq is a web-based application designed to streamline the goods request process within a company. The system provides employees and managers with roles to manage the request approval process more quickly, transparently, and in an organized manner. With a simple and responsive interface, FastReq helps companies reduce manual bureaucracy and increase efficiency in managing goods requirements.'"
+          class="bg-gray-600 text-white px-4 py-2 rounded hover:bg-gray-700 transition">
+          📄 Description
+        </button>
+      </div>
     </div>
 
     <!-- Project 2: Portfolio (Web) -->
@@ -150,10 +156,16 @@
       <h4 class="text-xl font-semibold mb-2">Personal Portfolio</h4>
       <p class="text-sm text-gray-600 mb-4">Portfolio site to showcase my work and profile.</p>
       <p class="text-sm text-gray-600 mb-4">HTML • CSS • JavaScript</p>
-      <a href="https://delfa-23.github.io/portofolio-delfa/" target="_blank"
-        class="inline-block bg-indigo-600 text-white px-4 py-2 rounded hover:bg-indigo-700 transition">
-        View Project
-      </a>
+      <div class="flex gap-2 justify-center">
+        <a href="https://delfa-23.github.io/portofolio-delfa/" target="_blank"
+          class="bg-indigo-600 text-white px-4 py-2 rounded hover:bg-indigo-700 transition">
+          View Project
+        </a>
+        <button @click="open=true; video=null; desc='This portfolio website was created as a platform to showcase your work, skills, and personal experience professionally. The design is modern, responsive, and interactive, with light animations to create an engaging experience for visitors. The website features past projects, contact information, and integration with LinkedIn and GitHub profiles, making it easy for others to directly view your skills and work.'"
+          class="bg-gray-600 text-white px-4 py-2 rounded hover:bg-gray-700 transition">
+          📄 Description
+        </button>
+      </div>
     </div>
 
     <!-- Project 3: Web PKL (Web) -->
@@ -163,26 +175,40 @@
       <h4 class="text-xl font-semibold mb-2">PKL Management Web</h4>
       <p class="text-sm text-gray-600 mb-4">Web app for managing students internship (PKL) data and activities.</p>
       <p class="text-sm text-gray-600 mb-4">Laravel</p>
-      <a href="https://delfa-23.github.io/web-pkl-ui/" target="_blank"
-        class="inline-block bg-indigo-600 text-white px-4 py-2 rounded hover:bg-indigo-700 transition">
-        View Project
-      </a>
+      <div class="flex gap-2 justify-center">
+        <a href="https://delfa-23.github.io/web-pkl-ui/" target="_blank"
+          class="bg-indigo-600 text-white px-4 py-2 rounded hover:bg-indigo-700 transition">
+          View Project
+        </a>
+        <button 
+          @click="open=true; video=null; desc=`The PKL Management System is a web-based application used to manage vocational high school students' Field Work Practice (PKL) activities. This system has three main roles: administrator, teacher, and student. The administrator manages primary data, teachers monitor and evaluate students, and students can record daily PKL activities and report evidence. With an interactive dashboard feature, this system helps schools improve order and accountability in PKL implementation.`"
+          class="bg-gray-600 text-white px-4 py-2 rounded hover:bg-gray-700 transition">
+          📄 Description
+        </button>
+      </div>
     </div>
 
     <!-- Project 4: Health Apps (Mobile) -->
     <div x-show="filter==='all' || filter==='mobile'" 
-         class="bg-white p-6 rounded-lg shadow-md text-center">
+        class="bg-white p-6 rounded-lg shadow-md text-center">
       <div class="relative mx-auto w-40 mb-4">
         <img src="assets/images/mockup-health.png" alt="Phone Mockup" class="w-full">
       </div>
       <h4 class="text-xl font-semibold mb-2">Health Apps</h4>
       <p class="text-sm text-gray-600 mb-4">Mobile health app built with Flutter to help track daily habits.</p>
       <p class="text-sm text-gray-600 mb-4">Flutter • Firebase</p>
-      <button @click="open=true; video='https://www.youtube.com/embed/LmdeaMrXF9E'"
-        class="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600 transition">
-        ▶ Demo
-      </button>
+      <div class="flex gap-2 justify-center">
+        <button @click="open=true; video='https://www.youtube.com/embed/LmdeaMrXF9E'; desc=null"
+          class="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600 transition">
+          ▶ Demo
+        </button>
+        <button @click="open=true; video=null; desc=`The Health Apps application was created to facilitate users in accessing health information quickly and integrated. The main goal of this application is to provide digital health services that include searching for doctors, hospitals, COVID-19, and trusted health articles. Users can view detailed doctor profiles, hospital locations, data on countries affected by COVID-19, and health tips through regularly updated articles. This application uses Firebase Firestore as a database to store user data and Firebase Storage to store profile photos and supporting images. In addition, several public APIs are used to retrieve health articles, doctor data, hospital data, and COVID-19 data, so that information is always relevant and up-to-date. With this application, users can obtain accurate health references and obtain important information without having to come directly to a health facility, thereby increasing efficiency and convenience in managing daily health.`"
+          class="bg-gray-600 text-white px-4 py-2 rounded hover:bg-gray-700 transition">
+          📄 Description
+        </button>
+      </div>
     </div>
+
 
     <!-- Project 5: Electronic Store App (Mobile) -->
     <div x-show="filter==='all' || filter==='mobile'" 
@@ -193,26 +219,41 @@
       <h4 class="text-xl font-semibold mb-2">Electronic Store App</h4>
       <p class="text-sm text-gray-600 mb-4">Flutter mobile app for managing electronic store products and sales.</p>
       <p class="text-sm text-gray-600 mb-4">Flutter • Firebase</p>
-      <button @click="open=true; video='https://www.youtube.com/embed/Hxzso_9Bps0'"
-        class="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600 transition">
-        ▶ Demo
-      </button>
-    </div>
-
-  </div>
-
-  <!-- Modal Video -->
-  <div x-show="open" class="fixed inset-0 bg-black bg-opacity-80 flex items-center justify-center z-50"
-       @click="open=false; video=null">
-    <div class="bg-white rounded-lg p-4 max-w-2xl w-full relative" @click.stop>
-      <button class="absolute top-2 right-2 text-gray-600 hover:text-red-500"
-              @click="open=false; video=null">✕</button>
-      <div class="aspect-w-16 aspect-h-9">
-        <iframe :src="video" class="w-full h-96 rounded-lg" frameborder="0" allowfullscreen></iframe>
+      <div class="flex gap-2 justify-center">
+        <button @click="open=true; video='https://www.youtube.com/embed/Hxzso_9Bps0'; desc=null"
+          class="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600 transition">
+          ▶ Demo
+        </button>
+        <button @click="open=true; video=null; desc='Electronic Store is a modern cashier application for e-commerce stores. With this app, users can easily add products to their cart, manage quantities, checkout, and print transaction receipts. Every transaction is stored in a history and can be reviewed in detail. The app is designed with a simple, responsive, and practical interface to assist with day-to-day e-commerce management.'"
+          class="bg-gray-600 text-white px-4 py-2 rounded hover:bg-gray-700 transition">
+          📄 Description
+        </button>
       </div>
     </div>
+
   </div>
+
+  <!-- Modal -->
+<div x-show="open" class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50"
+     @click="open=false">
+  <!-- Bagian putih ini yang diubah -->
+  <div class="bg-white rounded-lg p-8 max-w-4xl w-full max-h-[85vh] overflow-y-auto relative" @click.stop>    <!-- Tombol close -->
+    <button @click="open=false" class="absolute top-2 right-2 text-gray-600 hover:text-gray-900">✖</button>
+
+    <!-- Kalau video ada -->
+    <template x-if="video">
+      <iframe :src="video" class="w-full h-64 md:h-96 rounded" frameborder="0" allowfullscreen></iframe>
+    </template>
+
+    <!-- Kalau description ada -->
+    <template x-if="desc">
+      <p class="text-gray-700 text-sm leading-relaxed" x-text="desc"></p>
+    </template>
+  </div>
+</div>
+
 </section>
+
 
 </div>
 <!-- Certificates Section (di index.html) -->
