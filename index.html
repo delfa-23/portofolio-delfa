@@ -132,63 +132,109 @@
 
     <!-- Project 1: FastReq (Web) -->
     <div x-show="filter==='all' || filter==='web'" 
-         class="bg-white p-6 rounded-lg shadow-md text-center">
+        class="bg-white p-6 rounded-lg shadow-md text-center">
       <img src="assets/images/project1.png" class="rounded mb-4 mx-auto" alt="FastReq" />
+      
       <h4 class="text-xl font-semibold mb-2">FastReq</h4>
-      <p class="text-sm text-gray-600 mb-4">Simple web app for submitting purchase requests for goods in companies.</p>
-      <p class="text-sm text-gray-600 mb-4">Laravel</p>
-      <div class="flex gap-2 justify-center">
+      <p class="text-sm text-gray-600 mb-2">
+        Simple web app for submitting purchase requests for goods in companies.
+      </p>
+      <p class="text-sm text-gray-600 mb-2">Laravel</p>
+
+      <span class="inline-block bg-green-100 text-green-800 text-xs font-semibold px-3 py-1 rounded-full mb-4">
+        ✅ Live
+      </span>
+
+      <div class="flex flex-wrap gap-2 justify-center">
+
+        <!-- Live Demo -->
         <a href="https://delfa-23.github.io/fastreq-ui/" target="_blank"
-          class="bg-indigo-600 text-white px-4 py-2 rounded hover:bg-indigo-700 transition">
-          View Project
+          class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 transition">
+          🌐 Live Demo
         </a>
-        <button @click="open=true; video=null; desc='FastReq is a web-based application designed to streamline the goods request process within a company. The system provides employees and managers with roles to manage the request approval process more quickly, transparently, and in an organized manner. With a simple and responsive interface, FastReq helps companies reduce manual bureaucracy and increase efficiency in managing goods requirements.'"
+
+        <!-- Description Button -->
+        <button 
+          @click="open=true; video=null; desc=`FastReq is a web-based system designed to streamline and simplify the employee goods request process within a company. It provides clear roles for employees and managers, enabling faster approvals, better transparency, and organized tracking of requests. Built with a responsive interface, FastReq improves efficiency and reduces manual paperwork in managing procurement needs.`"
           class="bg-gray-600 text-white px-4 py-2 rounded hover:bg-gray-700 transition">
           📄 Description
         </button>
+
       </div>
     </div>
 
+
     <!-- Project 2: Portfolio (Web) -->
-    <div x-show="filter==='all' || filter==='web'" 
-         class="bg-white p-6 rounded-lg shadow-md text-center">
-      <img src="assets/images/project2.png" class="rounded mb-4 mx-auto" alt="Portfolio" />
-      <h4 class="text-xl font-semibold mb-2">Personal Portfolio</h4>
-      <p class="text-sm text-gray-600 mb-4">Portfolio site to showcase my work and profile.</p><br>
-      <p class="text-sm text-gray-600 mb-4">HTML • CSS • JavaScript</p>
-      <div class="flex gap-2 justify-center">
-        <a href="https://delfa-23.github.io/portofolio-delfa/" target="_blank"
-          class="bg-indigo-600 text-white px-4 py-2 rounded hover:bg-indigo-700 transition">
-          View Project
-        </a>
-        <button @click="open=true; video=null; desc='This portfolio website was created as a platform to showcase your work, skills, and personal experience professionally. The design is modern, responsive, and interactive, with light animations to create an engaging experience for visitors. The website features past projects, contact information, and integration with LinkedIn and GitHub profiles, making it easy for others to directly view your skills and work.'"
-          class="bg-gray-600 text-white px-4 py-2 rounded hover:bg-gray-700 transition">
-          📄 Description
-        </button>
+      <div x-show="filter==='all' || filter==='web'" 
+          class="bg-white p-6 rounded-lg shadow-md text-center">
+        <img src="assets/images/project2.png" class="rounded mb-4 mx-auto" alt="Portfolio" />
+        
+        <h4 class="text-xl font-semibold mb-2">Personal Portfolio</h4>
+        <p class="text-sm text-gray-600 mb-2">
+          Portfolio site to showcase my work and profile.
+        </p><br>
+        <p class="text-sm text-gray-600 mb-2">HTML • CSS • JavaScript</p>
+
+        <span class="inline-block bg-green-100 text-green-800 text-xs font-semibold px-3 py-1 rounded-full mb-4">
+          ✅ Live
+        </span>
+
+        <div class="flex flex-wrap gap-2 justify-center">
+
+          <!-- Live Demo -->
+          <a href="https://delfa-23.github.io/portofolio-delfa/" target="_blank"
+            class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 transition">
+            🌐 Live Demo
+          </a>
+
+          <!-- Description Button -->
+          <button 
+            @click="open=true; video=null; desc=`This portfolio website serves as a professional space to showcase your projects, skills, and experience. It features a modern, responsive, and clean design, complete with interactive animations and smooth navigation. Visitors can easily explore your work, connect via contact links, and access your LinkedIn and GitHub profiles directly.`"
+            class="bg-gray-600 text-white px-4 py-2 rounded hover:bg-gray-700 transition">
+            📄 Description
+          </button>
+
+        </div>
       </div>
-    </div>
+
 
     <!-- Project 3: Web PKL (Web) -->
     <div x-show="filter==='all' || filter==='web'" 
-     class="bg-white p-6 rounded-lg shadow-md text-center">
-  <img src="assets/images/project3.png" class="rounded mb-4 mx-auto" alt="Web PKL" />
-  <h4 class="text-xl font-semibold mb-2">PKL Management Web</h4>
-  <p class="text-sm text-gray-600 mb-2">Web app for managing students internship (PKL) data and activities.</p>
-  <p class="text-sm text-gray-600 mb-2">Laravel</p>
-  
-  <!-- On Progress Badge -->
-  <span class="inline-block bg-yellow-100 text-yellow-800 text-xs font-semibold px-3 py-1 rounded-full mb-4">
-    🚧 On Progress
-  </span>
+        class="bg-white p-6 rounded-lg shadow-md text-center">
+      <img src="assets/images/project3.png" class="rounded mb-4 mx-auto" alt="Web PKL" />
+      <h4 class="text-xl font-semibold mb-2">PKL Management Web</h4>
+      <p class="text-sm text-gray-600 mb-2">
+        Web app for managing students internship (PKL) data and activities.
+      </p>
+      <p class="text-sm text-gray-600 mb-2">Laravel</p>
 
-  <div class="flex gap-2 justify-center">
-    <button 
-      @click="open=true; video=null; desc=`The PKL Management System is a web-based application used to manage vocational high school students' Field Work Practice (PKL) activities. This system has three main roles: administrator, teacher, and student. The administrator manages primary data, teachers monitor and evaluate students, and students can record daily PKL activities and report evidence. With an interactive dashboard feature, this system helps schools improve order and accountability in PKL implementation.`"
-      class="bg-gray-600 text-white px-4 py-2 rounded hover:bg-gray-700 transition">
-      📄 Description
-    </button>
-  </div>
-</div>
+      <span class="inline-block bg-green-100 text-green-800 text-xs font-semibold px-3 py-1 rounded-full mb-4">
+        ✅ Live
+      </span>
+
+      <div class="flex flex-wrap gap-2 justify-center">
+
+        <!-- Demo Website Button -->
+        <a href="https://syifapkl.smkitassyifa.my.id/" target="_blank"
+          class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 transition">
+          🌐 Live Demo
+        </a>
+
+        <!-- Description Button -->
+        <button 
+          @click="open=true; video=null; desc=`The PKL Management System is a web-based application used to manage vocational high school students' Field Work Practice (PKL) activities. This system has three main roles: administrator, teacher, and student. The administrator manages primary data, teachers monitor and evaluate students, and students can record daily PKL activities and report evidence. With an interactive dashboard feature, this system helps schools improve order and accountability in PKL implementation.`"
+          class="bg-gray-600 text-white px-4 py-2 rounded hover:bg-gray-700 transition">
+          📄 Description
+        </button>
+
+        <button
+          @click="open=true; video=null; desc='Demo Login Accounts:<br><br>Student Account<br>ID: siswa<br>Password: siswa123<br><br>Teacher Account<br>ID: guru<br>Password: guru123'"
+          class="bg-purple-600 text-white px-4 py-2 rounded hover:bg-purple-700 transition">
+          🔐 Demo Login Info
+        </button>
+      </div>
+    </div>
+
 
 
     <!-- Project 4: Health Apps (Mobile) -->
@@ -234,6 +280,33 @@
       </div>
     </div>
 
+    <div x-show="filter==='all' || filter==='mobile'" 
+        class="bg-white p-6 rounded-lg shadow-md text-center">
+      <div class="relative mx-auto w-40 mb-4">
+        <img src="assets/images/mockup-bengkel.png" alt="Phone Mockup" class="w-full">
+      </div>
+      <h4 class="text-xl font-semibold mb-2">KasirKu Bengkel</h4>
+      <p class="text-sm text-gray-600 mb-4">
+        Flutter mobile app designed for workshop cashier and operational management.
+      </p>
+      <p class="text-sm text-gray-600 mb-4">Flutter • Firebase</p>
+
+      <div class="flex gap-2 justify-center">
+        <button 
+          @click="open=true; video='https://www.youtube.com/embed/r4IzedniLts'; desc=null"
+          class="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600 transition">
+          ▶ Demo
+        </button>
+
+        <button 
+          @click="open=true; video=null; desc=`KasirKu Bengkel is a mobile application built to simplify and optimize motorcycle and car workshop operations. It includes a full POS system, spare-part stock management, customer and mechanic data tracking, transaction history, daily reports, and Excel export support. All data is automatically stored and easily accessible, making it suitable for both small and large workshops that want faster, more efficient workflow.`"
+          class="bg-gray-600 text-white px-4 py-2 rounded hover:bg-gray-700 transition">
+          📄 Description
+        </button>
+      </div>
+    </div>
+
+
   </div>
 
   <!-- Modal -->
@@ -250,7 +323,7 @@
 
     <!-- Kalau description ada -->
     <template x-if="desc">
-      <p class="text-gray-700 text-sm leading-relaxed" x-text="desc"></p>
+      <p class="text-gray-700 text-sm leading-relaxed" x-html="desc"></p>
     </template>
   </div>
 </div>
