@@ -3,90 +3,575 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Certificates</title>
-  <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
-  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <title>Certificates - Delfa Portfolio</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="icon" type="image/png" href="assets/images/favicon.png">
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+    
+    body {
+      font-family: 'Poppins', sans-serif;
+      scroll-behavior: smooth;
+    }
+    
+    /* Gradient Text */
+    .gradient-text {
+      background: linear-gradient(45deg, #4f46e5, #7c3aed, #a855f7);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      background-size: 200% 200%;
+      animation: gradient-shift 3s ease infinite;
+    }
+    
+    @keyframes gradient-shift {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+    
+    /* Hover Effects */
+    .hover-lift {
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    
+    .hover-lift:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+    }
+    
+    /* Modal Animation */
+    .modal-enter {
+      animation: modalFadeIn 0.3s ease-out forwards;
+    }
+    
+    @keyframes modalFadeIn {
+      from {
+        opacity: 0;
+        transform: scale(0.95);
+      }
+      to {
+        opacity: 1;
+        transform: scale(1);
+      }
+    }
+    
+    /* Navbar Glass Effect */
+    .navbar-glass {
+      background: rgba(0, 0, 0, 0.3);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+    
+    /* Custom Scrollbar */
+    ::-webkit-scrollbar {
+      width: 8px;
+    }
+    
+    ::-webkit-scrollbar-track {
+      background: #f1f1f1;
+    }
+    
+    ::-webkit-scrollbar-thumb {
+      background: linear-gradient(45deg, #4f46e5, #7c3aed);
+      border-radius: 5px;
+    }
+    
+    /* Certificate Card Animation */
+    .certificate-card {
+      transition: all 0.3s ease;
+    }
+    
+    .certificate-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+    }
+    
+    /* Modal Responsive Styles */
+    @media (max-width: 768px) {
+      .modal-container {
+        margin: 1rem;
+        padding: 1rem;
+        max-height: 85vh;
+      }
+      
+      .modal-header {
+        padding: 0.5rem 0;
+        margin-bottom: 0.5rem;
+      }
+      
+      .modal-image-container {
+        height: 50vh !important;
+      }
+      
+      .modal-footer {
+        padding-top: 0.5rem;
+        flex-direction: column;
+        gap: 0.5rem;
+      }
+      
+      .modal-footer > div {
+        text-align: center;
+        width: 100%;
+      }
+      
+      .modal-footer .flex {
+        justify-content: center;
+        width: 100%;
+      }
+    }
+    
+    @media (max-width: 640px) {
+      .modal-container {
+        margin: 0.5rem;
+        padding: 0.75rem;
+        max-height: 90vh;
+      }
+      
+      .modal-image-container {
+        height: 40vh !important;
+      }
+      
+      .certificate-card {
+        margin-bottom: 1rem;
+      }
+      
+      .grid-cols-1 {
+        gap: 1rem;
+      }
+    }
+    
+    /* Touch-friendly zoom */
+    .zoomable-image {
+      touch-action: none;
+    }
+    
+    /* Better modal for desktop */
+    @media (min-width: 1024px) {
+      .modal-container {
+        max-width: 90%;
+        max-height: 85vh;
+      }
+      
+      .modal-image-container {
+        height: 65vh;
+      }
+    }
+    
+    @media (min-width: 1280px) {
+      .modal-container {
+        max-width: 80%;
+      }
+    }
+  </style>
 </head>
-<body class="bg-gray-100 text-gray-800">
+<body class="bg-gradient-to-br from-indigo-50 via-white to-purple-50 min-h-screen">
 
-  <!-- Navbar -->
-  <nav class="bg-white shadow-md p-4">
-    <div class="max-w-6xl mx-auto flex justify-between items-center">
-      <h1 class="font-bold text-lg">My Portfolio</h1>
-      <a href="index.html" class="text-indigo-600 hover:underline">Back to Home</a>
+<!-- Navbar -->
+<nav class="navbar-glass text-white fixed top-0 w-full z-50">
+  <div class="max-w-7xl mx-auto px-4 py-3 flex justify-between items-center">
+    <h1 class="text-xl font-bold">
+      <span class="gradient-text font-bold">Portfolio</span>
+    </h1>
+    
+    <div class="flex items-center gap-6">
+      <a href="index.html" 
+         class="flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700 rounded-lg shadow-md hover-lift transition-all">
+        <i class="fas fa-arrow-left mr-2"></i>
+        Back to Home
+      </a>
     </div>
-  </nav>
+  </div>
+</nav>
 
-  <!-- Certificates Page -->
-  <section class="py-16 px-6" 
-           x-data="{ 
-             open: false, 
-             active: null, 
-             certifs: [
-               { name: 'Internet Introduction', file: '23. SERTIFIKAT INTERNET INTRODUCTION-1.png' },
-               { name: 'Front-End Development Introduction', file: '24. SERTIFIKAT FRONT-END DEVELOPMENT INTRODUCTION-1.png' },
-               { name: 'Back-End Development Introduction', file: '25. SERTIFIKAT BACK END DEVELOPMENT INTRODUCTION-1.png' },
-               { name: 'API Introduction', file: '26. SERTIFIKAT API INTRODUCTION-1.png' },
-               { name: 'How WebDev Works', file: '27. SERTIFIKAT HOW WEBDEV WORKS-1.png' },
-               { name: 'Figma Community', file: 'SERTIFIKAT FIGMA COMMUNITY-1.png' },
-               { name: 'Operating FigJam', file: 'SERTIFIKAT OPERATING FIGJAM-1.png' },
-               { name: 'UI Design Improvement', file: 'SERTIFIKAT UI DESIGN IMPROVEMENT-1.png' },
-               { name: 'Variant and Layout', file: 'SERTIFIKAT VARIANT AND LAYOUT-1.png' },
-               { name: 'Belajar Wireframing', file: 'SERTIFIKAT BELAJAR WIREFRAMING-1.png' },
-               { name: 'Collaboration', file: 'SERTIFIKAT COLLABORATION-1.png' },
-               { name: 'Design Documentation', file: 'SERTIFIKAT DESIGN DOCUMENTATION-1.png' },
-               { name: 'Design System', file: 'SERTIFIKAT DESIGN SYSTEM-1.png' },
-               { name: 'Designing Checkout Process', file: 'SERTIFIKAT DESIGNING CHECKOUT PROCESS-1.png' },
-               { name: 'Designing Dashboard UI', file: 'SERTIFIKAT DESIGNING DASHBOARD UI-1.png' },
-               { name: 'Designing Landing Page', file: 'SERTIFIKAT DESIGNING LANDING PAGE-1.png' },
-               { name: 'Designing Onboarding', file: 'SERTIFIKAT DESIGNING ONBOARDING-1.png' },
-               { name: 'FigJam Brainstorming & Ideation', file: 'SERTIFIKAT FIGJAM BRAINSTORMING & IDEATION-1.png' },
-               { name: 'FigJam', file: 'SERTIFIKAT FIGJAM-1.png' },
-               { name: 'Figma Tools', file: 'SERTIFIKAT FIGMA TOOLS-1.png' },
-               { name: 'Hi-Fi', file: 'SERTIFIKAT HI-FI-1.png' },
-               { name: 'Introduction Figma', file: 'SERTIFIKAT INTRODUCTION FIGMA-1.png' },
-               { name: 'Plugin', file: 'SERTIFIKAT PLUGIN-1.png' },
-               { name: 'Profil Page', file: 'SERTIFIKAT PROFIL PAGE-1.png' },
-               { name: 'Prototyping FigJam Mirror', file: 'SERTIFIKAT PROTOTYPING FIGMA MIRROR-1.png' },
-               { name: 'Prototyping', file: 'SERTIFIKAT PROTOTYPING-1.png' },
-               { name: 'Style Guide', file: 'SERTIFIKAT STYLE GUIDE-1.png' },
-               { name: 'Intro to Data Analytics', file: 'data_analyst.png'},
-               { name: 'Flutter', file: 'flutter_sanbercode-1.png'},
-             ] 
-           }">
+<!-- Main Content -->
+<main class="pt-24 pb-16 px-4 md:px-6" 
+      x-data="certificateApp()">
 
-    <h2 class="text-3xl font-bold text-center mb-10">My Certificates</h2>
+  <!-- Header -->
+  <div class="max-w-6xl mx-auto mb-12 text-center" data-aos="fade-up">
+    <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-4">My Certificates</h2>
+    <div class="w-24 h-1 bg-gradient-to-r from-indigo-500 to-purple-500 mx-auto mb-6 rounded-full"></div>
+    <p class="text-gray-600 max-w-2xl mx-auto px-4">
+      A collection of certificates I've earned through various courses, training programs, and competitions. 
+      Each represents my commitment to continuous learning and skill development.
+    </p>
+    <div class="mt-6 flex flex-wrap items-center justify-center gap-4 text-sm text-gray-500">
+      <div class="flex items-center gap-2">
+        <div class="w-3 h-3 bg-indigo-500 rounded-full"></div>
+        <span>Total: <span class="font-bold" x-text="certifs.length"></span> Certificates</span>
+      </div>
+      <div class="flex items-center gap-2">
+        <div class="w-3 h-3 bg-purple-500 rounded-full"></div>
+        <span>Click to view details</span>
+      </div>
+    </div>
+  </div>
 
-    <!-- Grid -->
-    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 max-w-6xl mx-auto">
+  <!-- Certificates Grid -->
+  <div class="max-w-6xl mx-auto">
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
       <template x-for="(cert, index) in certifs" :key="index">
-        <div class="bg-white p-4 rounded-lg shadow-md text-center">
-          <h4 class="text-lg font-semibold mb-2" x-text="cert.name"></h4>
+        <div class="certificate-card bg-white rounded-xl shadow-lg overflow-hidden hover-lift transition-all duration-300"
+             data-aos="fade-up" :data-aos-delay="(index % 3) * 100">
+          <!-- Certificate Header -->
+          <div class="p-4 md:p-5 bg-gradient-to-r from-indigo-50 to-purple-50">
+            <div class="flex items-start justify-between">
+              <div class="flex-1 pr-2">
+                <h4 class="text-base md:text-lg font-bold text-gray-800 mb-1 truncate" x-text="cert.name"></h4>
+                <div class="flex items-center gap-2 text-xs md:text-sm text-gray-500">
+                  <i class="fas fa-award text-indigo-500"></i>
+                  <span>Certificate</span>
+                </div>
+              </div>
+              <div class="w-8 h-8 md:w-10 md:h-10 flex items-center justify-center bg-gradient-to-r from-indigo-500 to-purple-500 text-white rounded-full flex-shrink-0">
+                <i class="fas fa-certificate text-sm md:text-base"></i>
+              </div>
+            </div>
+          </div>
           
-          <!-- Thumbnail Certificate -->
-          <img 
-            :src="'assets/certificates/' + cert.file" 
-            :alt="cert.name" 
-            class="w-full h-40 object-contain rounded cursor-pointer hover:scale-105 transition-transform duration-200"
-            @click="open = true; active = cert.file"
-          >
+          <!-- Thumbnail -->
+          <div class="p-3 md:p-4">
+            <div class="relative overflow-hidden rounded-lg bg-gray-100 h-40 md:h-48 flex items-center justify-center">
+              <img 
+                :src="'assets/certificates/' + cert.file" 
+                :alt="cert.name"
+                class="w-full h-full object-contain p-2 cursor-pointer transition-transform duration-300 hover:scale-105"
+                @click="openModal(cert.file, cert.name)"
+                loading="lazy"
+              />
+              <!-- View Button Overlay -->
+              <div class="absolute inset-0 bg-black/0 hover:bg-black/20 flex items-center justify-center transition-all duration-300 opacity-0 hover:opacity-100">
+                <button class="bg-white text-indigo-600 px-3 py-1.5 md:px-4 md:py-2 rounded-lg font-medium shadow-lg text-sm md:text-base">
+                  <i class="fas fa-expand mr-1 md:mr-2"></i> View
+                </button>
+              </div>
+            </div>
+            
+            <!-- View Button -->
+            <button 
+              @click="openModal(cert.file, cert.name)"
+              class="w-full mt-3 md:mt-4 bg-gradient-to-r from-indigo-500 to-purple-500 text-white py-2.5 md:py-3 rounded-lg font-medium hover:from-indigo-600 hover:to-purple-600 transition-all flex items-center justify-center gap-2 text-sm md:text-base">
+              <i class="fas fa-eye"></i>
+              View Certificate
+            </button>
+          </div>
         </div>
       </template>
     </div>
+  </div>
 
-    <!-- Modal -->
-    <div x-show="open" 
-         class="fixed inset-0 bg-black bg-opacity-70 flex items-center justify-center z-50"
-         @click="open = false">
-      <div class="bg-white rounded-lg p-4 max-w-4xl w-full h-[90vh] relative"
-           @click.stop>
-        <button class="absolute top-2 right-2 text-gray-600 hover:text-red-500"
-                @click="open = false">✕</button>
-        <img :src="'assets/certificates/' + active" 
-             alt="Certificate" class="w-full h-full object-contain rounded">
+  <!-- Modal -->
+  <div x-show="open" 
+       x-transition:enter="modal-enter"
+       class="fixed inset-0 flex items-center justify-center bg-black/80 z-50 p-2 md:p-4 transition-opacity duration-300"
+       @click="open = false; resetZoom()">
+    <div class="modal-container bg-white rounded-xl md:rounded-2xl p-3 md:p-6 w-full max-w-6xl max-h-[90vh] md:max-h-[85vh] relative shadow-2xl overflow-hidden flex flex-col"
+         @click.stop>
+      <!-- Close Button -->
+      <button @click="open = false; resetZoom()" 
+              class="absolute top-2 right-2 md:top-4 md:right-4 bg-gray-800 text-white w-8 h-8 md:w-10 md:h-10 rounded-full flex items-center justify-center hover:bg-red-500 transition-colors z-10">
+        <i class="fas fa-times text-sm md:text-base"></i>
+      </button>
+      
+      <!-- Modal Header -->
+      <div class="modal-header mb-3 md:mb-4 pb-3 md:pb-4 border-b border-gray-200">
+        <h3 class="text-lg md:text-xl font-bold text-gray-800 truncate pr-8" x-text="activeName"></h3>
+        <p class="text-gray-600 text-xs md:text-sm mt-1">Click and drag to zoom in/out • Scroll to zoom</p>
+      </div>
+      
+      <!-- Certificate Image -->
+      <div class="modal-image-container relative flex-1 overflow-auto bg-gray-100 rounded-lg min-h-[200px]">
+        <div class="absolute inset-0 flex items-center justify-center p-2 md:p-4">
+          <img :src="'assets/certificates/' + active" 
+               :alt="activeName"
+               class="max-w-full max-h-full object-contain zoomable-image"
+               id="certificateImage"
+               @wheel="handleZoom($event)"
+               @mousedown="startPan($event)"
+               @touchstart="handleTouchStart($event)"
+               @touchmove="handleTouchMove($event)"
+               style="transform-origin: center center;"
+               draggable="false">
+        </div>
+        <!-- Loading Indicator -->
+        <div x-show="isLoading" class="absolute inset-0 flex items-center justify-center bg-white/80">
+          <div class="flex flex-col items-center">
+            <div class="w-12 h-12 border-4 border-indigo-500 border-t-transparent rounded-full animate-spin mb-2"></div>
+            <p class="text-gray-600">Loading...</p>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Modal Footer -->
+      <div class="modal-footer mt-3 md:mt-4 pt-3 md:pt-4 border-t border-gray-200 flex flex-col md:flex-row justify-between items-start md:items-center gap-2 md:gap-0">
+        <div class="text-gray-600 text-xs md:text-sm w-full md:w-auto text-center md:text-left">
+          <i class="fas fa-info-circle mr-1 md:mr-2"></i>
+          <span class="hidden md:inline">Use mouse wheel to zoom, drag to pan</span>
+          <span class="md:hidden">Pinch to zoom, drag to pan</span>
+        </div>
       </div>
     </div>
+  </div>
 
-  </section>
+</main>
+
+<!-- Footer -->
+<footer class="bg-gradient-to-r from-gray-900 to-black py-8 md:py-10 text-center text-gray-300">
+  <div class="max-w-6xl mx-auto px-4 md:px-6">
+    <div class="mb-4 md:mb-6">
+      <h2 class="text-xl md:text-2xl font-bold gradient-text mb-2">Muhammad Delfa Tamerawan</h2>
+      <p class="text-gray-400 text-sm md:text-base">Full-Stack Developer & Student</p>
+    </div>
+    
+    <div class="flex justify-center gap-4 md:gap-6 mb-6 md:mb-8">
+      <a href="https://www.linkedin.com/in/delfa-tamerawan/" target="_blank" 
+         class="text-gray-400 hover:text-white transition-colors text-lg md:text-xl">
+        <i class="fab fa-linkedin"></i>
+      </a>
+      <a href="https://github.com/delfa-23" target="_blank" 
+         class="text-gray-400 hover:text-white transition-colors text-lg md:text-xl">
+        <i class="fab fa-github"></i>
+      </a>
+      <a href="https://www.instagram.com/delfa_tamerawan/" target="_blank" 
+         class="text-gray-400 hover:text-white transition-colors text-lg md:text-xl">
+        <i class="fab fa-instagram"></i>
+      </a>
+    </div>
+    
+    <div class="border-t border-gray-800 pt-4 md:pt-6 text-xs md:text-sm">
+      <p>© 2025 Delfa Tamerawan. All rights reserved.</p>
+      <p class="mt-1 md:mt-2 text-gray-500">
+        <i class="fas fa-certificate mr-1 md:mr-2"></i>
+        <span x-text="certifs.length + ' certificates and counting...'"></span>
+      </p>
+    </div>
+  </div>
+</footer>
+
+<!-- Back to Top Button -->
+<button id="backToTop" 
+        class="fixed bottom-4 right-4 md:bottom-6 md:right-6 bg-gradient-to-r from-indigo-500 to-purple-500 text-white p-2.5 md:p-3 rounded-full shadow-lg hover:from-indigo-600 hover:to-purple-600 hover-lift transition-all-custom opacity-0 transform translate-y-10 z-40">
+  <i class="fas fa-chevron-up text-sm md:text-base"></i>
+</button>
+
+<script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
+
+<script>
+  // Initialize AOS
+  AOS.init({
+    duration: 800,
+    once: true,
+    offset: 100
+  });
+
+  function certificateApp() {
+    return {
+      open: false,
+      active: null,
+      activeName: '',
+      isLoading: false,
+      scale: 1,
+      translateX: 0,
+      translateY: 0,
+      isDragging: false,
+      startX: 0,
+      startY: 0,
+      lastTouchDistance: 0,
+      
+      certifs: [
+        { name: 'Internet Introduction', file: '23. SERTIFIKAT INTERNET INTRODUCTION-1.png' },
+        { name: 'Front-End Development Introduction', file: '24. SERTIFIKAT FRONT-END DEVELOPMENT INTRODUCTION-1.png' },
+        { name: 'Back-End Development Introduction', file: '25. SERTIFIKAT BACK END DEVELOPMENT INTRODUCTION-1.png' },
+        { name: 'API Introduction', file: '26. SERTIFIKAT API INTRODUCTION-1.png' },
+        { name: 'How WebDev Works', file: '27. SERTIFIKAT HOW WEBDEV WORKS-1.png' },
+        { name: 'Figma Community', file: 'SERTIFIKAT FIGMA COMMUNITY-1.png' },
+        { name: 'Operating FigJam', file: 'SERTIFIKAT OPERATING FIGJAM-1.png' },
+        { name: 'UI Design Improvement', file: 'SERTIFIKAT UI DESIGN IMPROVEMENT-1.png' },
+        { name: 'Variant and Layout', file: 'SERTIFIKAT VARIANT AND LAYOUT-1.png' },
+        { name: 'Belajar Wireframing', file: 'SERTIFIKAT BELAJAR WIREFRAMING-1.png' },
+        { name: 'Collaboration', file: 'SERTIFIKAT COLLABORATION-1.png' },
+        { name: 'Design Documentation', file: 'SERTIFIKAT DESIGN DOCUMENTATION-1.png' },
+        { name: 'Design System', file: 'SERTIFIKAT DESIGN SYSTEM-1.png' },
+        { name: 'Designing Checkout Process', file: 'SERTIFIKAT DESIGNING CHECKOUT PROCESS-1.png' },
+        { name: 'Designing Dashboard UI', file: 'SERTIFIKAT DESIGNING DASHBOARD UI-1.png' },
+        { name: 'Designing Landing Page', file: 'SERTIFIKAT DESIGNING LANDING PAGE-1.png' },
+        { name: 'Designing Onboarding', file: 'SERTIFIKAT DESIGNING ONBOARDING-1.png' },
+        { name: 'FigJam Brainstorming & Ideation', file: 'SERTIFIKAT FIGJAM BRAINSTORMING & IDEATION-1.png' },
+        { name: 'FigJam', file: 'SERTIFIKAT FIGJAM-1.png' },
+        { name: 'Figma Tools', file: 'SERTIFIKAT FIGMA TOOLS-1.png' },
+        { name: 'Hi-Fi', file: 'SERTIFIKAT HI-FI-1.png' },
+        { name: 'Introduction Figma', file: 'SERTIFIKAT INTRODUCTION FIGMA-1.png' },
+        { name: 'Plugin', file: 'SERTIFIKAT PLUGIN-1.png' },
+        { name: 'Profil Page', file: 'SERTIFIKAT PROFIL PAGE-1.png' },
+        { name: 'Prototyping FigJam Mirror', file: 'SERTIFIKAT PROTOTYPING FIGMA MIRROR-1.png' },
+        { name: 'Prototyping', file: 'SERTIFIKAT PROTOTYPING-1.png' },
+        { name: 'Style Guide', file: 'SERTIFIKAT STYLE GUIDE-1.png' },
+        { name: 'Intro to Data Analytics', file: 'data_analyst.png'},
+        { name: 'Flutter', file: 'flutter_sanbercode-1.png'},
+      ],
+      
+      init() {
+        // Initialize any additional setup if needed
+      },
+      
+      openModal(file, name) {
+        this.active = file;
+        this.activeName = name;
+        this.open = true;
+        this.isLoading = true;
+        
+        // Reset zoom and position
+        this.resetZoom();
+        
+        // Simulate loading for better UX
+        setTimeout(() => {
+          this.isLoading = false;
+        }, 300);
+      },
+      
+      handleZoom(event) {
+        event.preventDefault();
+        const zoomIntensity = 0.1;
+        const wheel = event.deltaY < 0 ? 1 : -1;
+        
+        this.scale += wheel * zoomIntensity;
+        this.scale = Math.min(Math.max(0.5, this.scale), 5); // Limit zoom between 0.5x and 5x
+        
+        this.updateTransform();
+      },
+      
+      startPan(event) {
+        if (this.scale <= 1) return;
+        
+        this.isDragging = true;
+        this.startX = event.clientX - this.translateX;
+        this.startY = event.clientY - this.translateY;
+        
+        document.addEventListener('mousemove', this.doPan.bind(this));
+        document.addEventListener('mouseup', this.stopPan.bind(this));
+      },
+      
+      doPan(event) {
+        if (!this.isDragging) return;
+        
+        this.translateX = event.clientX - this.startX;
+        this.translateY = event.clientY - this.startY;
+        
+        this.updateTransform();
+      },
+      
+      stopPan() {
+        this.isDragging = false;
+        document.removeEventListener('mousemove', this.doPan);
+        document.removeEventListener('mouseup', this.stopPan);
+      },
+      
+      handleTouchStart(event) {
+        if (event.touches.length === 2) {
+          // Pinch zoom start
+          const touch1 = event.touches[0];
+          const touch2 = event.touches[1];
+          this.lastTouchDistance = Math.hypot(
+            touch2.clientX - touch1.clientX,
+            touch2.clientY - touch1.clientY
+          );
+        } else if (event.touches.length === 1 && this.scale > 1) {
+          // Start panning
+          this.isDragging = true;
+          this.startX = event.touches[0].clientX - this.translateX;
+          this.startY = event.touches[0].clientY - this.translateY;
+        }
+      },
+      
+      handleTouchMove(event) {
+        event.preventDefault();
+        
+        if (event.touches.length === 2) {
+          // Pinch zoom
+          const touch1 = event.touches[0];
+          const touch2 = event.touches[1];
+          const distance = Math.hypot(
+            touch2.clientX - touch1.clientX,
+            touch2.clientY - touch1.clientY
+          );
+          
+          if (this.lastTouchDistance > 0) {
+            const zoomIntensity = 0.01;
+            const zoomChange = (distance - this.lastTouchDistance) * zoomIntensity;
+            
+            this.scale += zoomChange;
+            this.scale = Math.min(Math.max(0.5, this.scale), 5);
+            
+            this.updateTransform();
+          }
+          
+          this.lastTouchDistance = distance;
+        } else if (event.touches.length === 1 && this.isDragging) {
+          // Panning
+          this.translateX = event.touches[0].clientX - this.startX;
+          this.translateY = event.touches[0].clientY - this.startY;
+          
+          this.updateTransform();
+        }
+      },
+      
+      updateTransform() {
+        const img = document.getElementById('certificateImage');
+        if (img) {
+          img.style.transform = `scale(${this.scale}) translate(${this.translateX}px, ${this.translateY}px)`;
+        }
+      },
+      
+      resetZoom() {
+        this.scale = 1;
+        this.translateX = 0;
+        this.translateY = 0;
+        this.updateTransform();
+      },
+      
+      downloadCertificate() {
+        if (!this.active) return;
+        
+        const link = document.createElement('a');
+        link.href = 'assets/certificates/' + this.active;
+        link.download = this.activeName + '.png';
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+      }
+    };
+  }
+
+  // Back to top button functionality
+  window.addEventListener('scroll', () => {
+    const backToTop = document.getElementById('backToTop');
+    if (window.pageYOffset > 300) {
+      backToTop.style.opacity = '1';
+      backToTop.style.transform = 'translateY(0)';
+    } else {
+      backToTop.style.opacity = '0';
+      backToTop.style.transform = 'translateY(10px)';
+    }
+  });
+
+  document.getElementById('backToTop').addEventListener('click', () => {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth'
+    });
+  });
+
+  // Prevent scroll on modal when zooming
+  document.addEventListener('wheel', (e) => {
+    if (e.target.closest('.modal-image-container')) {
+      e.preventDefault();
+    }
+  }, { passive: false });
+</script>
 </body>
 </html>
