@@ -1,364 +1,537 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Portfolio Delfa</title>
-  <script src="https://cdn.tailwindcss.com"></script>
-  <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet" />
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  <link rel="icon" type="image/png" href="assets/images/favicon.png">
-  <link rel="apple-touch-icon" href="assets/images/favicon.png">
-  <style>
-    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
-    
-    body {
-      font-family: 'Poppins', sans-serif;
-      scroll-behavior: smooth;
-    }
-    
-    /* Custom Animations */
-    @keyframes float {
-      0%, 100% { transform: translateY(0); }
-      50% { transform: translateY(-20px); }
-    }
-    
-    @keyframes jelly {
-      0%, 100% { transform: scale(1); }
-      25% { transform: scale(0.9, 1.1); }
-      50% { transform: scale(1.1, 0.9); }
-      75% { transform: scale(0.95, 1.05); }
-    }
-    
-    @keyframes glow {
-      0%, 100% { box-shadow: 0 0 10px rgba(99, 102, 241, 0.3); }
-      50% { box-shadow: 0 0 20px rgba(99, 102, 241, 0.6); }
-    }
-    
-    .animate-float {
-      animation: float 6s ease-in-out infinite;
-    }
-    
-    .animate-jelly {
-      animation: jelly 3s ease-in-out infinite;
-    }
-    
-    .animate-glow {
-      animation: glow 2s ease-in-out infinite;
-    }
-    
-    /* Custom Scrollbar */
-    ::-webkit-scrollbar {
-      width: 10px;
-    }
-    
-    ::-webkit-scrollbar-track {
-      background: #f1f1f1;
-    }
-    
-    ::-webkit-scrollbar-thumb {
-      background: linear-gradient(45deg, #4f46e5, #7c3aed);
-      border-radius: 5px;
-    }
-    
-    /* Gradient Text */
-    .gradient-text {
-      background: linear-gradient(45deg, #4f46e5, #7c3aed, #a855f7);
-      -webkit-background-clip: text;
-      background-clip: text;
-      color: transparent;
-      background-size: 200% 200%;
-      animation: gradient-shift 3s ease infinite;
-    }
-    
-    @keyframes gradient-shift {
-      0% { background-position: 0% 50%; }
-      50% { background-position: 100% 50%; }
-      100% { background-position: 0% 50%; }
-    }
-    
-    /* Hover Effects */
-    .hover-lift {
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
-    }
-    
-    .hover-lift:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
-    }
-    
-    /* Section Divider */
-    .section-divider {
-      position: relative;
-      height: 80px;
-      overflow: hidden;
-    }
-    
-    .section-divider::before {
-      content: '';
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      width: 100%;
-      height: 100px;
-      background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 120' preserveAspectRatio='none'%3E%3Cpath d='M1200 120L0 16.48 0 0 1200 0 1200 120z' fill='%23ffffff'/%3E%3C/svg%3E");
-      background-size: 100% 100px;
-    }
-    
-    /* Smooth Transitions */
-    .transition-all-custom {
-      transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-    }
-    
-    /* Typing Animation */
-    .typing-cursor::after {
-      content: '|';
-      animation: blink 1s infinite;
-    }
-    
-    @keyframes blink {
-      0%, 100% { opacity: 1; }
-      50% { opacity: 0; }
-    }
-    
-    /* Project Card Hidden State */
-    .project-card.hidden {
-      display: none !important;
-    }
-    
-    /* Modal Animation */
-    .modal-enter {
-      animation: modalFadeIn 0.3s ease-out forwards;
-    }
-    
-    @keyframes modalFadeIn {
-      from {
-        opacity: 0;
-        transform: scale(0.9);
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Portfolio Delfa</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <link rel="icon" type="image/png" href="assets/images/favicon.png" />
+    <link rel="apple-touch-icon" href="assets/images/favicon.png" />
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap");
+
+      body {
+        font-family: "Poppins", sans-serif;
+        scroll-behavior: smooth;
       }
-      to {
-        opacity: 1;
-        transform: scale(1);
+
+      /* Custom Animations */
+      @keyframes float {
+        0%,
+        100% {
+          transform: translateY(0);
+        }
+        50% {
+          transform: translateY(-20px);
+        }
       }
-    }
-    
-    /* Hero Text Contrast */
-    .hero-text {
-      text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
-    }
-    
-    /* Navbar Glass Effect */
-    .navbar-glass {
-      background: rgba(0, 0, 0, 0.3);
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
-      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-    }
-    
-    /* Responsive fixes */
-    @media (max-width: 640px) {
+
+      @keyframes jelly {
+        0%,
+        100% {
+          transform: scale(1);
+        }
+        25% {
+          transform: scale(0.9, 1.1);
+        }
+        50% {
+          transform: scale(1.1, 0.9);
+        }
+        75% {
+          transform: scale(0.95, 1.05);
+        }
+      }
+
+      @keyframes glow {
+        0%,
+        100% {
+          box-shadow: 0 0 10px rgba(99, 102, 241, 0.3);
+        }
+        50% {
+          box-shadow: 0 0 20px rgba(99, 102, 241, 0.6);
+        }
+      }
+
+      .animate-float {
+        animation: float 6s ease-in-out infinite;
+      }
+
+      .animate-jelly {
+        animation: jelly 3s ease-in-out infinite;
+      }
+
+      .animate-glow {
+        animation: glow 2s ease-in-out infinite;
+      }
+
+      /* Custom Scrollbar */
+      ::-webkit-scrollbar {
+        width: 10px;
+      }
+
+      ::-webkit-scrollbar-track {
+        background: #f1f1f1;
+      }
+
+      ::-webkit-scrollbar-thumb {
+        background: linear-gradient(45deg, #4f46e5, #7c3aed);
+        border-radius: 5px;
+      }
+
+      /* Gradient Text */
+      .gradient-text {
+        background: linear-gradient(45deg, #4f46e5, #7c3aed, #a855f7);
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
+        background-size: 200% 200%;
+        animation: gradient-shift 3s ease infinite;
+      }
+
+      @keyframes gradient-shift {
+        0% {
+          background-position: 0% 50%;
+        }
+        50% {
+          background-position: 100% 50%;
+        }
+        100% {
+          background-position: 0% 50%;
+        }
+      }
+
+      /* Hover Effects */
+      .hover-lift {
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+      }
+
+      .hover-lift:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+      }
+
+      /* Section Divider */
       .section-divider {
-        height: 60px;
-      }
-      
-      .section-divider::before {
+        position: relative;
         height: 80px;
+        overflow: hidden;
       }
-    }
-  </style>
-</head>
-<body class="text-gray-800 bg-gradient-to-br from-indigo-50 via-white to-purple-50 min-h-screen">
 
-<!-- Navbar -->
-<header x-data="{open:false}" 
-  class="navbar-glass text-white fixed top-0 w-full z-50 transition-all duration-300"
-  id="navbar">
-  <div class="max-w-7xl mx-auto px-4 py-3 flex justify-between items-center">
-    <!-- Logo -->
-    <h1 class="text-xl font-bold">
-      <span class="gradient-text font-bold">Portfolio</span>
-    </h1>
+      .section-divider::before {
+        content: "";
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        height: 100px;
+        background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 120' preserveAspectRatio='none'%3E%3Cpath d='M1200 120L0 16.48 0 0 1200 0 1200 120z' fill='%23ffffff'/%3E%3C/svg%3E");
+        background-size: 100% 100px;
+      }
 
-    <!-- Desktop Menu -->
-    <nav class="hidden md:flex space-x-6 items-center">
-      <a href="#about" class="hover:text-indigo-200 transition-all hover:scale-105 relative group">
-        <span>About</span>
-        <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-indigo-300 group-hover:w-full transition-all duration-300"></span>
-      </a>
-      <a href="#projects" class="hover:text-indigo-200 transition-all hover:scale-105 relative group">
-        <span>Projects</span>
-        <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-indigo-300 group-hover:w-full transition-all duration-300"></span>
-      </a>
-      <a href="#certificates" class="hover:text-indigo-200 transition-all hover:scale-105 relative group">
-        <span>Certificates</span>
-        <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-indigo-300 group-hover:w-full transition-all duration-300"></span>
-      </a>
-      <a href="#contact" class="hover:text-indigo-200 transition-all hover:scale-105 relative group">
-        <span>Contact</span>
-        <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-indigo-300 group-hover:w-full transition-all duration-300"></span>
-      </a>
-      <a href="assets/cv.pdf" target="_blank"
-        class="ml-4 px-4 py-2 bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700 rounded-lg shadow-md hover-lift transition-all">
-        <i class="fas fa-file-alt mr-2"></i>View CV
-      </a>
-    </nav>
+      /* Smooth Transitions */
+      .transition-all-custom {
+        transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      }
 
-    <!-- Mobile Hamburger -->
-    <button @click="open=!open" class="md:hidden focus:outline-none text-2xl hover:text-indigo-300 transition-all">
-      <i x-show="!open" class="fas fa-bars"></i>
-      <i x-show="open" class="fas fa-times"></i>
-    </button>
-  </div>
+      /* Typing Animation */
+      .typing-cursor::after {
+        content: "|";
+        animation: blink 1s infinite;
+      }
 
-  <!-- Mobile Menu -->
-  <div x-show="open" x-transition:enter="mobile-menu-enter"
-       class="md:hidden bg-gray-900/90 backdrop-blur-sm text-white px-6 py-4 space-y-4">
-    <a href="#about" class="block py-2 hover:bg-white/10 rounded px-3 transition-all" @click="open=false">About</a>
-    <a href="#projects" class="block py-2 hover:bg-white/10 rounded px-3 transition-all" @click="open=false">Projects</a>
-    <a href="#certificates" class="block py-2 hover:bg-white/10 rounded px-3 transition-all" @click="open=false">Certificates</a>
-    <a href="#contact" class="block py-2 hover:bg-white/10 rounded px-3 transition-all" @click="open=false">Contact</a>
-    <a href="assets/cv.pdf" target="_blank"
-      class="block bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700 text-center py-3 rounded-lg transition-all" @click="open=false">
-      <i class="fas fa-file-alt mr-2"></i>View CV
-    </a>
-  </div>
-</header>
+      @keyframes blink {
+        0%,
+        100% {
+          opacity: 1;
+        }
+        50% {
+          opacity: 0;
+        }
+      }
 
-<!-- Hero Section -->
-<section class="h-screen text-white flex flex-col items-center justify-center relative overflow-hidden bg-gradient-to-br from-indigo-900 via-purple-900 to-indigo-800">
-  <!-- Animated Background Elements -->
-  <div class="absolute inset-0 overflow-hidden">
-    <div class="absolute top-10 left-10 w-24 h-24 bg-white/10 rounded-full animate-float"></div>
-    <div class="absolute bottom-20 right-20 w-32 h-32 bg-indigo-500/10 rounded-full animate-float" style="animation-delay: 1s;"></div>
-    <div class="absolute top-1/4 right-1/4 w-16 h-16 bg-purple-300/10 rounded-full animate-float" style="animation-delay: 2s;"></div>
-    
-    <!-- Animated Shapes -->
-    <div class="absolute top-1/3 left-1/4 w-12 h-12 border-2 border-white/20 rounded-lg animate-spin" style="animation-duration: 20s;"></div>
-  </div>
-  
-  <div class="z-10 text-center px-4 max-w-4xl mx-auto" data-aos="fade-up" data-aos-duration="1000">
-    <div class="mb-6">
-      <div class="w-32 h-32 mx-auto rounded-full bg-gradient-to-r from-indigo-500 to-purple-500 p-1 mb-6 animate-glow">
-        <img src="assets/images/foto.png" alt="Profile" class="w-full h-full rounded-full object-cover border-4 border-white/30">
+      /* Project Card Hidden State */
+      .project-card.hidden {
+        display: none !important;
+      }
+
+      /* Modal Animation */
+      .modal-enter {
+        animation: modalFadeIn 0.3s ease-out forwards;
+      }
+
+      @keyframes modalFadeIn {
+        from {
+          opacity: 0;
+          transform: scale(0.9);
+        }
+        to {
+          opacity: 1;
+          transform: scale(1);
+        }
+      }
+
+      /* Hero Text Contrast */
+      .hero-text {
+        text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+      }
+
+      /* Navbar Glass Effect */
+      .navbar-glass {
+        background: rgba(0, 0, 0, 0.3);
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      }
+
+      /* Responsive fixes */
+      @media (max-width: 640px) {
+        .section-divider {
+          height: 60px;
+        }
+
+        .section-divider::before {
+          height: 80px;
+        }
+      }
+    </style>
+  </head>
+  <body
+    class="text-gray-800 bg-gradient-to-br from-indigo-50 via-white to-purple-50 min-h-screen"
+  >
+    <!-- Navbar -->
+    <header
+      x-data="{open:false}"
+      class="navbar-glass text-white fixed top-0 w-full z-50 transition-all duration-300"
+      id="navbar"
+    >
+      <div
+        class="max-w-7xl mx-auto px-4 py-3 flex justify-between items-center"
+      >
+        <!-- Logo -->
+        <h1 class="text-xl font-bold">
+          <span class="gradient-text font-bold">Portfolio</span>
+        </h1>
+
+        <!-- Desktop Menu -->
+        <nav class="hidden md:flex space-x-6 items-center">
+          <a
+            href="#about"
+            class="hover:text-indigo-200 transition-all hover:scale-105 relative group"
+          >
+            <span>About</span>
+            <span
+              class="absolute bottom-0 left-0 w-0 h-0.5 bg-indigo-300 group-hover:w-full transition-all duration-300"
+            ></span>
+          </a>
+          <a
+            href="#projects"
+            class="hover:text-indigo-200 transition-all hover:scale-105 relative group"
+          >
+            <span>Projects</span>
+            <span
+              class="absolute bottom-0 left-0 w-0 h-0.5 bg-indigo-300 group-hover:w-full transition-all duration-300"
+            ></span>
+          </a>
+          <a
+            href="#certificates"
+            class="hover:text-indigo-200 transition-all hover:scale-105 relative group"
+          >
+            <span>Certificates</span>
+            <span
+              class="absolute bottom-0 left-0 w-0 h-0.5 bg-indigo-300 group-hover:w-full transition-all duration-300"
+            ></span>
+          </a>
+          <a
+            href="#contact"
+            class="hover:text-indigo-200 transition-all hover:scale-105 relative group"
+          >
+            <span>Contact</span>
+            <span
+              class="absolute bottom-0 left-0 w-0 h-0.5 bg-indigo-300 group-hover:w-full transition-all duration-300"
+            ></span>
+          </a>
+          <a
+            href="assets/cv.pdf"
+            target="_blank"
+            class="ml-4 px-4 py-2 bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700 rounded-lg shadow-md hover-lift transition-all"
+          >
+            <i class="fas fa-file-alt mr-2"></i>View CV
+          </a>
+        </nav>
+
+        <!-- Mobile Hamburger -->
+        <button
+          @click="open=!open"
+          class="md:hidden focus:outline-none text-2xl hover:text-indigo-300 transition-all"
+        >
+          <i x-show="!open" class="fas fa-bars"></i>
+          <i x-show="open" class="fas fa-times"></i>
+        </button>
       </div>
-    </div>
-    
-    <!-- Hero Text dengan kontras lebih baik -->
-    <h1 class="text-4xl md:text-6xl font-bold mb-4 hero-text">
-      <span class="text-white">Muhammad Delfa Tamerawan</span>
-    </h1>
-    
-    <div class="text-xl md:text-2xl mt-6 mb-8 h-12">
-      <p class="typing-cursor inline-block text-white font-light">
-        <span class="typing" id="typing"></span>
-      </p>
-    </div>
 
-    <!-- CTA Buttons -->
-    <div class="flex flex-col sm:flex-row gap-4 justify-center mt-8" data-aos="fade-up" data-aos-delay="300">
-      <!-- LinkedIn -->
-      <a href="https://www.linkedin.com/in/delfa-tamerawan/" target="_blank"
-         class="flex items-center justify-center gap-3 px-6 py-3 bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 rounded-lg shadow-lg hover-lift transition-all-custom group">
-        <i class="fab fa-linkedin text-xl"></i>
-        <span>Hire Me</span>
-        <i class="fas fa-arrow-right ml-2 transform group-hover:translate-x-1 transition-transform"></i>
-      </a>
+      <!-- Mobile Menu -->
+      <div
+        x-show="open"
+        x-transition:enter="mobile-menu-enter"
+        class="md:hidden bg-gray-900/90 backdrop-blur-sm text-white px-6 py-4 space-y-4"
+      >
+        <a
+          href="#about"
+          class="block py-2 hover:bg-white/10 rounded px-3 transition-all"
+          @click="open=false"
+          >About</a
+        >
+        <a
+          href="#projects"
+          class="block py-2 hover:bg-white/10 rounded px-3 transition-all"
+          @click="open=false"
+          >Projects</a
+        >
+        <a
+          href="#certificates"
+          class="block py-2 hover:bg-white/10 rounded px-3 transition-all"
+          @click="open=false"
+          >Certificates</a
+        >
+        <a
+          href="#contact"
+          class="block py-2 hover:bg-white/10 rounded px-3 transition-all"
+          @click="open=false"
+          >Contact</a
+        >
+        <a
+          href="assets/cv.pdf"
+          target="_blank"
+          class="block bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700 text-center py-3 rounded-lg transition-all"
+          @click="open=false"
+        >
+          <i class="fas fa-file-alt mr-2"></i>View CV
+        </a>
+      </div>
+    </header>
 
-      <!-- GitHub -->
-      <a href="https://github.com/delfa-23" target="_blank"
-         class="flex items-center justify-center gap-3 px-6 py-3 bg-gradient-to-r from-gray-800 to-gray-900 hover:from-gray-900 hover:to-black rounded-lg shadow-lg hover-lift transition-all-custom group">
-        <i class="fab fa-github text-xl"></i>
-        <span>GitHub</span>
-        <i class="fas fa-arrow-right ml-2 transform group-hover:translate-x-1 transition-transform"></i>
-      </a>
-    </div>
-    
-    <!-- Scroll Indicator -->
-    <div class="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce">
-      <a href="#about" class="text-white/70 hover:text-white transition-colors">
-        <i class="fas fa-chevron-down text-2xl"></i>
-      </a>
-    </div>
-  </div>
-</section>
+    <!-- Hero Section -->
+    <section
+      class="h-screen text-white flex flex-col items-center justify-center relative overflow-hidden bg-gradient-to-br from-indigo-900 via-purple-900 to-indigo-800"
+    >
+      <!-- Animated Background Elements -->
+      <div class="absolute inset-0 overflow-hidden">
+        <div
+          class="absolute top-10 left-10 w-24 h-24 bg-white/10 rounded-full animate-float"
+        ></div>
+        <div
+          class="absolute bottom-20 right-20 w-32 h-32 bg-indigo-500/10 rounded-full animate-float"
+          style="animation-delay: 1s"
+        ></div>
+        <div
+          class="absolute top-1/4 right-1/4 w-16 h-16 bg-purple-300/10 rounded-full animate-float"
+          style="animation-delay: 2s"
+        ></div>
 
-<!-- Section Divider -->
-<div class="section-divider"></div>
+        <!-- Animated Shapes -->
+        <div
+          class="absolute top-1/3 left-1/4 w-12 h-12 border-2 border-white/20 rounded-lg animate-spin"
+          style="animation-duration: 20s"
+        ></div>
+      </div>
 
-<!-- About Section -->
-<section id="about" class="py-20 px-6 bg-white text-gray-800" data-aos="fade-up">
-  <div class="max-w-6xl mx-auto">
-    <h3 class="text-3xl font-bold mb-4 text-center gradient-text">About Me</h3>
-    <div class="w-24 h-1 bg-gradient-to-r from-indigo-500 to-purple-500 mx-auto mb-12 rounded-full"></div>
-    
-    <div class="flex flex-col md:flex-row items-center gap-10">
-      <div class="w-full md:w-2/5 flex justify-center" data-aos="fade-right" data-aos-delay="200">
-        <div class="relative">
-          <div class="w-64 h-64 rounded-full overflow-hidden border-8 border-white shadow-2xl animate-glow">
-            <img src="assets/images/foto.png" alt="Foto" class="w-full h-full object-cover">
+      <div
+        class="z-10 text-center px-4 max-w-4xl mx-auto"
+        data-aos="fade-up"
+        data-aos-duration="1000"
+      >
+        <div class="mb-6">
+          <div
+            class="w-32 h-32 mx-auto rounded-full bg-gradient-to-r from-indigo-500 to-purple-500 p-1 mb-6 animate-glow"
+          >
+            <img
+              src="assets/images/foto.png"
+              alt="Profile"
+              class="w-full h-full rounded-full object-cover border-4 border-white/30"
+            />
           </div>
-          <div class="absolute -bottom-3 -right-3 w-20 h-20 bg-gradient-to-r from-indigo-500 to-purple-500 rounded-full flex items-center justify-center text-white text-3xl animate-jelly">
-            <i class="fas fa-code"></i>
+        </div>
+
+        <!-- Hero Text dengan kontras lebih baik -->
+        <h1 class="text-4xl md:text-6xl font-bold mb-4 hero-text">
+          <span class="text-white">Muhammad Delfa Tamerawan</span>
+        </h1>
+
+        <div class="text-xl md:text-2xl mt-6 mb-8 h-12">
+          <p class="typing-cursor inline-block text-white font-light">
+            <span class="typing" id="typing"></span>
+          </p>
+        </div>
+
+        <!-- CTA Buttons -->
+        <div
+          class="flex flex-col sm:flex-row gap-4 justify-center mt-8"
+          data-aos="fade-up"
+          data-aos-delay="300"
+        >
+          <!-- LinkedIn -->
+          <a
+            href="https://www.linkedin.com/in/delfa-tamerawan/"
+            target="_blank"
+            class="flex items-center justify-center gap-3 px-6 py-3 bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 rounded-lg shadow-lg hover-lift transition-all-custom group"
+          >
+            <i class="fab fa-linkedin text-xl"></i>
+            <span>Hire Me</span>
+            <i
+              class="fas fa-arrow-right ml-2 transform group-hover:translate-x-1 transition-transform"
+            ></i>
+          </a>
+
+          <!-- GitHub -->
+          <a
+            href="https://github.com/delfa-23"
+            target="_blank"
+            class="flex items-center justify-center gap-3 px-6 py-3 bg-gradient-to-r from-gray-800 to-gray-900 hover:from-gray-900 hover:to-black rounded-lg shadow-lg hover-lift transition-all-custom group"
+          >
+            <i class="fab fa-github text-xl"></i>
+            <span>GitHub</span>
+            <i
+              class="fas fa-arrow-right ml-2 transform group-hover:translate-x-1 transition-transform"
+            ></i>
+          </a>
+        </div>
+
+        <!-- Scroll Indicator -->
+        <div
+          class="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce"
+        >
+          <a
+            href="#about"
+            class="text-white/70 hover:text-white transition-colors"
+          >
+            <i class="fas fa-chevron-down text-2xl"></i>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section Divider -->
+    <div class="section-divider"></div>
+
+    <!-- About Section -->
+    <section
+      id="about"
+      class="py-20 px-6 bg-white text-gray-800"
+      data-aos="fade-up"
+    >
+      <div class="max-w-6xl mx-auto">
+        <h3 class="text-3xl font-bold mb-4 text-center gradient-text">
+          About Me
+        </h3>
+        <div
+          class="w-24 h-1 bg-gradient-to-r from-indigo-500 to-purple-500 mx-auto mb-12 rounded-full"
+        ></div>
+
+        <div class="flex flex-col md:flex-row items-center gap-10">
+          <div
+            class="w-full md:w-2/5 flex justify-center"
+            data-aos="fade-right"
+            data-aos-delay="200"
+          >
+            <div class="relative">
+              <div
+                class="w-64 h-64 rounded-full overflow-hidden border-8 border-white shadow-2xl animate-glow"
+              >
+                <img
+                  src="assets/images/foto.png"
+                  alt="Foto"
+                  class="w-full h-full object-cover"
+                />
+              </div>
+              <div
+                class="absolute -bottom-3 -right-3 w-20 h-20 bg-gradient-to-r from-indigo-500 to-purple-500 rounded-full flex items-center justify-center text-white text-3xl animate-jelly"
+              >
+                <i class="fas fa-code"></i>
+              </div>
+            </div>
+          </div>
+
+          <div
+            class="w-full md:w-3/5"
+            data-aos="fade-left"
+            data-aos-delay="400"
+          >
+            <h4 class="text-2xl font-bold mb-3 text-gray-900">
+              Muhammad Delfa Tamerawan
+            </h4>
+            <div
+              class="inline-block px-4 py-1 bg-gradient-to-r from-indigo-100 to-purple-100 text-indigo-700 rounded-full font-medium mb-6"
+            >
+              <i class="fas fa-laptop-code mr-2"></i>Full-Stack Developer
+            </div>
+
+            <p class="leading-relaxed text-gray-700 mb-6">
+              I am a passionate Full-Stack Developer currently studying at
+              vocational high school. I enjoy creating web and mobile
+              applications that are both functional and user-friendly.
+              Continuously learning and exploring modern technologies like
+              Laravel, Flutter, and Firebase to improve my skills and build
+              better solutions.
+            </p>
+
+            <p class="leading-relaxed text-gray-700 mb-8">
+              My goal is to grow as a professional developer and contribute to
+              meaningful digital projects that make a positive impact.
+            </p>
+
+            <!-- Skills tanpa bahasa code -->
+            <div class="grid grid-cols-2 sm:grid-cols-4 gap-4">
+              <div
+                class="bg-gray-50 p-4 rounded-lg text-center hover:bg-gray-100 transition-colors"
+              >
+                <div class="text-2xl mb-2">
+                  <i class="fas fa-paint-brush text-indigo-500"></i>
+                </div>
+                <p class="font-medium">UI/UX Design</p>
+              </div>
+
+              <div
+                class="bg-gray-50 p-4 rounded-lg text-center hover:bg-gray-100 transition-colors"
+              >
+                <div class="text-2xl mb-2">
+                  <i class="fas fa-code text-purple-500"></i>
+                </div>
+                <p class="font-medium">Web Development</p>
+              </div>
+
+              <div
+                class="bg-gray-50 p-4 rounded-lg text-center hover:bg-gray-100 transition-colors"
+              >
+                <div class="text-2xl mb-2">
+                  <i class="fas fa-mobile-alt text-blue-500"></i>
+                </div>
+                <p class="font-medium">Mobile Apps</p>
+              </div>
+
+              <div
+                class="bg-gray-50 p-4 rounded-lg text-center hover:bg-gray-100 transition-colors"
+              >
+                <div class="text-2xl mb-2">
+                  <i class="fas fa-database text-green-500"></i>
+                </div>
+                <p class="font-medium">Database</p>
+              </div>
+            </div>
           </div>
         </div>
       </div>
+    </section>
 
-      <div class="w-full md:w-3/5" data-aos="fade-left" data-aos-delay="400">
-        <h4 class="text-2xl font-bold mb-3 text-gray-900">Muhammad Delfa Tamerawan</h4>
-        <div class="inline-block px-4 py-1 bg-gradient-to-r from-indigo-100 to-purple-100 text-indigo-700 rounded-full font-medium mb-6">
-          <i class="fas fa-laptop-code mr-2"></i>Full-Stack Developer
-        </div>
-        
-        <p class="leading-relaxed text-gray-700 mb-6">
-          I am a passionate Full-Stack Developer currently studying at vocational high school. 
-          I enjoy creating web and mobile applications that are both functional and user-friendly. 
-          Continuously learning and exploring modern technologies like Laravel, Flutter, and Firebase 
-          to improve my skills and build better solutions.
-        </p>
-        
-        <p class="leading-relaxed text-gray-700 mb-8">
-          My goal is to grow as a professional developer and contribute to meaningful digital projects 
-          that make a positive impact.
-        </p>
-        
-        <!-- Skills tanpa bahasa code -->
-        <div class="grid grid-cols-2 sm:grid-cols-4 gap-4">
-          <div class="bg-gray-50 p-4 rounded-lg text-center hover:bg-gray-100 transition-colors">
-            <div class="text-2xl mb-2">
-              <i class="fas fa-paint-brush text-indigo-500"></i>
-            </div>
-            <p class="font-medium">UI/UX Design</p>
-          </div>
-          
-          <div class="bg-gray-50 p-4 rounded-lg text-center hover:bg-gray-100 transition-colors">
-            <div class="text-2xl mb-2">
-              <i class="fas fa-code text-purple-500"></i>
-            </div>
-            <p class="font-medium">Web Development</p>
-          </div>
-          
-          <div class="bg-gray-50 p-4 rounded-lg text-center hover:bg-gray-100 transition-colors">
-            <div class="text-2xl mb-2">
-              <i class="fas fa-mobile-alt text-blue-500"></i>
-            </div>
-            <p class="font-medium">Mobile Apps</p>
-          </div>
-          
-          <div class="bg-gray-50 p-4 rounded-lg text-center hover:bg-gray-100 transition-colors">
-            <div class="text-2xl mb-2">
-              <i class="fas fa-database text-green-500"></i>
-            </div>
-            <p class="font-medium">Database</p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- Projects Section -->
-<section id="projects" class="py-20 px-6 bg-gray-50 text-gray-800" 
-         x-data="{ 
+    <!-- Projects Section -->
+    <section
+      id="projects"
+      class="py-20 px-6 bg-gray-50 text-gray-800"
+      x-data="{ 
            filter: 'all', 
            open: false, 
            video: null, 
@@ -368,592 +541,824 @@
                AOS.refresh();
              }, 100);
            }
-         }">
-  <div class="max-w-6xl mx-auto">
-    <h3 class="text-3xl font-bold text-center text-gray-800 mb-4">Projects</h3>
-    <div class="w-24 h-1 bg-gradient-to-r from-indigo-500 to-purple-500 mx-auto mb-12 rounded-full"></div>
+         }"
+    >
+      <div class="max-w-6xl mx-auto">
+        <h3 class="text-3xl font-bold text-center text-gray-800 mb-4">
+          Projects
+        </h3>
+        <div
+          class="w-24 h-1 bg-gradient-to-r from-indigo-500 to-purple-500 mx-auto mb-12 rounded-full"
+        ></div>
 
-    <!-- Filter Buttons -->
-    <div class="flex flex-wrap justify-center gap-4 mb-12">
-      <button @click="filter='all'; $nextTick(() => AOS.refresh())" 
-              :class="filter==='all' ? 'bg-gradient-to-r from-indigo-600 to-purple-600 text-white shadow-lg active' : 'bg-white text-gray-700 hover:bg-gray-100'"
-              class="filter-btn px-5 py-3 rounded-full shadow hover-lift transition-all-custom flex items-center gap-2">
-        <i class="fas fa-layer-group"></i>
-        <span>All Projects</span>
-      </button>
-      <button @click="filter='web'; $nextTick(() => AOS.refresh())" 
-              :class="filter==='web' ? 'bg-gradient-to-r from-indigo-600 to-purple-600 text-white shadow-lg active' : 'bg-white text-gray-700 hover:bg-gray-100'"
-              class="filter-btn px-5 py-3 rounded-full shadow hover-lift transition-all-custom flex items-center gap-2">
-        <i class="fas fa-globe"></i>
-        <span>Web Apps</span>
-      </button>
-      <button @click="filter='mobile'; $nextTick(() => AOS.refresh())" 
-              :class="filter==='mobile' ? 'bg-gradient-to-r from-indigo-600 to-purple-600 text-white shadow-lg active' : 'bg-white text-gray-700 hover:bg-gray-100'"
-              class="filter-btn px-5 py-3 rounded-full shadow hover-lift transition-all-custom flex items-center gap-2">
-        <i class="fas fa-mobile-alt"></i>
-        <span>Mobile Apps</span>
-      </button>
-    </div>
-
-    <!-- Projects Grid -->
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" id="projects-grid">
-      <!-- Project 1: FastReq (Web) -->
-      <div class="project-card bg-white p-6 rounded-2xl shadow-lg hover-lift transition-all-custom" 
-           :class="{ 'hidden': filter !== 'all' && filter !== 'web' }"
-           data-aos="fade-up" data-aos-delay="0">
-        <div class="relative overflow-hidden rounded-xl mb-6">
-          <img src="assets/images/project1.png" class="w-full h-48 object-cover transform hover:scale-105 transition-transform duration-500" alt="FastReq" />
-          <div class="absolute top-3 right-3 bg-green-500 text-white text-xs font-bold px-3 py-1 rounded-full shadow">
-            <i class="fas fa-circle mr-1 text-xs"></i> Live
-          </div>
-        </div>
-        
-        <h4 class="text-xl font-bold mb-3 text-gray-900">FastReq</h4>
-        <p class="text-gray-600 mb-4">
-          Simple web app for submitting purchase requests for goods in companies.
-        </p>
-        
-        <div class="mb-6">
-          <span class="inline-flex items-center px-3 py-1 bg-red-100 text-red-800 rounded-full text-sm font-medium">
-            <i class="fab fa-laravel mr-2"></i> Laravel
-          </span>
-        </div>
-
-        <div class="flex flex-wrap gap-3">
-          <!-- Live Demo -->
-          <a href="https://delfa-23.github.io/fastreq-ui/" target="_blank"
-            class="flex-1 bg-gradient-to-r from-blue-500 to-blue-600 text-white px-4 py-3 rounded-lg hover:from-blue-600 hover:to-blue-700 transition-all-custom text-center hover-lift">
-            <i class="fas fa-external-link-alt mr-2"></i> Live Demo
-          </a>
-
-          <!-- Description Button -->
-          <button 
-            @click="open=true; video=null; desc=`FastReq is a web-based system designed to streamline and simplify the employee goods request process within a company. It provides clear roles for employees and managers, enabling faster approvals, better transparency, and organized tracking of requests. Built with a responsive interface, FastReq improves efficiency and reduces manual paperwork in managing procurement needs.`"
-            class="flex-1 bg-gradient-to-r from-gray-600 to-gray-700 text-white px-4 py-3 rounded-lg hover:from-gray-700 hover:to-gray-800 transition-all-custom hover-lift">
-            <i class="fas fa-info-circle mr-2"></i> Details
-          </button>
-        </div>
-      </div>
-
-      <!-- Project 2: Portfolio (Web) -->
-      <div class="project-card bg-white p-6 rounded-2xl shadow-lg hover-lift transition-all-custom"
-           :class="{ 'hidden': filter !== 'all' && filter !== 'web' }"
-           data-aos="fade-up" data-aos-delay="100">
-        <div class="relative overflow-hidden rounded-xl mb-6">
-          <img src="assets/images/project2.png" class="w-full h-48 object-cover transform hover:scale-105 transition-transform duration-500" alt="Portfolio" />
-          <div class="absolute top-3 right-3 bg-green-500 text-white text-xs font-bold px-3 py-1 rounded-full shadow">
-            <i class="fas fa-circle mr-1 text-xs"></i> Live
-          </div>
-        </div>
-        
-        <h4 class="text-xl font-bold mb-3 text-gray-900">Personal Portfolio</h4>
-        <p class="text-gray-600 mb-4">
-          Portfolio site to showcase my work and profile.
-        </p>
-        
-        <div class="mb-6">
-          <span class="inline-flex items-center px-3 py-1 bg-yellow-100 text-yellow-800 rounded-full text-sm font-medium mr-2">
-            <i class="fab fa-html5 mr-2"></i> HTML
-          </span>
-          <span class="inline-flex items-center px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-sm font-medium mr-2">
-            <i class="fab fa-css3-alt mr-2"></i> CSS
-          </span>
-          <span class="inline-flex items-center px-3 py-1 bg-green-100 text-green-800 rounded-full text-sm font-medium">
-            <i class="fab fa-js-square mr-2"></i> JavaScript
-          </span>
-        </div>
-
-        <div class="flex flex-wrap gap-3">
-          <!-- Live Demo -->
-          <a href="https://delfa-23.github.io/portofolio-delfa/" target="_blank"
-            class="flex-1 bg-gradient-to-r from-blue-500 to-blue-600 text-white px-4 py-3 rounded-lg hover:from-blue-600 hover:to-blue-700 transition-all-custom text-center hover-lift">
-            <i class="fas fa-external-link-alt mr-2"></i> Live Demo
-          </a>
-
-          <!-- Description Button -->
-          <button 
-            @click="open=true; video=null; desc=`This portfolio website serves as a professional space to showcase your projects, skills, and experience. It features a modern, responsive, and clean design, complete with interactive animations and smooth navigation. Visitors can easily explore your work, connect via contact links, and access your LinkedIn and GitHub profiles directly.`"
-            class="flex-1 bg-gradient-to-r from-gray-600 to-gray-700 text-white px-4 py-3 rounded-lg hover:from-gray-700 hover:to-gray-800 transition-all-custom hover-lift">
-            <i class="fas fa-info-circle mr-2"></i> Details
-          </button>
-        </div>
-      </div>
-
-      <!-- Project 3: Web PKL (Web) -->
-      <div class="project-card bg-white p-6 rounded-2xl shadow-lg hover-lift transition-all-custom"
-           :class="{ 'hidden': filter !== 'all' && filter !== 'web' }"
-           data-aos="fade-up" data-aos-delay="200">
-        <div class="relative overflow-hidden rounded-xl mb-6">
-          <img src="assets/images/project3.png" class="w-full h-48 object-cover transform hover:scale-105 transition-transform duration-500" alt="Web PKL" />
-          <div class="absolute top-3 right-3 bg-green-500 text-white text-xs font-bold px-3 py-1 rounded-full shadow">
-            <i class="fas fa-circle mr-1 text-xs"></i> Live
-          </div>
-        </div>
-        
-        <h4 class="text-xl font-bold mb-3 text-gray-900">PKL Management Web</h4>
-        <p class="text-gray-600 mb-4">
-          Web app for managing students internship (PKL) data and activities.
-        </p>
-        
-        <div class="mb-6">
-          <span class="inline-flex items-center px-3 py-1 bg-red-100 text-red-800 rounded-full text-sm font-medium">
-            <i class="fab fa-laravel mr-2"></i> Laravel
-          </span>
-        </div>
-
-        <div class="flex flex-wrap gap-3">
-          <!-- Live Demo -->
-          <a href="https://syifapkl.smkitassyifa.my.id/" target="_blank"
-            class="flex-1 bg-gradient-to-r from-blue-500 to-blue-600 text-white px-4 py-3 rounded-lg hover:from-blue-600 hover:to-blue-700 transition-all-custom text-center hover-lift">
-            <i class="fas fa-external-link-alt mr-2"></i> Live Demo
-          </a>
-
-          <!-- Description Button -->
-          <button 
-            @click="open=true; video=null; desc=`The PKL Management System is a web-based application used to manage vocational high school students' Field Work Practice (PKL) activities. This system has three main roles: administrator, teacher, and student. The administrator manages primary data, teachers monitor and evaluate students, and students can record daily PKL activities and report evidence. With an interactive dashboard feature, this system helps schools improve order and accountability in PKL implementation.`"
-            class="flex-1 bg-gradient-to-r from-gray-600 to-gray-700 text-white px-4 py-3 rounded-lg hover:from-gray-700 hover:to-gray-800 transition-all-custom hover-lift">
-            <i class="fas fa-info-circle mr-2"></i> Details
-          </button>
-
-          <!-- Demo Login Info -->
+        <!-- Filter Buttons -->
+        <div class="flex flex-wrap justify-center gap-4 mb-12">
           <button
-            @click="open=true; video=null; desc='<h4 class=\'text-lg font-bold mb-4 text-gray-800\'>Demo Login Accounts:</h4><div class=\'bg-blue-50 p-4 rounded-lg mb-3\'><h5 class=\'font-bold text-blue-700 mb-2\'>Student Account</h5><p class=\'text-gray-700\'><strong>ID:</strong> siswa<br><strong>Password:</strong> siswa123</p></div><div class=\'bg-purple-50 p-4 rounded-lg\'><h5 class=\'font-bold text-purple-700 mb-2\'>Teacher Account</h5><p class=\'text-gray-700\'><strong>ID:</strong> guru<br><strong>Password:</strong> guru123</p></div>'"
-            class="flex-1 bg-gradient-to-r from-purple-500 to-purple-600 text-white px-4 py-3 rounded-lg hover:from-purple-600 hover:to-purple-700 transition-all-custom hover-lift">
-            <i class="fas fa-key mr-2"></i> Login Info
+            @click="filter='all'; $nextTick(() => AOS.refresh())"
+            :class="filter==='all' ? 'bg-gradient-to-r from-indigo-600 to-purple-600 text-white shadow-lg active' : 'bg-white text-gray-700 hover:bg-gray-100'"
+            class="filter-btn px-5 py-3 rounded-full shadow hover-lift transition-all-custom flex items-center gap-2"
+          >
+            <i class="fas fa-layer-group"></i>
+            <span>All Projects</span>
+          </button>
+          <button
+            @click="filter='web'; $nextTick(() => AOS.refresh())"
+            :class="filter==='web' ? 'bg-gradient-to-r from-indigo-600 to-purple-600 text-white shadow-lg active' : 'bg-white text-gray-700 hover:bg-gray-100'"
+            class="filter-btn px-5 py-3 rounded-full shadow hover-lift transition-all-custom flex items-center gap-2"
+          >
+            <i class="fas fa-globe"></i>
+            <span>Web Apps</span>
+          </button>
+          <button
+            @click="filter='mobile'; $nextTick(() => AOS.refresh())"
+            :class="filter==='mobile' ? 'bg-gradient-to-r from-indigo-600 to-purple-600 text-white shadow-lg active' : 'bg-white text-gray-700 hover:bg-gray-100'"
+            class="filter-btn px-5 py-3 rounded-full shadow hover-lift transition-all-custom flex items-center gap-2"
+          >
+            <i class="fas fa-mobile-alt"></i>
+            <span>Mobile Apps</span>
           </button>
         </div>
-      </div>
 
-      <!-- Project 4: Health Apps (Mobile) -->
-      <div class="project-card bg-white p-6 rounded-2xl shadow-lg hover-lift transition-all-custom"
-           :class="{ 'hidden': filter !== 'all' && filter !== 'mobile' }"
-           data-aos="fade-up" data-aos-delay="0">
-        <div class="relative mx-auto w-48 mb-6">
-          <div class="absolute -inset-4 bg-gradient-to-r from-blue-400 to-purple-400 rounded-3xl blur opacity-30"></div>
-          <img src="assets/images/mockup-health.png" alt="Phone Mockup" class="relative w-full transform hover:scale-105 transition-transform duration-500">
-        </div>
-        
-        <h4 class="text-xl font-bold mb-3 text-gray-900">Health Apps</h4>
-        <p class="text-gray-600 mb-4">
-          Mobile health app built with Flutter to help track daily habits.
-        </p>
-        
-        <div class="mb-6">
-          <span class="inline-flex items-center px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-sm font-medium mr-2">
-            <i class="fab fa-flutter mr-2"></i> Flutter
-          </span>
-          <span class="inline-flex items-center px-3 py-1 bg-orange-100 text-orange-800 rounded-full text-sm font-medium">
-            <i class="fas fa-fire mr-2"></i> Firebase
-          </span>
-        </div>
+        <!-- Projects Grid -->
+        <div
+          class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
+          id="projects-grid"
+        >
+          <!-- Project 1: FastReq (Web) -->
+          <div
+            class="project-card bg-white p-6 rounded-2xl shadow-lg hover-lift transition-all-custom"
+            :class="{ 'hidden': filter !== 'all' && filter !== 'web' }"
+            data-aos="fade-up"
+            data-aos-delay="0"
+          >
+            <div class="relative overflow-hidden rounded-xl mb-6">
+              <img
+                src="assets/images/project1.png"
+                class="w-full h-48 object-cover transform hover:scale-105 transition-transform duration-500"
+                alt="FastReq"
+              />
+              <div
+                class="absolute top-3 right-3 bg-green-500 text-white text-xs font-bold px-3 py-1 rounded-full shadow"
+              >
+                <i class="fas fa-circle mr-1 text-xs"></i> Live
+              </div>
+            </div>
 
-        <div class="flex flex-wrap gap-3">
-          <!-- Video Demo Button -->
-          <button @click="open=true; video='https://www.youtube.com/embed/LmdeaMrXF9E'; desc=null"
-            class="flex-1 bg-gradient-to-r from-red-500 to-red-600 text-white px-4 py-3 rounded-lg hover:from-red-600 hover:to-red-700 transition-all-custom hover-lift">
-            <i class="fas fa-play mr-2"></i> Video Demo
-          </button>
-          
-          <!-- Description Button -->
-          <button @click="open=true; video=null; desc=`The Health Apps application was created to facilitate users in accessing health information quickly and integrated. The main goal of this application is to provide digital health services that includes searching for doctors, hospitals, COVID-19, and trusted health articles. Users can view detailed doctor profiles, hospital locations, data on countries affected by COVID-19, and health tips through regularly updated articles. This application uses Firebase Firestore as a database to store user data and Firebase Storage to store profile photos and supporting images. In addition, several public APIs are used to retrieve health articles, doctor data, hospital data, and COVID-19 data, so that information is always relevant and up-to-date. With this application, users can obtain accurate health references and obtain important information without having to come directly to a health facility, thereby increasing efficiency and convenience in managing daily health.`"
-            class="flex-1 bg-gradient-to-r from-gray-600 to-gray-700 text-white px-4 py-3 rounded-lg hover:from-gray-700 hover:to-gray-800 transition-all-custom hover-lift">
-            <i class="fas fa-info-circle mr-2"></i> Details
-          </button>
-        </div>
-      </div>
+            <h4 class="text-xl font-bold mb-3 text-gray-900">FastReq</h4>
+            <p class="text-gray-600 mb-4">
+              Simple web app for submitting purchase requests for goods in
+              companies.
+            </p>
 
-      <!-- Project 5: Electronic Store App (Mobile) -->
-      <div class="project-card bg-white p-6 rounded-2xl shadow-lg hover-lift transition-all-custom"
-           :class="{ 'hidden': filter !== 'all' && filter !== 'mobile' }"
-           data-aos="fade-up" data-aos-delay="100">
-        <div class="relative mx-auto w-48 mb-6">
-          <div class="absolute -inset-4 bg-gradient-to-r from-green-400 to-blue-400 rounded-3xl blur opacity-30"></div>
-          <img src="assets/images/mockup-electronic.png" alt="Phone Mockup" class="relative w-full transform hover:scale-105 transition-transform duration-500">
-        </div>
-        
-        <h4 class="text-xl font-bold mb-3 text-gray-900">Electronic Store App</h4>
-        <p class="text-gray-600 mb-4">
-          Flutter mobile app for managing electronic store products and sales.
-        </p>
-        
-        <div class="mb-6">
-          <span class="inline-flex items-center px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-sm font-medium mr-2">
-            <i class="fab fa-flutter mr-2"></i> Flutter
-          </span>
-          <span class="inline-flex items-center px-3 py-1 bg-orange-100 text-orange-800 rounded-full text-sm font-medium">
-            <i class="fas fa-fire mr-2"></i> Firebase
-          </span>
-        </div>
+            <div class="mb-6">
+              <span
+                class="inline-flex items-center px-3 py-1 bg-red-100 text-red-800 rounded-full text-sm font-medium"
+              >
+                <i class="fab fa-laravel mr-2"></i> Laravel
+              </span>
+            </div>
 
-        <div class="flex flex-wrap gap-3">
-          <!-- Video Demo Button -->
-          <button @click="open=true; video='https://www.youtube.com/embed/Hxzso_9Bps0'; desc=null"
-            class="flex-1 bg-gradient-to-r from-red-500 to-red-600 text-white px-4 py-3 rounded-lg hover:from-red-600 hover:to-red-700 transition-all-custom hover-lift">
-            <i class="fas fa-play mr-2"></i> Video Demo
-          </button>
-          
-          <!-- Description Button -->
-          <button @click="open=true; video=null; desc='Electronic Store is a modern cashier application for e-commerce stores. With this app, users can easily add products to their cart, manage quantities, checkout, and print transaction receipts. Every transaction is stored in a history and can be reviewed in detail. The app is designed with a simple, responsive, and practical interface to assist with day-to-day e-commerce management.'"
-            class="flex-1 bg-gradient-to-r from-gray-600 to-gray-700 text-white px-4 py-3 rounded-lg hover:from-gray-700 hover:to-gray-800 transition-all-custom hover-lift">
-            <i class="fas fa-info-circle mr-2"></i> Details
-          </button>
-        </div>
-      </div>
+            <div class="flex flex-wrap gap-3">
+              <!-- Live Demo -->
+              <a
+                href="https://delfa-23.github.io/fastreq-ui/"
+                target="_blank"
+                class="flex-1 bg-gradient-to-r from-blue-500 to-blue-600 text-white px-4 py-3 rounded-lg hover:from-blue-600 hover:to-blue-700 transition-all-custom text-center hover-lift"
+              >
+                <i class="fas fa-external-link-alt mr-2"></i> Live Demo
+              </a>
 
-      <!-- Project 6: KasirKu Bengkel (Mobile) -->
-      <div class="project-card bg-white p-6 rounded-2xl shadow-lg hover-lift transition-all-custom"
-           :class="{ 'hidden': filter !== 'all' && filter !== 'mobile' }"
-           data-aos="fade-up" data-aos-delay="200">
-        <div class="relative mx-auto w-48 mb-6">
-          <div class="absolute -inset-4 bg-gradient-to-r from-yellow-400 to-orange-400 rounded-3xl blur opacity-30"></div>
-          <img src="assets/images/mockup-bengkel.png" alt="Phone Mockup" class="relative w-full transform hover:scale-105 transition-transform duration-500">
-        </div>
-        
-        <h4 class="text-xl font-bold mb-3 text-gray-900">KasirKu Bengkel</h4>
-        <p class="text-gray-600 mb-4">
-          Flutter mobile app designed for workshop cashier and operational management.
-        </p>
-        
-        <div class="mb-6">
-          <span class="inline-flex items-center px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-sm font-medium mr-2">
-            <i class="fab fa-flutter mr-2"></i> Flutter
-          </span>
-          <span class="inline-flex items-center px-3 py-1 bg-orange-100 text-orange-800 rounded-full text-sm font-medium">
-            <i class="fas fa-fire mr-2"></i> Firebase
-          </span>
-        </div>
-
-        <div class="flex flex-wrap gap-3">
-          <!-- Video Demo Button -->
-          <button @click="open=true; video='https://www.youtube.com/embed/r4IzedniLts'; desc=null"
-            class="flex-1 bg-gradient-to-r from-red-500 to-red-600 text-white px-4 py-3 rounded-lg hover:from-red-600 hover:to-red-700 transition-all-custom hover-lift">
-            <i class="fas fa-play mr-2"></i> Video Demo
-          </button>
-          
-          <!-- Description Button -->
-          <button @click="open=true; video=null; desc=`KasirKu Bengkel is a mobile application built to simplify and optimize motorcycle and car workshop operations. It includes a full POS system, spare-part stock management, customer and mechanic data tracking, transaction history, daily reports, and Excel export support. All data is automatically stored and easily accessible, making it suitable for both small and large workshops that want faster, more efficient workflow.`"
-            class="flex-1 bg-gradient-to-r from-gray-600 to-gray-700 text-white px-4 py-3 rounded-lg hover:from-gray-700 hover:to-gray-800 transition-all-custom hover-lift">
-            <i class="fas fa-info-circle mr-2"></i> Details
-          </button>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- Modal -->
-  <div x-show="open" 
-       x-transition:enter="modal-enter"
-       class="fixed inset-0 flex items-center justify-center bg-black/70 z-50 p-4 transition-opacity duration-300"
-       @click="open=false">
-    <div class="bg-white rounded-2xl p-6 md:p-8 max-w-4xl w-full max-h-[90vh] overflow-y-auto relative shadow-2xl transform transition-transform duration-300"
-         @click.stop>
-      <button @click="open=false" 
-              class="absolute top-4 right-4 text-gray-500 hover:text-gray-800 text-2xl transition-colors z-10">
-        <i class="fas fa-times"></i>
-      </button>
-
-      <template x-if="video">
-        <div class="relative pt-[56.25%] rounded-xl overflow-hidden mb-6">
-          <iframe :src="video" 
-                  class="absolute top-0 left-0 w-full h-full rounded-xl" 
-                  frameborder="0" 
-                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-                  allowfullscreen>
-          </iframe>
-        </div>
-      </template>
-
-      <template x-if="desc">
-        <div class="prose prose-lg max-w-none">
-          <div x-html="desc" class="text-gray-700"></div>
-        </div>
-      </template>
-      
-      <div class="mt-8 pt-6 border-t border-gray-200 text-center">
-        <button @click="open=false" 
-                class="bg-gradient-to-r from-indigo-500 to-purple-500 text-white px-6 py-3 rounded-lg hover:from-indigo-600 hover:to-purple-600 transition-all-custom hover-lift">
-          <i class="fas fa-times mr-2"></i> Close
-        </button>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- Certificates Section -->
-<section id="certificates" class="py-20 px-6 bg-white text-gray-800">
-  <div class="max-w-6xl mx-auto">
-    <h3 class="text-3xl font-bold mb-4 text-center gradient-text">Certificates</h3>
-    <div class="w-24 h-1 bg-gradient-to-r from-indigo-500 to-purple-500 mx-auto mb-8 rounded-full"></div>
-    
-    <p class="text-center text-gray-600 mb-12 max-w-2xl mx-auto">
-      Some of my certificates that I've earned through various courses, training, and competitions.
-    </p>
-    
-    <div class="text-center" data-aos="zoom-in">
-      <a href="certificates.html" 
-         class="inline-flex items-center gap-3 bg-gradient-to-r from-indigo-600 to-purple-600 text-white px-8 py-4 rounded-full text-lg font-semibold shadow-lg hover:from-indigo-700 hover:to-purple-700 hover-lift transition-all-custom group">
-        <i class="fas fa-award text-xl"></i>
-        <span>View All Certificates</span>
-        <i class="fas fa-arrow-right transform group-hover:translate-x-2 transition-transform"></i>
-      </a>
-    </div>
-  </div>
-</section>
-
-<!-- Contact Section -->
-<section id="contact" class="py-20 px-6 bg-gradient-to-br from-indigo-50 to-purple-50" data-aos="fade-up">
-  <div class="max-w-6xl mx-auto">
-    <h3 class="text-3xl font-bold text-center text-gray-800 mb-4">Get In Touch</h3>
-    <div class="w-24 h-1 bg-gradient-to-r from-indigo-500 to-purple-500 mx-auto mb-12 rounded-full"></div>
-
-    <!-- Social Links - Fixed Instagram Button -->
-    <div class="flex flex-wrap justify-center items-center gap-8 mb-12">
-      <!-- Instagram -->
-      <a href="https://www.instagram.com/delfa_tamerawan/" target="_blank" 
-         class="group relative" data-aos="fade-up" data-aos-delay="100">
-        <div class="absolute -inset-4 bg-gradient-to-r from-pink-500 via-red-500 to-yellow-500 rounded-full blur opacity-0 group-hover:opacity-30 transition-opacity duration-300"></div>
-        <div class="relative bg-white p-5 rounded-full shadow-lg hover-lift transition-all-custom">
-          <i class="fab fa-instagram text-3xl text-transparent bg-clip-text bg-gradient-to-r from-pink-500 via-red-500 to-yellow-500"></i>
-        </div>
-        <p class="text-center mt-3 text-gray-600 font-medium">Instagram</p>
-      </a>
-
-      <!-- Email -->
-      <a href="mailto:your-email@example.com" 
-         class="group relative" data-aos="fade-up" data-aos-delay="200">
-        <div class="absolute -inset-4 bg-gradient-to-r from-blue-500 to-indigo-500 rounded-full blur opacity-0 group-hover:opacity-30 transition-opacity duration-300"></div>
-        <div class="relative bg-white p-5 rounded-full shadow-lg hover-lift transition-all-custom">
-          <i class="fas fa-envelope text-3xl text-blue-500"></i>
-        </div>
-        <p class="text-center mt-3 text-gray-600 font-medium">Email</p>
-      </a>
-    </div>
-
-    <!-- Contact Form -->
-    <div class="max-w-2xl mx-auto" data-aos="fade-up" data-aos-delay="300">
-      <div class="bg-white shadow-2xl rounded-2xl p-6 md:p-10">
-        <h4 class="text-xl font-bold text-gray-800 mb-6 text-center">Send Me a Message</h4>
-        
-        <form id="contact-form" class="space-y-6">
-          <div class="relative">
-            <i class="fas fa-user absolute left-4 top-4 text-gray-400"></i>
-            <input type="text" name="name" placeholder="Your Name" 
-              class="w-full pl-12 p-4 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-purple-400 focus:border-transparent transition-all" required>
+              <!-- Description Button -->
+              <button
+                @click="open=true; video=null; desc=`FastReq is a web-based system designed to streamline and simplify the employee goods request process within a company. It provides clear roles for employees and managers, enabling faster approvals, better transparency, and organized tracking of requests. Built with a responsive interface, FastReq improves efficiency and reduces manual paperwork in managing procurement needs.`"
+                class="flex-1 bg-gradient-to-r from-gray-600 to-gray-700 text-white px-4 py-3 rounded-lg hover:from-gray-700 hover:to-gray-800 transition-all-custom hover-lift"
+              >
+                <i class="fas fa-info-circle mr-2"></i> Details
+              </button>
+            </div>
           </div>
-          
-          <div class="relative">
-            <i class="fas fa-envelope absolute left-4 top-4 text-gray-400"></i>
-            <input type="email" name="email" placeholder="Your Email" 
-              class="w-full pl-12 p-4 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-purple-400 focus:border-transparent transition-all" required>
+
+          <!-- Project 2: Portfolio (Web) -->
+          <div
+            class="project-card bg-white p-6 rounded-2xl shadow-lg hover-lift transition-all-custom"
+            :class="{ 'hidden': filter !== 'all' && filter !== 'web' }"
+            data-aos="fade-up"
+            data-aos-delay="100"
+          >
+            <div class="relative overflow-hidden rounded-xl mb-6">
+              <img
+                src="assets/images/project2.png"
+                class="w-full h-48 object-cover transform hover:scale-105 transition-transform duration-500"
+                alt="Portfolio"
+              />
+              <div
+                class="absolute top-3 right-3 bg-green-500 text-white text-xs font-bold px-3 py-1 rounded-full shadow"
+              >
+                <i class="fas fa-circle mr-1 text-xs"></i> Live
+              </div>
+            </div>
+
+            <h4 class="text-xl font-bold mb-3 text-gray-900">
+              Personal Portfolio
+            </h4>
+            <p class="text-gray-600 mb-4">
+              Portfolio site to showcase my work and profile.
+            </p>
+
+            <div class="mb-6">
+              <span
+                class="inline-flex items-center px-3 py-1 bg-yellow-100 text-yellow-800 rounded-full text-sm font-medium mr-2"
+              >
+                <i class="fab fa-html5 mr-2"></i> HTML
+              </span>
+              <span
+                class="inline-flex items-center px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-sm font-medium mr-2"
+              >
+                <i class="fab fa-css3-alt mr-2"></i> CSS
+              </span>
+              <span
+                class="inline-flex items-center px-3 py-1 bg-green-100 text-green-800 rounded-full text-sm font-medium"
+              >
+                <i class="fab fa-js-square mr-2"></i> JavaScript
+              </span>
+            </div>
+
+            <div class="flex flex-wrap gap-3">
+              <!-- Live Demo -->
+              <a
+                href="https://delfa-23.github.io/portofolio-delfa/"
+                target="_blank"
+                class="flex-1 bg-gradient-to-r from-blue-500 to-blue-600 text-white px-4 py-3 rounded-lg hover:from-blue-600 hover:to-blue-700 transition-all-custom text-center hover-lift"
+              >
+                <i class="fas fa-external-link-alt mr-2"></i> Live Demo
+              </a>
+
+              <!-- Description Button -->
+              <button
+                @click="open=true; video=null; desc=`This portfolio website serves as a professional space to showcase your projects, skills, and experience. It features a modern, responsive, and clean design, complete with interactive animations and smooth navigation. Visitors can easily explore your work, connect via contact links, and access your LinkedIn and GitHub profiles directly.`"
+                class="flex-1 bg-gradient-to-r from-gray-600 to-gray-700 text-white px-4 py-3 rounded-lg hover:from-gray-700 hover:to-gray-800 transition-all-custom hover-lift"
+              >
+                <i class="fas fa-info-circle mr-2"></i> Details
+              </button>
+            </div>
           </div>
-          
-          <div class="relative">
-            <i class="fas fa-comment absolute left-4 top-4 text-gray-400"></i>
-            <textarea name="message" placeholder="Your Message" rows="5" 
-              class="w-full pl-12 p-4 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-purple-400 focus:border-transparent transition-all resize-none" required></textarea>
+
+          <!-- Project 3: Web PKL (Web) -->
+          <div
+            class="project-card bg-white p-6 rounded-2xl shadow-lg hover-lift transition-all-custom"
+            :class="{ 'hidden': filter !== 'all' && filter !== 'web' }"
+            data-aos="fade-up"
+            data-aos-delay="200"
+          >
+            <div class="relative overflow-hidden rounded-xl mb-6">
+              <img
+                src="assets/images/project3.png"
+                class="w-full h-48 object-cover transform hover:scale-105 transition-transform duration-500"
+                alt="Web PKL"
+              />
+              <div
+                class="absolute top-3 right-3 bg-green-500 text-white text-xs font-bold px-3 py-1 rounded-full shadow"
+              >
+                <i class="fas fa-circle mr-1 text-xs"></i> Live
+              </div>
+            </div>
+
+            <h4 class="text-xl font-bold mb-3 text-gray-900">
+              PKL Management Web
+            </h4>
+            <p class="text-gray-600 mb-4">
+              Web app for managing students internship (PKL) data and
+              activities.
+            </p>
+
+            <div class="mb-6">
+              <span
+                class="inline-flex items-center px-3 py-1 bg-red-100 text-red-800 rounded-full text-sm font-medium"
+              >
+                <i class="fab fa-laravel mr-2"></i> Laravel
+              </span>
+            </div>
+
+            <div class="flex flex-wrap gap-3">
+              <!-- Live Demo -->
+              <a
+                href="https://syifapkl.smkitassyifa.my.id/"
+                target="_blank"
+                class="flex-1 bg-gradient-to-r from-blue-500 to-blue-600 text-white px-4 py-3 rounded-lg hover:from-blue-600 hover:to-blue-700 transition-all-custom text-center hover-lift"
+              >
+                <i class="fas fa-external-link-alt mr-2"></i> Live Demo
+              </a>
+
+              <!-- Description Button -->
+              <button
+                @click="open=true; video=null; desc=`The PKL Management System is a web-based application used to manage vocational high school students' Field Work Practice (PKL) activities. This system has three main roles: administrator, teacher, and student. The administrator manages primary data, teachers monitor and evaluate students, and students can record daily PKL activities and report evidence. With an interactive dashboard feature, this system helps schools improve order and accountability in PKL implementation.`"
+                class="flex-1 bg-gradient-to-r from-gray-600 to-gray-700 text-white px-4 py-3 rounded-lg hover:from-gray-700 hover:to-gray-800 transition-all-custom hover-lift"
+              >
+                <i class="fas fa-info-circle mr-2"></i> Details
+              </button>
+
+              <!-- Demo Login Info -->
+              <button
+                @click="open=true; video=null; desc='<h4 class=\'text-lg font-bold mb-4 text-gray-800\'>Demo Login Accounts:</h4><div class=\'bg-blue-50 p-4 rounded-lg mb-3\'><h5 class=\'font-bold text-blue-700 mb-2\'>Student Account</h5><p class=\'text-gray-700\'><strong>ID:</strong> siswa<br><strong>Password:</strong> siswa123</p></div><div class=\'bg-purple-50 p-4 rounded-lg\'><h5 class=\'font-bold text-purple-700 mb-2\'>Teacher Account</h5><p class=\'text-gray-700\'><strong>ID:</strong> guru<br><strong>Password:</strong> guru123</p></div>'"
+                class="flex-1 bg-gradient-to-r from-purple-500 to-purple-600 text-white px-4 py-3 rounded-lg hover:from-purple-600 hover:to-purple-700 transition-all-custom hover-lift"
+              >
+                <i class="fas fa-key mr-2"></i> Login Info
+              </button>
+            </div>
           </div>
-          
-          <button type="submit" 
-            class="w-full bg-gradient-to-r from-purple-600 to-indigo-600 text-white py-4 rounded-xl font-semibold text-lg hover:from-purple-700 hover:to-indigo-700 hover-lift transition-all-custom shadow-lg">
-            <i class="fas fa-paper-plane mr-3"></i>Send Message
-          </button>
-          
-          <p class="text-center text-gray-500 text-sm mt-4">
-            <i class="fas fa-shield-alt mr-2"></i>
-            Your information is safe with me. I'll respond as soon as possible.
-          </p>
-        </form>
+
+          <!-- Project 4: Health Apps (Mobile) -->
+          <div
+            class="project-card bg-white p-6 rounded-2xl shadow-lg hover-lift transition-all-custom"
+            :class="{ 'hidden': filter !== 'all' && filter !== 'mobile' }"
+            data-aos="fade-up"
+            data-aos-delay="0"
+          >
+            <div class="relative mx-auto w-48 mb-6">
+              <div
+                class="absolute -inset-4 bg-gradient-to-r from-blue-400 to-purple-400 rounded-3xl blur opacity-30"
+              ></div>
+              <img
+                src="assets/images/mockup-health.png"
+                alt="Phone Mockup"
+                class="relative w-full transform hover:scale-105 transition-transform duration-500"
+              />
+            </div>
+
+            <h4 class="text-xl font-bold mb-3 text-gray-900">Health Apps</h4>
+            <p class="text-gray-600 mb-4">
+              Mobile health app built with Flutter to help track daily habits.
+            </p>
+
+            <div class="mb-6">
+              <span
+                class="inline-flex items-center px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-sm font-medium mr-2"
+              >
+                <i class="fab fa-flutter mr-2"></i> Flutter
+              </span>
+              <span
+                class="inline-flex items-center px-3 py-1 bg-orange-100 text-orange-800 rounded-full text-sm font-medium"
+              >
+                <i class="fas fa-fire mr-2"></i> Firebase
+              </span>
+            </div>
+
+            <div class="flex flex-wrap gap-3">
+              <!-- Video Demo Button -->
+              <button
+                @click="open=true; video='https://www.youtube.com/embed/LmdeaMrXF9E'; desc=null"
+                class="flex-1 bg-gradient-to-r from-red-500 to-red-600 text-white px-4 py-3 rounded-lg hover:from-red-600 hover:to-red-700 transition-all-custom hover-lift"
+              >
+                <i class="fas fa-play mr-2"></i> Video Demo
+              </button>
+
+              <!-- Description Button -->
+              <button
+                @click="open=true; video=null; desc=`The Health Apps application was created to facilitate users in accessing health information quickly and integrated. The main goal of this application is to provide digital health services that includes searching for doctors, hospitals, COVID-19, and trusted health articles. Users can view detailed doctor profiles, hospital locations, data on countries affected by COVID-19, and health tips through regularly updated articles. This application uses Firebase Firestore as a database to store user data and Firebase Storage to store profile photos and supporting images. In addition, several public APIs are used to retrieve health articles, doctor data, hospital data, and COVID-19 data, so that information is always relevant and up-to-date. With this application, users can obtain accurate health references and obtain important information without having to come directly to a health facility, thereby increasing efficiency and convenience in managing daily health.`"
+                class="flex-1 bg-gradient-to-r from-gray-600 to-gray-700 text-white px-4 py-3 rounded-lg hover:from-gray-700 hover:to-gray-800 transition-all-custom hover-lift"
+              >
+                <i class="fas fa-info-circle mr-2"></i> Details
+              </button>
+            </div>
+          </div>
+
+          <!-- Project 5: Electronic Store App (Mobile) -->
+          <div
+            class="project-card bg-white p-6 rounded-2xl shadow-lg hover-lift transition-all-custom"
+            :class="{ 'hidden': filter !== 'all' && filter !== 'mobile' }"
+            data-aos="fade-up"
+            data-aos-delay="100"
+          >
+            <div class="relative mx-auto w-48 mb-6">
+              <div
+                class="absolute -inset-4 bg-gradient-to-r from-green-400 to-blue-400 rounded-3xl blur opacity-30"
+              ></div>
+              <img
+                src="assets/images/mockup-electronic.png"
+                alt="Phone Mockup"
+                class="relative w-full transform hover:scale-105 transition-transform duration-500"
+              />
+            </div>
+
+            <h4 class="text-xl font-bold mb-3 text-gray-900">
+              Electronic Store App
+            </h4>
+            <p class="text-gray-600 mb-4">
+              Flutter mobile app for managing electronic store products and
+              sales.
+            </p>
+
+            <div class="mb-6">
+              <span
+                class="inline-flex items-center px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-sm font-medium mr-2"
+              >
+                <i class="fab fa-flutter mr-2"></i> Flutter
+              </span>
+              <span
+                class="inline-flex items-center px-3 py-1 bg-orange-100 text-orange-800 rounded-full text-sm font-medium"
+              >
+                <i class="fas fa-fire mr-2"></i> Firebase
+              </span>
+            </div>
+
+            <div class="flex flex-wrap gap-3">
+              <!-- Video Demo Button -->
+              <button
+                @click="open=true; video='https://www.youtube.com/embed/Hxzso_9Bps0'; desc=null"
+                class="flex-1 bg-gradient-to-r from-red-500 to-red-600 text-white px-4 py-3 rounded-lg hover:from-red-600 hover:to-red-700 transition-all-custom hover-lift"
+              >
+                <i class="fas fa-play mr-2"></i> Video Demo
+              </button>
+
+              <!-- Description Button -->
+              <button
+                @click="open=true; video=null; desc='Electronic Store is a modern cashier application for e-commerce stores. With this app, users can easily add products to their cart, manage quantities, checkout, and print transaction receipts. Every transaction is stored in a history and can be reviewed in detail. The app is designed with a simple, responsive, and practical interface to assist with day-to-day e-commerce management.'"
+                class="flex-1 bg-gradient-to-r from-gray-600 to-gray-700 text-white px-4 py-3 rounded-lg hover:from-gray-700 hover:to-gray-800 transition-all-custom hover-lift"
+              >
+                <i class="fas fa-info-circle mr-2"></i> Details
+              </button>
+            </div>
+          </div>
+
+          <!-- Project 6: KasirKu Bengkel (Mobile) -->
+          <div
+            class="project-card bg-white p-6 rounded-2xl shadow-lg hover-lift transition-all-custom"
+            :class="{ 'hidden': filter !== 'all' && filter !== 'mobile' }"
+            data-aos="fade-up"
+            data-aos-delay="200"
+          >
+            <div class="relative mx-auto w-48 mb-6">
+              <div
+                class="absolute -inset-4 bg-gradient-to-r from-yellow-400 to-orange-400 rounded-3xl blur opacity-30"
+              ></div>
+              <img
+                src="assets/images/mockup-bengkel.png"
+                alt="Phone Mockup"
+                class="relative w-full transform hover:scale-105 transition-transform duration-500"
+              />
+            </div>
+
+            <h4 class="text-xl font-bold mb-3 text-gray-900">
+              KasirKu Bengkel
+            </h4>
+            <p class="text-gray-600 mb-4">
+              Flutter mobile app designed for workshop cashier and operational
+              management.
+            </p>
+
+            <div class="mb-6">
+              <span
+                class="inline-flex items-center px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-sm font-medium mr-2"
+              >
+                <i class="fab fa-flutter mr-2"></i> Flutter
+              </span>
+              <span
+                class="inline-flex items-center px-3 py-1 bg-orange-100 text-orange-800 rounded-full text-sm font-medium"
+              >
+                <i class="fas fa-fire mr-2"></i> Firebase
+              </span>
+            </div>
+
+            <div class="flex flex-wrap gap-3">
+              <!-- Video Demo Button -->
+              <button
+                @click="open=true; video='https://www.youtube.com/embed/r4IzedniLts'; desc=null"
+                class="flex-1 bg-gradient-to-r from-red-500 to-red-600 text-white px-4 py-3 rounded-lg hover:from-red-600 hover:to-red-700 transition-all-custom hover-lift"
+              >
+                <i class="fas fa-play mr-2"></i> Video Demo
+              </button>
+
+              <!-- Description Button -->
+              <button
+                @click="open=true; video=null; desc=`KasirKu Bengkel is a mobile application built to simplify and optimize motorcycle and car workshop operations. It includes a full POS system, spare-part stock management, customer and mechanic data tracking, transaction history, daily reports, and Excel export support. All data is automatically stored and easily accessible, making it suitable for both small and large workshops that want faster, more efficient workflow.`"
+                class="flex-1 bg-gradient-to-r from-gray-600 to-gray-700 text-white px-4 py-3 rounded-lg hover:from-gray-700 hover:to-gray-800 transition-all-custom hover-lift"
+              >
+                <i class="fas fa-info-circle mr-2"></i> Details
+              </button>
+            </div>
+          </div>
+        </div>
       </div>
-    </div>
-  </div>
-</section>
 
-<!-- Footer -->
-<footer class="bg-gradient-to-r from-gray-900 to-black py-10 text-center text-gray-300">
-  <div class="max-w-6xl mx-auto px-6">
-    <div class="mb-6">
-      <h2 class="text-2xl font-bold gradient-text mb-2">Muhammad Delfa Tamerawan</h2>
-      <p class="text-gray-400">Full-Stack Developer & Student</p>
-    </div>
-    
-    <div class="flex justify-center gap-6 mb-8">
-      <a href="https://www.linkedin.com/in/delfa-tamerawan/" target="_blank" 
-         class="text-gray-400 hover:text-white transition-colors text-xl">
-        <i class="fab fa-linkedin"></i>
-      </a>
-      <a href="https://github.com/delfa-23" target="_blank" 
-         class="text-gray-400 hover:text-white transition-colors text-xl">
-        <i class="fab fa-github"></i>
-      </a>
-      <a href="https://www.instagram.com/delfa_tamerawan/" target="_blank" 
-         class="text-gray-400 hover:text-white transition-colors text-xl">
-        <i class="fab fa-instagram"></i>
-      </a>
-    </div>
-    
-    <div class="border-t border-gray-800 pt-6 text-sm">
-      <p>© 2025 Delfa Tamerawan. All rights reserved.</p>
-    </div>
-  </div>
-</footer>
+      <!-- Modal -->
+      <div
+        x-show="open"
+        x-transition:enter="modal-enter"
+        class="fixed inset-0 flex items-center justify-center bg-black/70 z-50 p-4 transition-opacity duration-300"
+        @click="open=false"
+      >
+        <div
+          class="bg-white rounded-2xl p-6 md:p-8 max-w-4xl w-full max-h-[90vh] overflow-y-auto relative shadow-2xl transform transition-transform duration-300"
+          @click.stop
+        >
+          <button
+            @click="open=false"
+            class="absolute top-4 right-4 text-gray-500 hover:text-gray-800 text-2xl transition-colors z-10"
+          >
+            <i class="fas fa-times"></i>
+          </button>
 
-<!-- Back to Top Button -->
-<button id="backToTop" 
-        class="fixed bottom-6 right-6 bg-gradient-to-r from-indigo-500 to-purple-500 text-white p-3 rounded-full shadow-lg hover:from-indigo-600 hover:to-purple-600 hover-lift transition-all-custom opacity-0 transform translate-y-10 z-40">
-  <i class="fas fa-chevron-up"></i>
-</button>
+          <template x-if="video">
+            <div class="relative pt-[56.25%] rounded-xl overflow-hidden mb-6">
+              <iframe
+                :src="video"
+                class="absolute top-0 left-0 w-full h-full rounded-xl"
+                frameborder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowfullscreen
+              >
+              </iframe>
+            </div>
+          </template>
 
-<script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
+          <template x-if="desc">
+            <div class="prose prose-lg max-w-none">
+              <div x-html="desc" class="text-gray-700"></div>
+            </div>
+          </template>
 
-<script>
-  // Initialize EmailJS
-  (function(){
-    emailjs.init("LDgu6mHW1D5eaafDq");
-  })();
+          <div class="mt-8 pt-6 border-t border-gray-200 text-center">
+            <button
+              @click="open=false"
+              class="bg-gradient-to-r from-indigo-500 to-purple-500 text-white px-6 py-3 rounded-lg hover:from-indigo-600 hover:to-purple-600 transition-all-custom hover-lift"
+            >
+              <i class="fas fa-times mr-2"></i> Close
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
 
-  // Initialize AOS
-  AOS.init({
-    duration: 800,
-    once: false,
-    offset: 100
-  });
+    <!-- Certificates Section -->
+    <section id="certificates" class="py-20 px-6 bg-white text-gray-800">
+      <div class="max-w-6xl mx-auto">
+        <h3 class="text-3xl font-bold mb-4 text-center gradient-text">
+          Certificates
+        </h3>
+        <div
+          class="w-24 h-1 bg-gradient-to-r from-indigo-500 to-purple-500 mx-auto mb-8 rounded-full"
+        ></div>
 
-  // Navbar scroll effect
-  let lastScroll = 0;
-  const navbar = document.getElementById('navbar');
-  window.addEventListener('scroll', () => {
-    const currentScroll = window.pageYOffset;
-    if (currentScroll > 100) {
-      navbar.style.transform = currentScroll > lastScroll ? 'translateY(-100%)' : 'translateY(0)';
-    } else {
-      navbar.style.transform = 'translateY(0)';
-    }
-    lastScroll = currentScroll;
-    
-    // Back to top button
-    const backToTop = document.getElementById('backToTop');
-    if (currentScroll > 300) {
-      backToTop.style.opacity = '1';
-      backToTop.style.transform = 'translateY(0)';
-    } else {
-      backToTop.style.opacity = '0';
-      backToTop.style.transform = 'translateY(10px)';
-    }
-  });
+        <p class="text-center text-gray-600 mb-12 max-w-2xl mx-auto">
+          Some of my certificates that I've earned through various courses,
+          training, and competitions.
+        </p>
 
-  // Back to top functionality
-  document.getElementById('backToTop').addEventListener('click', () => {
-    window.scrollTo({
-      top: 0,
-      behavior: 'smooth'
-    });
-  });
+        <div class="text-center" data-aos="zoom-in">
+          <a
+            href="certificates.html"
+            class="inline-flex items-center gap-3 bg-gradient-to-r from-indigo-600 to-purple-600 text-white px-8 py-4 rounded-full text-lg font-semibold shadow-lg hover:from-indigo-700 hover:to-purple-700 hover-lift transition-all-custom group"
+          >
+            <i class="fas fa-award text-xl"></i>
+            <span>View All Certificates</span>
+            <i
+              class="fas fa-arrow-right transform group-hover:translate-x-2 transition-transform"
+            ></i>
+          </a>
+        </div>
+      </div>
+    </section>
 
-  // Typing effect
-  const words = ["Hey there! Welcome to my space on the web — feel free to explore my portfolio"];
-  let wordIndex = 0;
-  let charIndex = 0;
-  const typingElement = document.getElementById("typing");
+    <!-- Contact Section -->
+    <section
+      id="contact"
+      class="py-20 px-6 bg-gradient-to-br from-indigo-50 to-purple-50"
+      data-aos="fade-up"
+    >
+      <div class="max-w-6xl mx-auto">
+        <h3 class="text-3xl font-bold text-center text-gray-800 mb-4">
+          Get In Touch
+        </h3>
+        <div
+          class="w-24 h-1 bg-gradient-to-r from-indigo-500 to-purple-500 mx-auto mb-12 rounded-full"
+        ></div>
 
-  function type() {
-    if (charIndex < words[wordIndex].length) {
-      typingElement.textContent += words[wordIndex].charAt(charIndex);
-      charIndex++;
-      setTimeout(type, 50);
-    } else {
-      setTimeout(erase, 3000);
-    }
-  }
+        <!-- Social Links - Fixed Instagram Button -->
+        <div class="flex flex-wrap justify-center items-center gap-8 mb-12">
+          <!-- Instagram -->
+          <a
+            href="https://www.instagram.com/delfa_tamerawan/"
+            target="_blank"
+            class="group flex flex-col items-center"
+            data-aos="fade-up"
+            data-aos-delay="100"
+          >
+            <div class="relative">
+              <div
+                class="absolute -inset-4 bg-gradient-to-r from-pink-500 via-red-500 to-yellow-500 rounded-full blur opacity-0 group-hover:opacity-30 transition-opacity duration-300"
+              ></div>
 
-  function erase() {
-    if (charIndex > 0) {
-      typingElement.textContent = words[wordIndex].substring(0, charIndex - 1);
-      charIndex--;
-      setTimeout(erase, 20);
-    } else {
-      wordIndex = (wordIndex + 1) % words.length;
-      setTimeout(type, 500);
-    }
-  }
+              <div
+                class="relative bg-white p-5 rounded-full shadow-lg hover-lift transition-all-custom"
+              >
+                <i
+                  class="fab fa-instagram text-3xl text-transparent bg-clip-text bg-gradient-to-r from-pink-500 via-red-500 to-yellow-500"
+                ></i>
+              </div>
+            </div>
 
-  document.addEventListener("DOMContentLoaded", () => {
-    setTimeout(type, 1000);
-    
-    // Add active state to first filter button
-    document.querySelectorAll('.filter-btn').forEach((btn, index) => {
-      if (index === 0) {
-        btn.classList.add('active');
-      }
-    });
-    
-    // Responsive adjustments
-    function handleResize() {
-      const isMobile = window.innerWidth < 768;
-      
-      // Adjust project cards on mobile
-      document.querySelectorAll('.project-card').forEach(card => {
-        if (isMobile) {
-          card.style.marginBottom = '20px';
+            <p class="mt-3 text-gray-600 font-medium">Instagram</p>
+          </a>
+
+          <!-- Email -->
+          <a
+            href="mailto:delfatamerawan@gmail.com"
+            class="group relative"
+            data-aos="fade-up"
+            data-aos-delay="200"
+          >
+            <div
+              class="absolute -inset-4 bg-gradient-to-r from-blue-500 to-indigo-500 rounded-full blur opacity-0 group-hover:opacity-30 transition-opacity duration-300"
+            ></div>
+            <div
+              class="relative bg-white p-5 rounded-full shadow-lg hover-lift transition-all-custom"
+            >
+              <i class="fas fa-envelope text-3xl text-blue-500"></i>
+            </div>
+            <p class="text-center mt-3 text-gray-600 font-medium">Email</p>
+          </a>
+        </div>
+
+        <!-- Contact Form -->
+        <div class="max-w-2xl mx-auto" data-aos="fade-up" data-aos-delay="300">
+          <div class="bg-white shadow-2xl rounded-2xl p-6 md:p-10">
+            <h4 class="text-xl font-bold text-gray-800 mb-6 text-center">
+              Send Me a Message
+            </h4>
+
+            <form id="contact-form" class="space-y-6">
+              <div class="relative">
+                <i class="fas fa-user absolute left-4 top-4 text-gray-400"></i>
+                <input
+                  type="text"
+                  name="name"
+                  placeholder="Your Name"
+                  class="w-full pl-12 p-4 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-purple-400 focus:border-transparent transition-all"
+                  required
+                />
+              </div>
+
+              <div class="relative">
+                <i
+                  class="fas fa-envelope absolute left-4 top-4 text-gray-400"
+                ></i>
+                <input
+                  type="email"
+                  name="email"
+                  placeholder="Your Email"
+                  class="w-full pl-12 p-4 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-purple-400 focus:border-transparent transition-all"
+                  required
+                />
+              </div>
+
+              <div class="relative">
+                <i
+                  class="fas fa-comment absolute left-4 top-4 text-gray-400"
+                ></i>
+                <textarea
+                  name="message"
+                  placeholder="Your Message"
+                  rows="5"
+                  class="w-full pl-12 p-4 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-purple-400 focus:border-transparent transition-all resize-none"
+                  required
+                ></textarea>
+              </div>
+
+              <button
+                type="submit"
+                class="w-full bg-gradient-to-r from-purple-600 to-indigo-600 text-white py-4 rounded-xl font-semibold text-lg hover:from-purple-700 hover:to-indigo-700 hover-lift transition-all-custom shadow-lg"
+              >
+                <i class="fas fa-paper-plane mr-3"></i>Send Message
+              </button>
+
+              <p class="text-center text-gray-500 text-sm mt-4">
+                <i class="fas fa-shield-alt mr-2"></i>
+                Your information is safe with me. I'll respond as soon as
+                possible.
+              </p>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer
+      class="bg-gradient-to-r from-gray-900 to-black py-10 text-center text-gray-300"
+    >
+      <div class="max-w-6xl mx-auto px-6">
+        <div class="mb-6">
+          <h2 class="text-2xl font-bold gradient-text mb-2">
+            Muhammad Delfa Tamerawan
+          </h2>
+          <p class="text-gray-400">Full-Stack Developer & Student</p>
+        </div>
+
+        <div class="flex justify-center gap-6 mb-8">
+          <a
+            href="https://www.linkedin.com/in/delfa-tamerawan/"
+            target="_blank"
+            class="text-gray-400 hover:text-white transition-colors text-xl"
+          >
+            <i class="fab fa-linkedin"></i>
+          </a>
+          <a
+            href="https://github.com/delfa-23"
+            target="_blank"
+            class="text-gray-400 hover:text-white transition-colors text-xl"
+          >
+            <i class="fab fa-github"></i>
+          </a>
+          <a
+            href="https://www.instagram.com/delfa_tamerawan/"
+            target="_blank"
+            class="text-gray-400 hover:text-white transition-colors text-xl"
+          >
+            <i class="fab fa-instagram"></i>
+          </a>
+        </div>
+
+        <div class="border-t border-gray-800 pt-6 text-sm">
+          <p>© 2025 Delfa Tamerawan. All rights reserved.</p>
+        </div>
+      </div>
+    </footer>
+
+    <!-- Back to Top Button -->
+    <button
+      id="backToTop"
+      class="fixed bottom-6 right-6 bg-gradient-to-r from-indigo-500 to-purple-500 text-white p-3 rounded-full shadow-lg hover:from-indigo-600 hover:to-purple-600 hover-lift transition-all-custom opacity-0 transform translate-y-10 z-40"
+    >
+      <i class="fas fa-chevron-up"></i>
+    </button>
+
+    <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"
+      defer
+    ></script>
+
+    <script>
+      // Initialize EmailJS
+      (function () {
+        emailjs.init("LDgu6mHW1D5eaafDq");
+      })();
+
+      // Initialize AOS
+      AOS.init({
+        duration: 800,
+        once: false,
+        offset: 100,
+      });
+
+      // Navbar scroll effect
+      let lastScroll = 0;
+      const navbar = document.getElementById("navbar");
+      window.addEventListener("scroll", () => {
+        const currentScroll = window.pageYOffset;
+        if (currentScroll > 100) {
+          navbar.style.transform =
+            currentScroll > lastScroll ? "translateY(-100%)" : "translateY(0)";
         } else {
-          card.style.marginBottom = '';
+          navbar.style.transform = "translateY(0)";
+        }
+        lastScroll = currentScroll;
+
+        // Back to top button
+        const backToTop = document.getElementById("backToTop");
+        if (currentScroll > 300) {
+          backToTop.style.opacity = "1";
+          backToTop.style.transform = "translateY(0)";
+        } else {
+          backToTop.style.opacity = "0";
+          backToTop.style.transform = "translateY(10px)";
         }
       });
-    }
-    
-    // Initial call
-    handleResize();
-    
-    // Listen for resize
-    window.addEventListener('resize', handleResize);
-  });
 
-  // Contact form submission
-  document.getElementById("contact-form").addEventListener("submit", function(event) {
-    event.preventDefault();
-    
-    const button = this.querySelector('button[type="submit"]');
-    const originalText = button.innerHTML;
-    
-    // Show loading state
-    button.innerHTML = '<i class="fas fa-spinner fa-spin mr-2"></i>Sending...';
-    button.disabled = true;
-    
-    emailjs.sendForm("service_t36llfs", "template_mx5yk8q", this)
-      .then(function() {
-          // Success state
-          button.innerHTML = '<i class="fas fa-check mr-2"></i>Message Sent!';
-          button.classList.remove('from-purple-600', 'to-indigo-600');
-          button.classList.add('from-green-500', 'to-green-600');
-          
-          // Reset form
-          document.getElementById("contact-form").reset();
-          
-          // Revert button after 3 seconds
-          setTimeout(() => {
-            button.innerHTML = originalText;
-            button.classList.remove('from-green-500', 'to-green-600');
-            button.classList.add('from-purple-600', 'to-indigo-600');
-            button.disabled = false;
-          }, 3000);
-      }, function(error) {
-          // Error state
-          button.innerHTML = '<i class="fas fa-exclamation-triangle mr-2"></i>Error! Try Again';
-          button.classList.remove('from-purple-600', 'to-indigo-600');
-          button.classList.add('from-red-500', 'to-red-600');
-          
-          // Revert button after 3 seconds
-          setTimeout(() => {
-            button.innerHTML = originalText;
-            button.classList.remove('from-red-500', 'to-red-600');
-            button.classList.add('from-purple-600', 'to-indigo-600');
-            button.disabled = false;
-          }, 3000);
-          
-          console.error('Email send error:', error);
+      // Back to top functionality
+      document.getElementById("backToTop").addEventListener("click", () => {
+        window.scrollTo({
+          top: 0,
+          behavior: "smooth",
+        });
       });
-  });
-</script>
-</body>
+
+      // Typing effect
+      const words = [
+        "Hey there! Welcome to my space on the web — feel free to explore my portfolio",
+      ];
+      let wordIndex = 0;
+      let charIndex = 0;
+      const typingElement = document.getElementById("typing");
+
+      function type() {
+        if (charIndex < words[wordIndex].length) {
+          typingElement.textContent += words[wordIndex].charAt(charIndex);
+          charIndex++;
+          setTimeout(type, 50);
+        } else {
+          setTimeout(erase, 3000);
+        }
+      }
+
+      function erase() {
+        if (charIndex > 0) {
+          typingElement.textContent = words[wordIndex].substring(
+            0,
+            charIndex - 1
+          );
+          charIndex--;
+          setTimeout(erase, 20);
+        } else {
+          wordIndex = (wordIndex + 1) % words.length;
+          setTimeout(type, 500);
+        }
+      }
+
+      document.addEventListener("DOMContentLoaded", () => {
+        setTimeout(type, 1000);
+
+        // Add active state to first filter button
+        document.querySelectorAll(".filter-btn").forEach((btn, index) => {
+          if (index === 0) {
+            btn.classList.add("active");
+          }
+        });
+
+        // Responsive adjustments
+        function handleResize() {
+          const isMobile = window.innerWidth < 768;
+
+          // Adjust project cards on mobile
+          document.querySelectorAll(".project-card").forEach((card) => {
+            if (isMobile) {
+              card.style.marginBottom = "20px";
+            } else {
+              card.style.marginBottom = "";
+            }
+          });
+        }
+
+        // Initial call
+        handleResize();
+
+        // Listen for resize
+        window.addEventListener("resize", handleResize);
+      });
+
+      // Contact form submission
+      document
+        .getElementById("contact-form")
+        .addEventListener("submit", function (event) {
+          event.preventDefault();
+
+          const button = this.querySelector('button[type="submit"]');
+          const originalText = button.innerHTML;
+
+          // Show loading state
+          button.innerHTML =
+            '<i class="fas fa-spinner fa-spin mr-2"></i>Sending...';
+          button.disabled = true;
+
+          emailjs.sendForm("service_t36llfs", "template_mx5yk8q", this).then(
+            function () {
+              // Success state
+              button.innerHTML =
+                '<i class="fas fa-check mr-2"></i>Message Sent!';
+              button.classList.remove("from-purple-600", "to-indigo-600");
+              button.classList.add("from-green-500", "to-green-600");
+
+              // Reset form
+              document.getElementById("contact-form").reset();
+
+              // Revert button after 3 seconds
+              setTimeout(() => {
+                button.innerHTML = originalText;
+                button.classList.remove("from-green-500", "to-green-600");
+                button.classList.add("from-purple-600", "to-indigo-600");
+                button.disabled = false;
+              }, 3000);
+            },
+            function (error) {
+              // Error state
+              button.innerHTML =
+                '<i class="fas fa-exclamation-triangle mr-2"></i>Error! Try Again';
+              button.classList.remove("from-purple-600", "to-indigo-600");
+              button.classList.add("from-red-500", "to-red-600");
+
+              // Revert button after 3 seconds
+              setTimeout(() => {
+                button.innerHTML = originalText;
+                button.classList.remove("from-red-500", "to-red-600");
+                button.classList.add("from-purple-600", "to-indigo-600");
+                button.disabled = false;
+              }, 3000);
+
+              console.error("Email send error:", error);
+            }
+          );
+        });
+    </script>
+  </body>
 </html>
