@@ -1,517 +1,332 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Portfolio Delfa</title>
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, viewport-fit=cover"
+    />
+    <title>Delfa Tamerawan · Full-Stack Dev</title>
+    <!-- Tailwind + Fonts + Icons -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700&display=swap"
+      rel="stylesheet"
+    />
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
     />
+    <!-- favicon (as requested) -->
     <link rel="icon" type="image/png" href="assets/images/favicon.png" />
     <link rel="apple-touch-icon" href="assets/images/favicon.png" />
     <style>
-      @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap");
-
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
       body {
-        font-family: "Poppins", sans-serif;
+        font-family: "Inter", sans-serif;
         scroll-behavior: smooth;
+        background: #faf9ff;
       }
 
-      /* Custom Animations */
-      @keyframes float {
-        0%,
-        100% {
-          transform: translateY(0);
-        }
-        50% {
-          transform: translateY(-20px);
-        }
+      /* purple-rich gradient + soft animations */
+      .purple-glow {
+        background: linear-gradient(135deg, #a855f7 0%, #7c3aed 100%);
       }
-
-      @keyframes jelly {
-        0%,
-        100% {
-          transform: scale(1);
-        }
-        25% {
-          transform: scale(0.9, 1.1);
-        }
-        50% {
-          transform: scale(1.1, 0.9);
-        }
-        75% {
-          transform: scale(0.95, 1.05);
-        }
-      }
-
-      @keyframes glow {
-        0%,
-        100% {
-          box-shadow: 0 0 10px rgba(99, 102, 241, 0.3);
-        }
-        50% {
-          box-shadow: 0 0 20px rgba(99, 102, 241, 0.6);
-        }
-      }
-
-      .animate-float {
-        animation: float 6s ease-in-out infinite;
-      }
-
-      .animate-jelly {
-        animation: jelly 3s ease-in-out infinite;
-      }
-
-      .animate-glow {
-        animation: glow 2s ease-in-out infinite;
-      }
-
-      /* Custom Scrollbar */
-      ::-webkit-scrollbar {
-        width: 10px;
-      }
-
-      ::-webkit-scrollbar-track {
-        background: #f1f1f1;
-      }
-
-      ::-webkit-scrollbar-thumb {
-        background: linear-gradient(45deg, #4f46e5, #7c3aed);
-        border-radius: 5px;
-      }
-
-      /* Gradient Text */
-      .gradient-text {
-        background: linear-gradient(45deg, #4f46e5, #7c3aed, #a855f7);
+      .purple-text-grad {
+        background: linear-gradient(120deg, #c084fc, #9333ea, #a855f7);
+        background-size: 200% auto;
         -webkit-background-clip: text;
         background-clip: text;
         color: transparent;
-        background-size: 200% 200%;
-        animation: gradient-shift 3s ease infinite;
+        animation: shimmer 4s linear infinite;
       }
-
-      @keyframes gradient-shift {
+      @keyframes shimmer {
         0% {
           background-position: 0% 50%;
         }
-        50% {
-          background-position: 100% 50%;
-        }
         100% {
-          background-position: 0% 50%;
+          background-position: 200% 50%;
         }
       }
-
-      /* Hover Effects */
-      .hover-lift {
-        transition: transform 0.3s ease, box-shadow 0.3s ease;
+      .soft-float {
+        animation: floatSoft 5s ease-in-out infinite;
       }
-
-      .hover-lift:hover {
-        transform: translateY(-5px);
-        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
-      }
-
-      /* Section Divider */
-      .section-divider {
-        position: relative;
-        height: 80px;
-        overflow: hidden;
-      }
-
-      .section-divider::before {
-        content: "";
-        position: absolute;
-        bottom: 0;
-        left: 0;
-        width: 100%;
-        height: 100px;
-        background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 120' preserveAspectRatio='none'%3E%3Cpath d='M1200 120L0 16.48 0 0 1200 0 1200 120z' fill='%23ffffff'/%3E%3C/svg%3E");
-        background-size: 100% 100px;
-      }
-
-      /* Smooth Transitions */
-      .transition-all-custom {
-        transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-      }
-
-      /* Typing Animation */
-      .typing-cursor::after {
-        content: "|";
-        animation: blink 1s infinite;
-      }
-
-      @keyframes blink {
-        0%,
-        100% {
-          opacity: 1;
+      @keyframes floatSoft {
+        0% {
+          transform: translateY(0px);
         }
         50% {
-          opacity: 0;
+          transform: translateY(-8px);
+        }
+        100% {
+          transform: translateY(0px);
         }
       }
-
-      /* Project Card Hidden State */
-      .project-card.hidden {
-        display: none !important;
+      .card-hover {
+        transition: all 0.3s cubic-bezier(0.2, 0.9, 0.4, 1.1);
       }
-
-      /* Modal Animation */
-      .modal-enter {
-        animation: modalFadeIn 0.3s ease-out forwards;
+      .card-hover:hover {
+        transform: translateY(-6px) scale(1.01);
+        box-shadow: 0 25px 35px -12px rgba(139, 92, 246, 0.25);
       }
-
-      @keyframes modalFadeIn {
+      .btn-pulse {
+        transition: 0.2s;
+      }
+      .btn-pulse:active {
+        transform: scale(0.97);
+      }
+      .navbar-blur {
+        background: rgba(255, 255, 255, 0.85);
+        backdrop-filter: blur(12px);
+        border-bottom: 1px solid rgba(139, 92, 246, 0.2);
+      }
+      ::-webkit-scrollbar {
+        width: 8px;
+      }
+      ::-webkit-scrollbar-track {
+        background: #f1f1ff;
+        border-radius: 10px;
+      }
+      ::-webkit-scrollbar-thumb {
+        background: #a855f7;
+        border-radius: 10px;
+      }
+      ::-webkit-scrollbar-thumb:hover {
+        background: #7c3aed;
+      }
+      .modal-pop {
+        animation: modalRise 0.2s ease-out;
+      }
+      @keyframes modalRise {
         from {
           opacity: 0;
-          transform: scale(0.9);
+          transform: scale(0.96) translateY(12px);
         }
         to {
           opacity: 1;
-          transform: scale(1);
+          transform: scale(1) translateY(0);
         }
       }
-
-      /* Hero Text Contrast */
-      .hero-text {
-        text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+      .bg-purple-pattern {
+        background-image: radial-gradient(
+          circle at 10% 20%,
+          rgba(139, 92, 246, 0.03) 2%,
+          transparent 2.5%
+        );
+        background-size: 32px 32px;
       }
-
-      /* Navbar Glass Effect */
-      .navbar-glass {
-        background: rgba(0, 0, 0, 0.3);
-        backdrop-filter: blur(12px);
-        -webkit-backdrop-filter: blur(12px);
-        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-      }
-
-      /* Responsive fixes */
-      @media (max-width: 640px) {
-        .section-divider {
-          height: 60px;
-        }
-
-        .section-divider::before {
-          height: 80px;
-        }
+      .project-tag {
+        transition: all 0.2s;
       }
     </style>
   </head>
-  <body
-    class="text-gray-800 bg-gradient-to-br from-indigo-50 via-white to-purple-50 min-h-screen"
-  >
-    <!-- Navbar -->
+  <body class="antialiased">
+    <!-- NAVBAR (purple accent, glass) -->
     <header
-      x-data="{open:false}"
-      class="navbar-glass text-white fixed top-0 w-full z-50 transition-all duration-300"
       id="navbar"
+      class="fixed top-0 w-full z-50 navbar-blur transition-all duration-300"
     >
       <div
-        class="max-w-7xl mx-auto px-4 py-3 flex justify-between items-center"
+        class="max-w-6xl mx-auto px-5 py-3 flex items-center justify-between"
       >
-        <!-- Logo -->
-        <h1 class="text-xl font-bold">
-          <span class="gradient-text font-bold">Portfolio</span>
-        </h1>
-
-        <!-- Desktop Menu -->
-        <nav class="hidden md:flex space-x-6 items-center">
+        <div class="flex items-center gap-2">
+          <a href="#home"
+            ><img src="assets/images/favicon.png" alt="Logo" class="h-8 w-8"
+          /></a>
+        </div>
+        <nav class="hidden md:flex gap-7 items-center">
           <a
             href="#about"
-            class="hover:text-indigo-200 transition-all hover:scale-105 relative group"
+            class="text-gray-700 hover:text-purple-700 font-medium transition flex items-center gap-1"
+            ><i class="fas fa-user-astronaut text-purple-400 text-sm"></i>
+            About</a
           >
-            <span>About</span>
-            <span
-              class="absolute bottom-0 left-0 w-0 h-0.5 bg-indigo-300 group-hover:w-full transition-all duration-300"
-            ></span>
-          </a>
           <a
             href="#projects"
-            class="hover:text-indigo-200 transition-all hover:scale-105 relative group"
+            class="text-gray-700 hover:text-purple-700 font-medium transition flex items-center gap-1"
+            ><i class="fas fa-laptop-code text-purple-400 text-sm"></i> Work</a
           >
-            <span>Projects</span>
-            <span
-              class="absolute bottom-0 left-0 w-0 h-0.5 bg-indigo-300 group-hover:w-full transition-all duration-300"
-            ></span>
-          </a>
           <a
             href="#certificates"
-            class="hover:text-indigo-200 transition-all hover:scale-105 relative group"
+            class="text-gray-700 hover:text-purple-700 font-medium transition flex items-center gap-1"
+            ><i class="fas fa-award text-purple-400 text-sm"></i> Certs</a
           >
-            <span>Certificates</span>
-            <span
-              class="absolute bottom-0 left-0 w-0 h-0.5 bg-indigo-300 group-hover:w-full transition-all duration-300"
-            ></span>
-          </a>
           <a
             href="#contact"
-            class="hover:text-indigo-200 transition-all hover:scale-105 relative group"
+            class="text-gray-700 hover:text-purple-700 font-medium transition flex items-center gap-1"
+            ><i class="fas fa-paper-plane text-purple-400 text-sm"></i>
+            Contact</a
           >
-            <span>Contact</span>
-            <span
-              class="absolute bottom-0 left-0 w-0 h-0.5 bg-indigo-300 group-hover:w-full transition-all duration-300"
-            ></span>
-          </a>
           <a
             href="assets/cv.pdf"
             target="_blank"
-            class="ml-4 px-4 py-2 bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700 rounded-lg shadow-md hover-lift transition-all"
+            class="ml-2 px-4 py-2 rounded-full bg-purple-600 text-white text-sm font-semibold shadow-md hover:bg-purple-700 transition flex items-center gap-2"
+            ><i class="fas fa-file-pdf"></i> CV</a
           >
-            <i class="fas fa-file-alt mr-2"></i>View CV
-          </a>
         </nav>
-
-        <!-- Mobile Hamburger -->
         <button
-          @click="open=!open"
-          class="md:hidden focus:outline-none text-2xl hover:text-indigo-300 transition-all"
+          id="mobileMenuBtn"
+          class="md:hidden text-purple-700 text-2xl focus:outline-none"
         >
-          <i x-show="!open" class="fas fa-bars"></i>
-          <i x-show="open" class="fas fa-times"></i>
+          <i class="fas fa-bars"></i>
         </button>
       </div>
-
-      <!-- Mobile Menu -->
+      <!-- mobile drawer -->
       <div
-        x-show="open"
-        x-transition:enter="mobile-menu-enter"
-        class="md:hidden bg-gray-900/90 backdrop-blur-sm text-white px-6 py-4 space-y-4"
+        id="mobileDrawer"
+        class="fixed inset-0 bg-white/95 backdrop-blur-md z-40 transform translate-x-full transition-transform duration-300 md:hidden"
       >
-        <a
-          href="#about"
-          class="block py-2 hover:bg-white/10 rounded px-3 transition-all"
-          @click="open=false"
-          >About</a
-        >
-        <a
-          href="#projects"
-          class="block py-2 hover:bg-white/10 rounded px-3 transition-all"
-          @click="open=false"
-          >Projects</a
-        >
-        <a
-          href="#certificates"
-          class="block py-2 hover:bg-white/10 rounded px-3 transition-all"
-          @click="open=false"
-          >Certificates</a
-        >
-        <a
-          href="#contact"
-          class="block py-2 hover:bg-white/10 rounded px-3 transition-all"
-          @click="open=false"
-          >Contact</a
-        >
-        <a
-          href="assets/cv.pdf"
-          target="_blank"
-          class="block bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700 text-center py-3 rounded-lg transition-all"
-          @click="open=false"
-        >
-          <i class="fas fa-file-alt mr-2"></i>View CV
-        </a>
+        <div class="flex justify-end p-5">
+          <button id="closeDrawer">
+            <i class="fas fa-times text-2xl text-purple-700"></i>
+          </button>
+        </div>
+        <div class="flex flex-col items-center gap-6 text-xl mt-10">
+          <a href="#about" class="mobile-link">About</a
+          ><a href="#projects" class="mobile-link">Projects</a
+          ><a href="#certificates" class="mobile-link">Certificates</a
+          ><a href="#contact" class="mobile-link">Contact</a>
+          <a
+            href="assets/cv.pdf"
+            target="_blank"
+            class="bg-purple-600 px-6 py-2 rounded-full text-white"
+            >CV</a
+          >
+        </div>
       </div>
     </header>
 
-    <!-- Hero Section -->
+    <!-- HERO SECTION (purple dominant, playful animation) -->
     <section
-      class="h-screen text-white flex flex-col items-center justify-center relative overflow-hidden bg-gradient-to-br from-indigo-900 via-purple-900 to-indigo-800"
+      id="home"
+      class="min-h-screen flex items-center justify-center relative overflow-hidden bg-gradient-to-br from-[#f3e8ff] via-white to-[#f1eaff] pt-20"
     >
-      <!-- Animated Background Elements -->
-      <div class="absolute inset-0 overflow-hidden">
-        <div
-          class="absolute top-10 left-10 w-24 h-24 bg-white/10 rounded-full animate-float"
-        ></div>
-        <div
-          class="absolute bottom-20 right-20 w-32 h-32 bg-indigo-500/10 rounded-full animate-float"
-          style="animation-delay: 1s"
-        ></div>
-        <div
-          class="absolute top-1/4 right-1/4 w-16 h-16 bg-purple-300/10 rounded-full animate-float"
-          style="animation-delay: 2s"
-        ></div>
-
-        <!-- Animated Shapes -->
-        <div
-          class="absolute top-1/3 left-1/4 w-12 h-12 border-2 border-white/20 rounded-lg animate-spin"
-          style="animation-duration: 20s"
-        ></div>
-      </div>
-
       <div
-        class="z-10 text-center px-4 max-w-4xl mx-auto"
-        data-aos="fade-up"
-        data-aos-duration="1000"
-      >
-        <div class="mb-6">
+        class="absolute top-20 left-10 w-64 h-64 bg-purple-200 rounded-full mix-blend-multiply filter blur-3xl opacity-30 animate-pulse"
+      ></div>
+      <div
+        class="absolute bottom-10 right-5 w-80 h-80 bg-indigo-200 rounded-full blur-3xl opacity-30 animate-pulse delay-700"
+      ></div>
+
+      <div class="relative z-10 text-center max-w-4xl px-5">
+        <div class="mb-5 soft-float">
           <div
-            class="w-32 h-32 mx-auto rounded-full bg-gradient-to-r from-indigo-500 to-purple-500 p-1 mb-6 animate-glow"
+            class="w-32 h-32 mx-auto rounded-full border-4 border-purple-300 shadow-xl overflow-hidden bg-white"
           >
             <img
               src="assets/images/foto.jpeg"
-              alt="Profile"
-              class="w-full h-full rounded-full object-cover border-4 border-white/30"
+              alt="Delfa profile"
+              class="w-full h-full object-cover"
             />
           </div>
         </div>
-
-        <!-- Hero Text dengan kontras lebih baik -->
-        <h1 class="text-4xl md:text-6xl font-bold mb-4 hero-text">
-          <span class="text-white">Muhammad Delfa Tamerawan</span>
+        <h1 class="text-4xl md:text-6xl font-extrabold tracking-tight">
+          Muhammad Delfa <br /><span class="purple-text-grad">Tamerawan</span>
         </h1>
-
-        <div class="text-xl md:text-2xl mt-6 mb-8 h-12">
-          <p class="typing-cursor inline-block text-white font-light">
-            <span class="typing" id="typing"></span>
-          </p>
+        <div class="h-14 mt-4 text-lg md:text-xl text-gray-700 font-medium">
+          <span
+            id="dynamicText"
+            class="border-r-2 border-purple-500 pr-1"
+          ></span>
         </div>
-
-        <!-- CTA Buttons -->
-        <div
-          class="flex flex-col sm:flex-row gap-4 justify-center mt-8"
-          data-aos="fade-up"
-          data-aos-delay="300"
-        >
-          <!-- LinkedIn -->
+        <div class="flex flex-wrap justify-center gap-5 mt-8">
           <a
             href="https://www.linkedin.com/in/delfa-tamerawan/"
             target="_blank"
-            class="flex items-center justify-center gap-3 px-6 py-3 bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 rounded-lg shadow-lg hover-lift transition-all-custom group"
-          >
-            <i class="fab fa-linkedin text-xl"></i>
-            <span>Hire Me</span>
-            <i
-              class="fas fa-arrow-right ml-2 transform group-hover:translate-x-1 transition-transform"
-            ></i>
-          </a>
-
-          <!-- GitHub -->
+            class="inline-flex items-center gap-2 bg-purple-700 hover:bg-purple-800 text-white px-6 py-3 rounded-full shadow-md transition-all btn-pulse"
+            ><i class="fab fa-linkedin"></i> Hire Me
+            <i class="fas fa-arrow-right text-sm"></i
+          ></a>
           <a
             href="https://github.com/delfa-23"
             target="_blank"
-            class="flex items-center justify-center gap-3 px-6 py-3 bg-gradient-to-r from-gray-800 to-gray-900 hover:from-gray-900 hover:to-black rounded-lg shadow-lg hover-lift transition-all-custom group"
+            class="inline-flex items-center gap-2 bg-gray-800 hover:bg-black text-white px-6 py-3 rounded-full shadow-md transition-all"
+            ><i class="fab fa-github"></i> GitHub</a
           >
-            <i class="fab fa-github text-xl"></i>
-            <span>GitHub</span>
-            <i
-              class="fas fa-arrow-right ml-2 transform group-hover:translate-x-1 transition-transform"
-            ></i>
-          </a>
         </div>
-
-        <!-- Scroll Indicator -->
-        <div
-          class="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce"
-        >
-          <a
-            href="#about"
-            class="text-white/70 hover:text-white transition-colors"
-          >
-            <i class="fas fa-chevron-down text-2xl"></i>
-          </a>
+        <div class="absolute bottom-8 left-1/2 -translate-x-1/2 animate-bounce">
+          <a href="#about"
+            ><i class="fas fa-chevron-down text-purple-500 text-2xl"></i
+          ></a>
         </div>
       </div>
     </section>
 
-    <!-- Section Divider -->
-    <div class="section-divider"></div>
-
-    <!-- About Section -->
-    <section
-      id="about"
-      class="py-20 px-6 bg-white text-gray-800"
-      data-aos="fade-up"
-    >
-      <div class="max-w-6xl mx-auto">
-        <h3 class="text-3xl font-bold mb-4 text-center gradient-text">
-          About Me
-        </h3>
-        <div
-          class="w-24 h-1 bg-gradient-to-r from-indigo-500 to-purple-500 mx-auto mb-12 rounded-full"
-        ></div>
-
-        <div class="flex flex-col md:flex-row items-center gap-10">
-          <div
-            class="w-full md:w-2/5 flex justify-center"
-            data-aos="fade-right"
-            data-aos-delay="200"
+    <!-- ABOUT section with purple accents -->
+    <section id="about" class="py-20 px-5 bg-white relative bg-purple-pattern">
+      <div class="max-w-5xl mx-auto">
+        <div class="text-center mb-12">
+          <span
+            class="bg-purple-100 text-purple-700 px-4 py-1 rounded-full text-sm font-semibold"
+            ><i class="fas fa-smile-wink mr-1"></i> Who Am I</span
           >
+          <h2 class="text-3xl md:text-4xl font-bold mt-3">
+            About <span class="purple-text-grad">Me</span>
+          </h2>
+          <div class="w-20 h-1 bg-purple-400 mx-auto mt-3 rounded-full"></div>
+        </div>
+        <div class="flex flex-col md:flex-row gap-12 items-center">
+          <div class="md:w-2/5 flex justify-center">
             <div class="relative">
               <div
-                class="w-64 h-64 rounded-full overflow-hidden border-8 border-white shadow-2xl animate-glow"
+                class="w-56 h-56 rounded-full border-[5px] border-purple-300 shadow-2xl overflow-hidden bg-purple-50"
               >
                 <img
                   src="assets/images/foto.jpeg"
-                  alt="Foto"
+                  alt="Delfa"
                   class="w-full h-full object-cover"
                 />
               </div>
               <div
-                class="absolute -bottom-3 -right-3 w-20 h-20 bg-gradient-to-r from-indigo-500 to-purple-500 rounded-full flex items-center justify-center text-white text-3xl animate-jelly"
+                class="absolute -bottom-4 -right-4 bg-purple-600 text-white p-3 rounded-full shadow-lg"
               >
-                <i class="fas fa-code"></i>
+                <i class="fas fa-laptop-code text-xl"></i>
               </div>
             </div>
           </div>
-
-          <div
-            class="w-full md:w-3/5"
-            data-aos="fade-left"
-            data-aos-delay="400"
-          >
-            <h4 class="text-2xl font-bold mb-3 text-gray-900">
+          <div class="md:w-3/5 space-y-4">
+            <h3 class="text-2xl font-bold text-gray-800">
               Muhammad Delfa Tamerawan
-            </h4>
+            </h3>
             <div
-              class="inline-block px-4 py-1 bg-gradient-to-r from-indigo-100 to-purple-100 text-indigo-700 rounded-full font-medium mb-6"
+              class="inline-block bg-purple-100 text-purple-800 px-4 py-1 rounded-full text-sm"
             >
-              <i class="fas fa-laptop-code mr-2"></i>Full-Stack Developer
+              <i class="fas fa-code-branch mr-1"></i> Full-Stack Developer
             </div>
-
-            <p class="leading-relaxed text-gray-700 mb-6">
-              I am a passionate Full-Stack Developer currently studying at
-              vocational high school. I enjoy creating web and mobile
-              applications that are both functional and user-friendly.
-              Continuously learning and exploring modern technologies like
-              Laravel, Flutter, and Firebase to improve my skills and build
-              better solutions.
+            <div
+              class="inline-block bg-purple-100 text-purple-800 px-4 py-1 rounded-full text-sm"
+            >
+              <i class="fas fa-mobile-alt mr-1"></i> Mobile Developer
+            </div>
+            <p class="text-gray-700 leading-relaxed">
+              I'm a passionate developer currently studying at a vocational high
+              school, focused on building fast and user-friendly web & mobile
+              applications. I specialize in creating clean, modern interfaces
+              backed by solid and scalable systems. I turn ideas into real,
+              functional products — let's build something impactful.
             </p>
-
-            <p class="leading-relaxed text-gray-700 mb-8">
-              My goal is to grow as a professional developer and contribute to
-              meaningful digital projects that make a positive impact.
-            </p>
-
-            <!-- Skills tanpa bahasa code -->
-            <div class="grid grid-cols-2 sm:grid-cols-4 gap-4">
-
+            <div class="grid grid-cols-2 sm:grid-cols-3 gap-3 pt-2">
               <div
-                class="bg-gray-50 p-4 rounded-lg text-center hover:bg-gray-100 transition-colors"
+                class="bg-gray-50 p-3 rounded-xl text-center border border-purple-100"
               >
-                <div class="text-2xl mb-2">
-                  <i class="fas fa-code text-purple-500"></i>
-                </div>
-                <p class="font-medium">Web Development</p>
+                <i class="fas fa-globe text-purple-600 text-xl"></i>
+                <p class="text-sm font-medium mt-1">Website Development</p>
               </div>
-
               <div
-                class="bg-gray-50 p-4 rounded-lg text-center hover:bg-gray-100 transition-colors"
+                class="bg-gray-50 p-3 rounded-xl text-center border border-purple-100"
               >
-                <div class="text-2xl mb-2">
-                  <i class="fas fa-mobile-alt text-blue-500"></i>
-                </div>
-                <p class="font-medium">Mobile Apps</p>
+                <i class="fas fa-mobile-alt text-purple-600 text-xl"></i>
+                <p class="text-sm font-medium mt-1">Mobile App</p>
               </div>
-
               <div
-                class="bg-gray-50 p-4 rounded-lg text-center hover:bg-gray-100 transition-colors"
+                class="bg-gray-50 p-3 rounded-xl text-center border border-purple-100"
               >
-                <div class="text-2xl mb-2">
-                  <i class="fas fa-database text-green-500"></i>
-                </div>
-                <p class="font-medium">Database</p>
+                <i class="fas fa-chart-line text-purple-600 text-xl"></i>
+                <p class="text-sm font-medium mt-1">Dashboard System</p>
               </div>
             </div>
           </div>
@@ -519,838 +334,646 @@
       </div>
     </section>
 
-    <!-- Projects Section -->
-    <section
-      id="projects"
-      class="py-20 px-6 bg-gray-50 text-gray-800"
-      x-data="{ 
-           filter: 'all', 
-           open: false, 
-           video: null, 
-           desc: null,
-           init() {
-             setTimeout(() => {
-               AOS.refresh();
-             }, 100);
-           }
-         }"
-    >
+    <!-- PROJECTS section (filter, modal, purple touches, uses your images exactly) -->
+    <section id="projects" class="py-20 px-5 bg-[#fcfaff]">
       <div class="max-w-6xl mx-auto">
-        <h3 class="text-3xl font-bold text-center text-gray-800 mb-4">
-          Projects
-        </h3>
-        <div
-          class="w-24 h-1 bg-gradient-to-r from-indigo-500 to-purple-500 mx-auto mb-12 rounded-full"
-        ></div>
-
-        <!-- Filter Buttons -->
-        <div class="flex flex-wrap justify-center gap-4 mb-12">
-          <button
-            @click="filter='all'; $nextTick(() => AOS.refresh())"
-            :class="filter==='all' ? 'bg-gradient-to-r from-indigo-600 to-purple-600 text-white shadow-lg active' : 'bg-white text-gray-700 hover:bg-gray-100'"
-            class="filter-btn px-5 py-3 rounded-full shadow hover-lift transition-all-custom flex items-center gap-2"
+        <div class="text-center mb-10">
+          <span
+            class="bg-purple-100 text-purple-700 px-4 py-1 rounded-full text-sm"
+            ><i class="fas fa-rocket"></i> portfolio</span
           >
-            <i class="fas fa-layer-group"></i>
-            <span>All Projects</span>
+          <h2 class="text-3xl md:text-4xl font-bold mt-2">
+            Featured <span class="purple-text-grad">Projects</span>
+          </h2>
+          <div class="w-20 h-1 bg-purple-400 mx-auto mt-3 rounded-full"></div>
+        </div>
+        <!-- filter buttons with icons -->
+        <div class="flex flex-wrap justify-center gap-3 mb-12">
+          <button
+            data-filter="all"
+            class="filterBtn active-filter bg-purple-600 text-white shadow-md px-5 py-2 rounded-full flex items-center gap-2 transition duration-75 btn-pulse"
+          >
+            <i class="fas fa-th-large"></i> All
           </button>
           <button
-            @click="filter='web'; $nextTick(() => AOS.refresh())"
-            :class="filter==='web' ? 'bg-gradient-to-r from-indigo-600 to-purple-600 text-white shadow-lg active' : 'bg-white text-gray-700 hover:bg-gray-100'"
-            class="filter-btn px-5 py-3 rounded-full shadow hover-lift transition-all-custom flex items-center gap-2"
+            data-filter="web"
+            class="filterBtn bg-white text-gray-700 hover:bg-purple-50 px-5 py-2 rounded-full flex items-center gap-2 transition duration-75 shadow-sm"
           >
-            <i class="fas fa-globe"></i>
-            <span>Web Apps</span>
+            <i class="fas fa-globe"></i> Web Apps
           </button>
           <button
-            @click="filter='mobile'; $nextTick(() => AOS.refresh())"
-            :class="filter==='mobile' ? 'bg-gradient-to-r from-indigo-600 to-purple-600 text-white shadow-lg active' : 'bg-white text-gray-700 hover:bg-gray-100'"
-            class="filter-btn px-5 py-3 rounded-full shadow hover-lift transition-all-custom flex items-center gap-2"
+            data-filter="mobile"
+            class="filterBtn bg-white text-gray-700 hover:bg-purple-50 px-5 py-2 rounded-full flex items-center gap-2 transition duration-75 shadow-sm"
           >
-            <i class="fas fa-mobile-alt"></i>
-            <span>Mobile Apps</span>
+            <i class="fas fa-mobile-alt"></i> Mobile Apps
           </button>
         </div>
 
-        <!-- Projects Grid -->
         <div
           class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
-          id="projects-grid"
+          id="projectsGrid"
         >
-          <!-- Project 1: FastReq (Web) -->
+          <!-- Project 1: FastReq (web) -->
           <div
-            class="project-card bg-white p-6 rounded-2xl shadow-lg hover-lift transition-all-custom"
-            :class="{ 'hidden': filter !== 'all' && filter !== 'web' }"
-            data-aos="fade-up"
-            data-aos-delay="0"
+            class="project-item bg-white rounded-2xl shadow-md overflow-hidden card-hover"
+            data-category="web"
           >
-            <div class="relative overflow-hidden rounded-xl mb-6">
-              <img
-                src="assets/images/project1.png"
-                class="w-full h-48 object-cover transform hover:scale-105 transition-transform duration-500"
-                alt="FastReq"
-              />
-              <div
-                class="absolute top-3 right-3 bg-green-500 text-white text-xs font-bold px-3 py-1 rounded-full shadow"
-              >
-                <i class="fas fa-circle mr-1 text-xs"></i> Live
+            <img
+              src="assets/images/project1.png"
+              alt="FastReq"
+              class="w-full h-44 object-cover border-b border-purple-100"
+            />
+            <div class="p-5">
+              <div class="flex justify-between items-start">
+                <h3 class="text-xl font-bold text-gray-800">FastReq</h3>
+                <span
+                  class="bg-green-100 text-green-700 text-xs px-2 py-1 rounded-full"
+                  ><i class="fas fa-circle text-[8px] mr-1"></i> Live</span
+                >
+              </div>
+              <p class="text-gray-600 text-sm mt-1">
+                Purchase request system for companies — simple approval flow.
+              </p>
+              <div class="mt-3 flex flex-wrap gap-2">
+                <span
+                  class="text-xs bg-red-50 text-red-700 px-3 py-1 rounded-full"
+                  ><i class="fab fa-laravel"></i> Laravel</span
+                >
+              </div>
+              <div class="flex gap-2 mt-5">
+                <a
+                  href="https://delfa-23.github.io/fastreq-ui/"
+                  target="_blank"
+                  class="flex-1 text-center bg-purple-600 text-white py-2 rounded-lg text-sm hover:bg-purple-700 transition"
+                  >Live Demo</a
+                ><button
+                  class="detailBtn flex-1 text-center bg-gray-200 text-gray-700 py-2 rounded-lg text-sm hover:bg-gray-300 transition"
+                  data-title="FastReq"
+                  data-desc="FastReq streamlines employee goods requests. Employees submit requests, managers approve/decline with notes. Built with Laravel & MySQL, role-based access control makes procurement transparent and efficient."
+                  data-video=""
+                >
+                  Details
+                </button>
               </div>
             </div>
-
-            <h4 class="text-xl font-bold mb-3 text-gray-900">FastReq</h4>
-            <p class="text-gray-600 mb-4">
-              Simple web app for submitting purchase requests for goods in
-              companies.
-            </p>
-
-            <div class="mb-6">
-              <span
-                class="inline-flex items-center px-3 py-1 bg-red-100 text-red-800 rounded-full text-sm font-medium"
-              >
-                <i class="fab fa-laravel mr-2"></i> Laravel
-              </span>
-            </div>
-
-            <div class="flex flex-wrap gap-3">
-              <!-- Live Demo -->
-              <a
-                href="https://delfa-23.github.io/fastreq-ui/"
-                target="_blank"
-                class="flex-1 bg-gradient-to-r from-blue-500 to-blue-600 text-white px-4 py-3 rounded-lg hover:from-blue-600 hover:to-blue-700 transition-all-custom text-center hover-lift"
-              >
-                <i class="fas fa-external-link-alt mr-2"></i> Live Demo
-              </a>
-
-              <!-- Description Button -->
-              <button
-                @click="open=true; video=null; desc=`FastReq is a web-based system designed to streamline and simplify the employee goods request process within a company. It provides clear roles for employees and managers, enabling faster approvals, better transparency, and organized tracking of requests. Built with a responsive interface, FastReq improves efficiency and reduces manual paperwork in managing procurement needs.`"
-                class="flex-1 bg-gradient-to-r from-gray-600 to-gray-700 text-white px-4 py-3 rounded-lg hover:from-gray-700 hover:to-gray-800 transition-all-custom hover-lift"
-              >
-                <i class="fas fa-info-circle mr-2"></i> Details
-              </button>
-            </div>
           </div>
-
-          <!-- Project 2: Portfolio (Web) -->
+          <!-- Project 2: Personal Portfolio (web) -->
           <div
-            class="project-card bg-white p-6 rounded-2xl shadow-lg hover-lift transition-all-custom"
-            :class="{ 'hidden': filter !== 'all' && filter !== 'web' }"
-            data-aos="fade-up"
-            data-aos-delay="100"
+            class="project-item bg-white rounded-2xl shadow-md overflow-hidden card-hover"
+            data-category="web"
           >
-            <div class="relative overflow-hidden rounded-xl mb-6">
-              <img
-                src="assets/images/project2.png"
-                class="w-full h-48 object-cover transform hover:scale-105 transition-transform duration-500"
-                alt="Portfolio"
-              />
-              <div
-                class="absolute top-3 right-3 bg-green-500 text-white text-xs font-bold px-3 py-1 rounded-full shadow"
-              >
-                <i class="fas fa-circle mr-1 text-xs"></i> Live
+            <img
+              src="assets/images/project2.png"
+              alt="Portfolio Delfa"
+              class="w-full h-44 object-cover"
+            />
+            <div class="p-5">
+              <h3 class="text-xl font-bold">Personal Portfolio</h3>
+              <p class="text-gray-600 text-sm">
+                Modern portfolio to showcase my work & skills.
+              </p>
+              <div class="mt-3 flex gap-2">
+                <span
+                  class="text-xs bg-yellow-50 text-yellow-700 px-3 py-1 rounded-full"
+                  ><i class="fab fa-html5"></i> HTML/CSS</span
+                ><span
+                  class="text-xs bg-blue-50 text-blue-700 px-3 py-1 rounded-full"
+                  ><i class="fab fa-js"></i> JS</span
+                >
+              </div>
+              <div class="flex gap-2 mt-5">
+                <a
+                  href="https://delfa-23.github.io/portofolio-delfa/"
+                  target="_blank"
+                  class="flex-1 text-center bg-purple-600 text-white py-2 rounded-lg text-sm hover:bg-purple-700"
+                  >Live Demo</a
+                ><button
+                  class="detailBtn flex-1 text-center bg-gray-200 text-gray-700 py-2 rounded-lg text-sm"
+                  data-title="Personal Portfolio"
+                  data-desc="Clean, responsive personal portfolio with interactive animations, project gallery, and direct links to socials. Built with vanilla HTML/CSS/JS, optimized for all devices."
+                  data-video=""
+                >
+                  Details
+                </button>
               </div>
             </div>
-
-            <h4 class="text-xl font-bold mb-3 text-gray-900">
-              Personal Portfolio
-            </h4>
-            <p class="text-gray-600 mb-4">
-              Portfolio site to showcase my work and profile.
-            </p>
-
-            <div class="mb-6">
-              <span
-                class="inline-flex items-center px-3 py-1 bg-yellow-100 text-yellow-800 rounded-full text-sm font-medium mr-2"
-              >
-                <i class="fab fa-html5 mr-2"></i> HTML
-              </span>
-              <span
-                class="inline-flex items-center px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-sm font-medium mr-2"
-              >
-                <i class="fab fa-css3-alt mr-2"></i> CSS
-              </span>
-              <span
-                class="inline-flex items-center px-3 py-1 bg-green-100 text-green-800 rounded-full text-sm font-medium"
-              >
-                <i class="fab fa-js-square mr-2"></i> JavaScript
-              </span>
-            </div>
-
-            <div class="flex flex-wrap gap-3">
-              <!-- Live Demo -->
-              <a
-                href="https://delfa-23.github.io/portofolio-delfa/"
-                target="_blank"
-                class="flex-1 bg-gradient-to-r from-blue-500 to-blue-600 text-white px-4 py-3 rounded-lg hover:from-blue-600 hover:to-blue-700 transition-all-custom text-center hover-lift"
-              >
-                <i class="fas fa-external-link-alt mr-2"></i> Live Demo
-              </a>
-
-              <!-- Description Button -->
-              <button
-                @click="open=true; video=null; desc=`This portfolio website serves as a professional space to showcase your projects, skills, and experience. It features a modern, responsive, and clean design, complete with interactive animations and smooth navigation. Visitors can easily explore your work, connect via contact links, and access your LinkedIn and GitHub profiles directly.`"
-                class="flex-1 bg-gradient-to-r from-gray-600 to-gray-700 text-white px-4 py-3 rounded-lg hover:from-gray-700 hover:to-gray-800 transition-all-custom hover-lift"
-              >
-                <i class="fas fa-info-circle mr-2"></i> Details
-              </button>
-            </div>
           </div>
-
-          <!-- Project 3: Web PKL (Web) -->
+          <!-- Project 3: PKL Management (web) -->
           <div
-            class="project-card bg-white p-6 rounded-2xl shadow-lg hover-lift transition-all-custom"
-            :class="{ 'hidden': filter !== 'all' && filter !== 'web' }"
-            data-aos="fade-up"
-            data-aos-delay="200"
+            class="project-item bg-white rounded-2xl shadow-md overflow-hidden card-hover"
+            data-category="web"
           >
-            <div class="relative overflow-hidden rounded-xl mb-6">
-              <img
-                src="assets/images/project3.png"
-                class="w-full h-48 object-cover transform hover:scale-105 transition-transform duration-500"
-                alt="Web PKL"
-              />
-              <div
-                class="absolute top-3 right-3 bg-green-500 text-white text-xs font-bold px-3 py-1 rounded-full shadow"
-              >
-                <i class="fas fa-circle mr-1 text-xs"></i> Live
+            <img
+              src="assets/images/project3.png"
+              alt="PKL Management"
+              class="w-full h-44 object-cover"
+            />
+            <div class="p-5">
+              <h3 class="text-xl font-bold">PKL Management</h3>
+              <p class="text-gray-600 text-sm">
+                Manage student internships: logs, reports, roles.
+              </p>
+              <div class="mt-3">
+                <span
+                  class="text-xs bg-red-50 text-red-700 px-3 py-1 rounded-full"
+                  ><i class="fab fa-laravel"></i> Laravel</span
+                >
+              </div>
+              <div class="flex gap-2 mt-5">
+                <a
+                  href="https://syifapkl.smkitassyifa.my.id/"
+                  target="_blank"
+                  class="flex-1 text-center bg-purple-600 text-white py-2 rounded-lg text-sm hover:bg-purple-700"
+                  >Live Demo</a
+                ><button
+                  class="detailBtn flex-1 text-center bg-gray-200 text-gray-700 py-2 rounded-lg text-sm"
+                  data-title="PKL Management"
+                  data-desc="Complete system for internship monitoring: admin, teacher, student dashboards. Students post daily logs, teachers assess, admin generates reports. Improves accountability."
+                  data-video=""
+                >
+                  Details</button
+                ><button
+                  class="loginInfoBtn flex-1 text-center bg-purple-100 text-purple-800 py-2 rounded-lg text-sm"
+                  data-login="<b>Student:</b> siswa / siswa123<br><b>Teacher:</b> guru / guru123"
+                >
+                  Login Info
+                </button>
               </div>
             </div>
-
-            <h4 class="text-xl font-bold mb-3 text-gray-900">
-              PKL Management Web
-            </h4>
-            <p class="text-gray-600 mb-4">
-              Web app for managing students internship (PKL) data and
-              activities.
-            </p>
-
-            <div class="mb-6">
-              <span
-                class="inline-flex items-center px-3 py-1 bg-red-100 text-red-800 rounded-full text-sm font-medium"
-              >
-                <i class="fab fa-laravel mr-2"></i> Laravel
-              </span>
-            </div>
-
-            <div class="flex flex-wrap gap-3">
-              <!-- Live Demo -->
-              <a
-                href="https://syifapkl.smkitassyifa.my.id/"
-                target="_blank"
-                class="flex-1 bg-gradient-to-r from-blue-500 to-blue-600 text-white px-4 py-3 rounded-lg hover:from-blue-600 hover:to-blue-700 transition-all-custom text-center hover-lift"
-              >
-                <i class="fas fa-external-link-alt mr-2"></i> Live Demo
-              </a>
-
-              <!-- Description Button -->
-              <button
-                @click="open=true; video=null; desc=`The PKL Management System is a web-based application used to manage vocational high school students' Field Work Practice (PKL) activities. This system has three main roles: administrator, teacher, and student. The administrator manages primary data, teachers monitor and evaluate students, and students can record daily PKL activities and report evidence. With an interactive dashboard feature, this system helps schools improve order and accountability in PKL implementation.`"
-                class="flex-1 bg-gradient-to-r from-gray-600 to-gray-700 text-white px-4 py-3 rounded-lg hover:from-gray-700 hover:to-gray-800 transition-all-custom hover-lift"
-              >
-                <i class="fas fa-info-circle mr-2"></i> Details
-              </button>
-
-              <!-- Demo Login Info -->
-              <button
-                @click="open=true; video=null; desc='<h4 class=\'text-lg font-bold mb-4 text-gray-800\'>Demo Login Accounts:</h4><div class=\'bg-blue-50 p-4 rounded-lg mb-3\'><h5 class=\'font-bold text-blue-700 mb-2\'>Student Account</h5><p class=\'text-gray-700\'><strong>ID:</strong> siswa<br><strong>Password:</strong> siswa123</p></div><div class=\'bg-purple-50 p-4 rounded-lg\'><h5 class=\'font-bold text-purple-700 mb-2\'>Teacher Account</h5><p class=\'text-gray-700\'><strong>ID:</strong> guru<br><strong>Password:</strong> guru123</p></div>'"
-                class="flex-1 bg-gradient-to-r from-purple-500 to-purple-600 text-white px-4 py-3 rounded-lg hover:from-purple-600 hover:to-purple-700 transition-all-custom hover-lift"
-              >
-                <i class="fas fa-key mr-2"></i> Login Info
-              </button>
-            </div>
           </div>
-
-          <!-- Project 4: Health Apps (Mobile) -->
+          <!-- Project 4: Health Apps (mobile) -->
           <div
-            class="project-card bg-white p-6 rounded-2xl shadow-lg hover-lift transition-all-custom"
-            :class="{ 'hidden': filter !== 'all' && filter !== 'mobile' }"
-            data-aos="fade-up"
-            data-aos-delay="0"
+            class="project-item bg-white rounded-2xl shadow-md overflow-hidden card-hover"
+            data-category="mobile"
           >
-            <div class="relative mx-auto w-48 mb-6">
-              <div
-                class="absolute -inset-4 bg-gradient-to-r from-blue-400 to-purple-400 rounded-3xl blur opacity-30"
-              ></div>
+            <div
+              class="relative bg-gradient-to-br from-blue-50 to-purple-50 py-4 flex justify-center"
+            >
               <img
                 src="assets/images/mockup-health.png"
-                alt="Phone Mockup"
-                class="relative w-full transform hover:scale-105 transition-transform duration-500"
+                alt="Health App mockup"
+                class="w-28 h-auto object-contain"
               />
             </div>
-
-            <h4 class="text-xl font-bold mb-3 text-gray-900">Health Apps</h4>
-            <p class="text-gray-600 mb-4">
-              Mobile health app built with Flutter to help track daily habits.
-            </p>
-
-            <div class="mb-6">
-              <span
-                class="inline-flex items-center px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-sm font-medium mr-2"
-              >
-                <i class="fab fa-flutter mr-2"></i> Flutter
-              </span>
-              <span
-                class="inline-flex items-center px-3 py-1 bg-orange-100 text-orange-800 rounded-full text-sm font-medium"
-              >
-                <i class="fas fa-fire mr-2"></i> Firebase
-              </span>
-            </div>
-
-            <div class="flex flex-wrap gap-3">
-              <!-- Video Demo Button -->
-              <button
-                @click="open=true; video='https://www.youtube.com/embed/LmdeaMrXF9E'; desc=null"
-                class="flex-1 bg-gradient-to-r from-red-500 to-red-600 text-white px-4 py-3 rounded-lg hover:from-red-600 hover:to-red-700 transition-all-custom hover-lift"
-              >
-                <i class="fas fa-play mr-2"></i> Video Demo
-              </button>
-
-              <!-- Description Button -->
-              <button
-                @click="open=true; video=null; desc=`The Health Apps application was created to facilitate users in accessing health information quickly and integrated. The main goal of this application is to provide digital health services that includes searching for doctors, hospitals, COVID-19, and trusted health articles. Users can view detailed doctor profiles, hospital locations, data on countries affected by COVID-19, and health tips through regularly updated articles. This application uses Firebase Firestore as a database to store user data and Firebase Storage to store profile photos and supporting images. In addition, several public APIs are used to retrieve health articles, doctor data, hospital data, and COVID-19 data, so that information is always relevant and up-to-date. With this application, users can obtain accurate health references and obtain important information without having to come directly to a health facility, thereby increasing efficiency and convenience in managing daily health.`"
-                class="flex-1 bg-gradient-to-r from-gray-600 to-gray-700 text-white px-4 py-3 rounded-lg hover:from-gray-700 hover:to-gray-800 transition-all-custom hover-lift"
-              >
-                <i class="fas fa-info-circle mr-2"></i> Details
-              </button>
+            <div class="p-5">
+              <h3 class="text-xl font-bold">Health Apps</h3>
+              <p class="text-gray-600 text-sm">
+                Flutter health hub: doctors, hospitals, COVID-19 tracker
+              </p>
+              <div class="flex flex-wrap gap-2 mt-2">
+                <span
+                  class="text-xs bg-blue-100 text-blue-800 rounded-full px-2 py-1 flex items-center gap-1"
+                >
+                  <img
+                    src="assets/images/flutter.png"
+                    class="w-4 h-4"
+                    alt="Flutter"
+                  />
+                  Flutter </span
+                ><span
+                  class="text-xs bg-orange-100 text-orange-800 rounded-full px-2 py-1"
+                  ><i class="fas fa-fire"></i> Firebase</span
+                >
+              </div>
+              <div class="flex gap-2 mt-5">
+                <button
+                  class="videoBtn flex-1 text-center bg-purple-600 text-white py-2 rounded-lg text-sm"
+                  data-video="https://www.youtube.com/embed/LmdeaMrXF9E"
+                >
+                  <i class="fas fa-play mr-1"></i> Video Demo</button
+                ><button
+                  class="detailBtn flex-1 text-center bg-gray-200 text-gray-700 py-2 rounded-lg text-sm"
+                  data-title="Health Apps"
+                  data-desc="Integrated health app providing doctor search, hospital info, COVID-19 stats, and health articles. Uses Firebase Firestore & external APIs for real-time data. Helps users get health references without physical visits."
+                >
+                  Details
+                </button>
+              </div>
             </div>
           </div>
-
-          <!-- Project 5: Electronic Store App (Mobile) -->
+          <!-- Project 5: Electronic Store App (mobile) -->
           <div
-            class="project-card bg-white p-6 rounded-2xl shadow-lg hover-lift transition-all-custom"
-            :class="{ 'hidden': filter !== 'all' && filter !== 'mobile' }"
-            data-aos="fade-up"
-            data-aos-delay="100"
+            class="project-item bg-white rounded-2xl shadow-md overflow-hidden card-hover"
+            data-category="mobile"
           >
-            <div class="relative mx-auto w-48 mb-6">
-              <div
-                class="absolute -inset-4 bg-gradient-to-r from-green-400 to-blue-400 rounded-3xl blur opacity-30"
-              ></div>
+            <div
+              class="bg-gradient-to-br from-green-50 to-indigo-50 py-4 flex justify-center"
+            >
               <img
                 src="assets/images/mockup-electronic.png"
-                alt="Phone Mockup"
-                class="relative w-full transform hover:scale-105 transition-transform duration-500"
+                alt="Electronic Store mockup"
+                class="w-28 h-auto"
               />
             </div>
-
-            <h4 class="text-xl font-bold mb-3 text-gray-900">
-              Electronic Store App
-            </h4>
-            <p class="text-gray-600 mb-4">
-              Flutter mobile app for managing electronic store products and
-              sales.
-            </p>
-
-            <div class="mb-6">
-              <span
-                class="inline-flex items-center px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-sm font-medium mr-2"
-              >
-                <i class="fab fa-flutter mr-2"></i> Flutter
-              </span>
-              <span
-                class="inline-flex items-center px-3 py-1 bg-orange-100 text-orange-800 rounded-full text-sm font-medium"
-              >
-                <i class="fas fa-fire mr-2"></i> Firebase
-              </span>
-            </div>
-
-            <div class="flex flex-wrap gap-3">
-              <!-- Video Demo Button -->
-              <button
-                @click="open=true; video='https://www.youtube.com/embed/Hxzso_9Bps0'; desc=null"
-                class="flex-1 bg-gradient-to-r from-red-500 to-red-600 text-white px-4 py-3 rounded-lg hover:from-red-600 hover:to-red-700 transition-all-custom hover-lift"
-              >
-                <i class="fas fa-play mr-2"></i> Video Demo
-              </button>
-
-              <!-- Description Button -->
-              <button
-                @click="open=true; video=null; desc='Electronic Store is a modern cashier application for e-commerce stores. With this app, users can easily add products to their cart, manage quantities, checkout, and print transaction receipts. Every transaction is stored in a history and can be reviewed in detail. The app is designed with a simple, responsive, and practical interface to assist with day-to-day e-commerce management.'"
-                class="flex-1 bg-gradient-to-r from-gray-600 to-gray-700 text-white px-4 py-3 rounded-lg hover:from-gray-700 hover:to-gray-800 transition-all-custom hover-lift"
-              >
-                <i class="fas fa-info-circle mr-2"></i> Details
-              </button>
+            <div class="p-5">
+              <h3 class="text-xl font-bold">Electronic Store App</h3>
+              <p class="text-gray-600 text-sm">
+                E‑commerce cashier, cart, transaction history.
+              </p>
+              <div class="flex gap-2 mt-2">
+                <span
+                  class="text-xs bg-blue-100 text-blue-800 rounded-full px-2 py-1 flex items-center gap-1"
+                >
+                  <img
+                    src="assets/images/flutter.png"
+                    class="w-4 h-4"
+                    alt="Flutter"
+                  />
+                  Flutter </span
+                ><span
+                  class="text-xs bg-orange-100 text-orange-800 rounded-full px-2 py-1"
+                  ><i class="fas fa-fire"></i> Firebase</span
+                >
+              </div>
+              <div class="flex gap-2 mt-5">
+                <button
+                  class="videoBtn flex-1 text-center bg-purple-600 text-white py-2 rounded-lg text-sm"
+                  data-video="https://www.youtube.com/embed/Hxzso_9Bps0"
+                >
+                  <i class="fas fa-play"></i> Demo</button
+                ><button
+                  class="detailBtn flex-1 text-center bg-gray-200 text-gray-700 py-2 rounded-lg text-sm"
+                  data-title="Electronic Store App"
+                  data-desc="Modern cashier for electronic shops: cart management, checkout, print receipts, transaction history. Built with Flutter and Firebase, supports stock tracking and smooth UI."
+                >
+                  Details
+                </button>
+              </div>
             </div>
           </div>
-
-          <!-- Project 6: KasirKu Bengkel (Mobile) -->
+          <!-- Project 6: KasirKu Bengkel (mobile) -->
           <div
-            class="project-card bg-white p-6 rounded-2xl shadow-lg hover-lift transition-all-custom"
-            :class="{ 'hidden': filter !== 'all' && filter !== 'mobile' }"
-            data-aos="fade-up"
-            data-aos-delay="200"
+            class="project-item bg-white rounded-2xl shadow-md overflow-hidden card-hover"
+            data-category="mobile"
           >
-            <div class="relative mx-auto w-48 mb-6">
-              <div
-                class="absolute -inset-4 bg-gradient-to-r from-yellow-400 to-orange-400 rounded-3xl blur opacity-30"
-              ></div>
+            <div
+              class="bg-gradient-to-br from-amber-50 to-purple-50 py-4 flex justify-center"
+            >
               <img
                 src="assets/images/mockup-bengkel.png"
-                alt="Phone Mockup"
-                class="relative w-full transform hover:scale-105 transition-transform duration-500"
+                alt="KasirKu Bengkel"
+                class="w-28 h-auto"
               />
             </div>
-
-            <h4 class="text-xl font-bold mb-3 text-gray-900">
-              KasirKu Bengkel
-            </h4>
-            <p class="text-gray-600 mb-4">
-              Flutter mobile app designed for workshop cashier and operational
-              management.
-            </p>
-
-            <div class="mb-6">
-              <span
-                class="inline-flex items-center px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-sm font-medium mr-2"
-              >
-                <i class="fab fa-flutter mr-2"></i> Flutter
-              </span>
-              <span
-                class="inline-flex items-center px-3 py-1 bg-orange-100 text-orange-800 rounded-full text-sm font-medium"
-              >
-                <i class="fas fa-fire mr-2"></i> Firebase
-              </span>
-            </div>
-
-            <div class="flex flex-wrap gap-3">
-              <!-- Video Demo Button -->
-              <button
-                @click="open=true; video='https://www.youtube.com/embed/r4IzedniLts'; desc=null"
-                class="flex-1 bg-gradient-to-r from-red-500 to-red-600 text-white px-4 py-3 rounded-lg hover:from-red-600 hover:to-red-700 transition-all-custom hover-lift"
-              >
-                <i class="fas fa-play mr-2"></i> Video Demo
-              </button>
-
-              <!-- Description Button -->
-              <button
-                @click="open=true; video=null; desc=`KasirKu Bengkel is a mobile application built to simplify and optimize motorcycle and car workshop operations. It includes a full POS system, spare-part stock management, customer and mechanic data tracking, transaction history, daily reports, and Excel export support. All data is automatically stored and easily accessible, making it suitable for both small and large workshops that want faster, more efficient workflow.`"
-                class="flex-1 bg-gradient-to-r from-gray-600 to-gray-700 text-white px-4 py-3 rounded-lg hover:from-gray-700 hover:to-gray-800 transition-all-custom hover-lift"
-              >
-                <i class="fas fa-info-circle mr-2"></i> Details
-              </button>
+            <div class="p-5">
+              <h3 class="text-xl font-bold">KasirKu Bengkel</h3>
+              <p class="text-gray-600 text-sm">
+                Workshop POS: spare parts, mechanics, reports, export Excel
+              </p>
+              <div class="flex gap-2">
+                <span
+                  class="text-xs bg-blue-100 text-blue-800 rounded-full px-2 py-1 flex items-center gap-1"
+                >
+                  <img
+                    src="assets/images/flutter.png"
+                    class="w-4 h-4"
+                    alt="Flutter"
+                  />
+                  Flutter </span
+                ><span
+                  class="text-xs bg-orange-100 text-orange-800 rounded-full px-2 py-1"
+                  ><i class="fas fa-fire"></i> Firebase</span
+                >
+              </div>
+              <div class="flex gap-2 mt-5">
+                <button
+                  class="videoBtn flex-1 text-center bg-purple-600 text-white py-2 rounded-lg text-sm"
+                  data-video="https://www.youtube.com/embed/r4IzedniLts"
+                >
+                  <i class="fas fa-play"></i> Video</button
+                ><button
+                  class="detailBtn flex-1 text-center bg-gray-200 text-gray-700 py-2 rounded-lg text-sm"
+                  data-title="KasirKu Bengkel"
+                  data-desc="Complete workshop management app: POS, inventory, mechanic and customer tracking, daily reports, export to Excel. Streamlines operations for automotive workshops."
+                >
+                  Details
+                </button>
+              </div>
             </div>
           </div>
         </div>
       </div>
-
-      <!-- Modal -->
+      <!-- Modal structure -->
       <div
-        x-show="open"
-        x-transition:enter="modal-enter"
-        class="fixed inset-0 flex items-center justify-center bg-black/70 z-50 p-4 transition-opacity duration-300"
-        @click="open=false"
+        id="projectModal"
+        class="fixed inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center z-50 hidden transition-all"
       >
         <div
-          class="bg-white rounded-2xl p-6 md:p-8 max-w-4xl w-full max-h-[90vh] overflow-y-auto relative shadow-2xl transform transition-transform duration-300"
-          @click.stop
+          class="bg-white rounded-2xl max-w-2xl w-full mx-4 p-6 modal-pop relative max-h-[85vh] overflow-auto"
         >
           <button
-            @click="open=false"
-            class="absolute top-4 right-4 text-gray-500 hover:text-gray-800 text-2xl transition-colors z-10"
+            id="closeModal"
+            class="absolute top-4 right-5 text-gray-500 hover:text-purple-700 text-2xl"
           >
             <i class="fas fa-times"></i>
           </button>
-
-          <template x-if="video">
-            <div class="relative pt-[56.25%] rounded-xl overflow-hidden mb-6">
-              <iframe
-                :src="video"
-                class="absolute top-0 left-0 w-full h-full rounded-xl"
-                frameborder="0"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                allowfullscreen
-              >
-              </iframe>
-            </div>
-          </template>
-
-          <template x-if="desc">
-            <div class="prose prose-lg max-w-none">
-              <div x-html="desc" class="text-gray-700"></div>
-            </div>
-          </template>
-
-          <div class="mt-8 pt-6 border-t border-gray-200 text-center">
+          <div id="modalVideoContainer" class="hidden mb-5">
+            <iframe
+              id="modalIframe"
+              width="100%"
+              height="280"
+              class="rounded-xl"
+              frameborder="0"
+              allowfullscreen
+            ></iframe>
+          </div>
+          <div id="modalTextContent">
+            <h3 class="text-2xl font-bold text-purple-800" id="modalTitle"></h3>
+            <p class="text-gray-700 mt-3 leading-relaxed" id="modalDesc"></p>
+          </div>
+          <div class="mt-6 text-right">
             <button
-              @click="open=false"
-              class="bg-gradient-to-r from-indigo-500 to-purple-500 text-white px-6 py-3 rounded-lg hover:from-indigo-600 hover:to-purple-600 transition-all-custom hover-lift"
+              id="modalCloseBtn"
+              class="bg-purple-100 text-purple-700 px-5 py-2 rounded-full"
             >
-              <i class="fas fa-times mr-2"></i> Close
+              Close
             </button>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- Certificates Section -->
-    <section id="certificates" class="py-20 px-6 bg-white text-gray-800">
-      <div class="max-w-6xl mx-auto">
-        <h3 class="text-3xl font-bold mb-4 text-center gradient-text">
-          Certificates
-        </h3>
-        <div
-          class="w-24 h-1 bg-gradient-to-r from-indigo-500 to-purple-500 mx-auto mb-8 rounded-full"
-        ></div>
-
-        <p class="text-center text-gray-600 mb-12 max-w-2xl mx-auto">
-          Some of my certificates that I've earned through various courses,
-          training, and competitions.
+    <!-- CERTIFICATES SECTION (purple + button) -->
+    <section id="certificates" class="py-20 px-5 bg-white">
+      <div class="max-w-4xl mx-auto text-center">
+        <i class="fas fa-certificate text-5xl text-purple-400 mb-3"></i>
+        <h2 class="text-3xl font-bold">
+          Certificates & <span class="purple-text-grad">Achievements</span>
+        </h2>
+        <div class="w-20 h-1 bg-purple-400 mx-auto my-4 rounded-full"></div>
+        <p class="text-gray-600 max-w-xl mx-auto">
+          Course completions, workshops, and competition recognitions I've
+          gathered along the way.
         </p>
-
-        <div class="text-center" data-aos="zoom-in">
+        <div class="mt-8">
           <a
             href="certificates.html"
-            class="inline-flex items-center gap-3 bg-gradient-to-r from-indigo-600 to-purple-600 text-white px-8 py-4 rounded-full text-lg font-semibold shadow-lg hover:from-indigo-700 hover:to-purple-700 hover-lift transition-all-custom group"
-          >
-            <i class="fas fa-award text-xl"></i>
-            <span>View All Certificates</span>
-            <i
-              class="fas fa-arrow-right transform group-hover:translate-x-2 transition-transform"
-            ></i>
-          </a>
+            class="inline-flex items-center gap-3 bg-purple-600 hover:bg-purple-700 text-white px-7 py-3 rounded-full shadow-lg transition-all"
+            ><i class="fas fa-award"></i> Browse all certificates
+            <i class="fas fa-arrow-right"></i
+          ></a>
         </div>
       </div>
     </section>
 
-    <!-- Contact Section -->
+    <!-- CONTACT with purple vibe -->
     <section
       id="contact"
-      class="py-20 px-6 bg-gradient-to-br from-indigo-50 to-purple-50"
-      data-aos="fade-up"
+      class="py-20 px-5 bg-gradient-to-br from-purple-50 to-indigo-50"
     >
-      <div class="max-w-6xl mx-auto">
-        <h3 class="text-3xl font-bold text-center text-gray-800 mb-4">
-          Get In Touch
-        </h3>
-        <div
-          class="w-24 h-1 bg-gradient-to-r from-indigo-500 to-purple-500 mx-auto mb-12 rounded-full"
-        ></div>
-
-        <!-- Social Links - Fixed Instagram Button -->
-        <div class="flex flex-wrap justify-center items-center gap-8 mb-12">
-          <!-- Instagram -->
+      <div class="max-w-3xl mx-auto">
+        <div class="text-center mb-8">
+          <h2 class="text-3xl font-bold">
+            Let's <span class="purple-text-grad">Connect</span>
+          </h2>
+          <div class="w-16 h-1 bg-purple-400 mx-auto mt-2 rounded-full"></div>
+        </div>
+        <div class="flex justify-center gap-8 mb-10">
           <a
             href="https://www.instagram.com/delfa_tamerawan/"
             target="_blank"
-            class="group flex flex-col items-center"
-            data-aos="fade-up"
-            data-aos-delay="100"
-          >
-            <div class="relative">
-              <div
-                class="absolute -inset-4 bg-gradient-to-r from-pink-500 via-red-500 to-yellow-500 rounded-full blur opacity-0 group-hover:opacity-30 transition-opacity duration-300"
-              ></div>
-
-              <div
-                class="relative bg-white p-5 rounded-full shadow-lg hover-lift transition-all-custom"
-              >
-                <i
-                  class="fab fa-instagram text-3xl text-transparent bg-clip-text bg-gradient-to-r from-pink-500 via-red-500 to-yellow-500"
-                ></i>
-              </div>
-            </div>
-
-            <p class="mt-3 text-gray-600 font-medium">Instagram</p>
-          </a>
-
-          <!-- Email -->
+            class="bg-white p-3 rounded-full shadow-md hover:shadow-purple-200 transition"
+            ><i class="fab fa-instagram text-3xl text-purple-600"></i
+          ></a>
           <a
-            href="mailto:delfatamerawan@gmail.com"
-            class="group relative"
-            data-aos="fade-up"
-            data-aos-delay="200"
+            href="https://wa.me/628111443260"
+            target="_blank"
+            class="bg-white p-3 rounded-full shadow-md hover:shadow-green-200 transition"
           >
-            <div
-              class="absolute -inset-4 bg-gradient-to-r from-blue-500 to-indigo-500 rounded-full blur opacity-0 group-hover:opacity-30 transition-opacity duration-300"
-            ></div>
-            <div
-              class="relative bg-white p-5 rounded-full shadow-lg hover-lift transition-all-custom"
-            >
-              <i class="fas fa-envelope text-3xl text-blue-500"></i>
-            </div>
-            <p class="text-center mt-3 text-gray-600 font-medium">Email</p>
+            <i class="fab fa-whatsapp text-3xl text-green-500"></i>
           </a>
         </div>
-
-        <!-- Contact Form -->
-        <div class="max-w-2xl mx-auto" data-aos="fade-up" data-aos-delay="300">
-          <div class="bg-white shadow-2xl rounded-2xl p-6 md:p-10">
-            <h4 class="text-xl font-bold text-gray-800 mb-6 text-center">
-              Send Me a Message
-            </h4>
-
-            <form id="contact-form" class="space-y-6">
-              <div class="relative">
-                <i class="fas fa-user absolute left-4 top-4 text-gray-400"></i>
-                <input
-                  type="text"
-                  name="name"
-                  placeholder="Your Name"
-                  class="w-full pl-12 p-4 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-purple-400 focus:border-transparent transition-all"
-                  required
-                />
-              </div>
-
-              <div class="relative">
-                <i
-                  class="fas fa-envelope absolute left-4 top-4 text-gray-400"
-                ></i>
-                <input
-                  type="email"
-                  name="email"
-                  placeholder="Your Email"
-                  class="w-full pl-12 p-4 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-purple-400 focus:border-transparent transition-all"
-                  required
-                />
-              </div>
-
-              <div class="relative">
-                <i
-                  class="fas fa-comment absolute left-4 top-4 text-gray-400"
-                ></i>
-                <textarea
-                  name="message"
-                  placeholder="Your Message"
-                  rows="5"
-                  class="w-full pl-12 p-4 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-purple-400 focus:border-transparent transition-all resize-none"
-                  required
-                ></textarea>
-              </div>
-
-              <button
-                type="submit"
-                class="w-full bg-gradient-to-r from-purple-600 to-indigo-600 text-white py-4 rounded-xl font-semibold text-lg hover:from-purple-700 hover:to-indigo-700 hover-lift transition-all-custom shadow-lg"
-              >
-                <i class="fas fa-paper-plane mr-3"></i>Send Message
-              </button>
-
-              <p class="text-center text-gray-500 text-sm mt-4">
-                <i class="fas fa-shield-alt mr-2"></i>
-                Your information is safe with me. I'll respond as soon as
-                possible.
-              </p>
-            </form>
-          </div>
+        <div class="bg-white rounded-2xl shadow-xl p-7">
+          <form id="contactForm">
+            <div class="mb-4">
+              <input
+                type="text"
+                name="name"
+                placeholder="Your name"
+                class="w-full border border-purple-200 rounded-xl p-3 focus:ring-2 focus:ring-purple-300 outline-none"
+                required
+              />
+            </div>
+            <div class="mb-4">
+              <input
+                type="email"
+                name="email"
+                placeholder="Email address"
+                class="w-full border border-purple-200 rounded-xl p-3 focus:ring-2 focus:ring-purple-300"
+                required
+              />
+            </div>
+            <div class="mb-5">
+              <textarea
+                name="message"
+                rows="4"
+                placeholder="Your message..."
+                class="w-full border border-purple-200 rounded-xl p-3 focus:ring-2 focus:ring-purple-300"
+                required
+              ></textarea>
+            </div>
+            <button
+              type="submit"
+              class="w-full bg-purple-700 hover:bg-purple-800 text-white py-3 rounded-xl font-semibold transition flex items-center justify-center gap-2"
+            >
+              <i class="fas fa-paper-plane"></i> Send Message
+            </button>
+            <p class="text-xs text-center text-gray-400 mt-4">
+              <i class="fas fa-lock"></i> I'll reply within 24h
+            </p>
+          </form>
         </div>
       </div>
     </section>
 
-    <!-- Footer -->
-    <footer
-      class="bg-gradient-to-r from-gray-900 to-black py-10 text-center text-gray-300"
-    >
-      <div class="max-w-6xl mx-auto px-6">
-        <div class="mb-6">
-          <h2 class="text-2xl font-bold gradient-text mb-2">
-            Muhammad Delfa Tamerawan
-          </h2>
-          <p class="text-gray-400">Full-Stack Developer & Student</p>
-        </div>
-
-        <div class="flex justify-center gap-6 mb-8">
-          <a
-            href="https://www.linkedin.com/in/delfa-tamerawan/"
-            target="_blank"
-            class="text-gray-400 hover:text-white transition-colors text-xl"
-          >
-            <i class="fab fa-linkedin"></i>
-          </a>
-          <a
-            href="https://github.com/delfa-23"
-            target="_blank"
-            class="text-gray-400 hover:text-white transition-colors text-xl"
-          >
-            <i class="fab fa-github"></i>
-          </a>
-          <a
-            href="https://www.instagram.com/delfa_tamerawan/"
-            target="_blank"
-            class="text-gray-400 hover:text-white transition-colors text-xl"
-          >
-            <i class="fab fa-instagram"></i>
-          </a>
-        </div>
-
-        <div class="border-t border-gray-800 pt-6 text-sm">
-          <p>© 2025 Delfa Tamerawan. All rights reserved.</p>
-        </div>
-      </div>
+    <footer class="bg-gray-900 text-gray-400 py-8 text-center">
+      <p>© 2026 Muhammad Delfa Tamerawan</p>
     </footer>
-
-    <!-- Back to Top Button -->
     <button
-      id="backToTop"
-      class="fixed bottom-6 right-6 bg-gradient-to-r from-indigo-500 to-purple-500 text-white p-3 rounded-full shadow-lg hover:from-indigo-600 hover:to-purple-600 hover-lift transition-all-custom opacity-0 transform translate-y-10 z-40"
+      id="goTop"
+      class="fixed bottom-5 right-5 bg-purple-600 text-white p-3 rounded-full shadow-lg hover:bg-purple-700 transition opacity-0 pointer-events-none"
     >
       <i class="fas fa-chevron-up"></i>
     </button>
 
-    <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
-    <script
-      src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"
-      defer
-    ></script>
-
     <script>
-      // Initialize EmailJS
       (function () {
         emailjs.init("LDgu6mHW1D5eaafDq");
       })();
-
-      // Initialize AOS
-      AOS.init({
-        duration: 800,
-        once: false,
-        offset: 100,
-      });
-
-      // Navbar scroll effect
-      let lastScroll = 0;
-      const navbar = document.getElementById("navbar");
-      window.addEventListener("scroll", () => {
-        const currentScroll = window.pageYOffset;
-        if (currentScroll > 100) {
-          navbar.style.transform =
-            currentScroll > lastScroll ? "translateY(-100%)" : "translateY(0)";
-        } else {
-          navbar.style.transform = "translateY(0)";
+      // dynamic text
+      const texts = ["Full-Stack Developer", "Mobile Developer"];
+      let idx = 0,
+        charIdx = 0,
+        isDeleting = false;
+      const dynamicSpan = document.getElementById("dynamicText");
+      function typeEffect() {
+        let current = texts[idx];
+        if (isDeleting) dynamicSpan.innerText = current.substring(0, charIdx--);
+        else dynamicSpan.innerText = current.substring(0, charIdx++);
+        if (!isDeleting && charIdx === current.length + 1) {
+          isDeleting = true;
+          setTimeout(typeEffect, 1500);
+          return;
         }
-        lastScroll = currentScroll;
-
-        // Back to top button
-        const backToTop = document.getElementById("backToTop");
-        if (currentScroll > 300) {
-          backToTop.style.opacity = "1";
-          backToTop.style.transform = "translateY(0)";
-        } else {
-          backToTop.style.opacity = "0";
-          backToTop.style.transform = "translateY(10px)";
+        if (isDeleting && charIdx === 0) {
+          isDeleting = false;
+          idx = (idx + 1) % texts.length;
+          setTimeout(typeEffect, 200);
+          return;
         }
-      });
+        setTimeout(typeEffect, isDeleting ? 40 : 80);
+      }
+      typeEffect();
 
-      // Back to top functionality
-      document.getElementById("backToTop").addEventListener("click", () => {
-        window.scrollTo({
-          top: 0,
-          behavior: "smooth",
+      // filter + modal
+      const filterBtns = document.querySelectorAll(".filterBtn");
+      const projects = document.querySelectorAll(".project-item");
+      filterBtns.forEach((btn) => {
+      btn.addEventListener("click", () => {
+        
+        filterBtns.forEach((b) => {
+          b.classList.remove("active-filter", "bg-purple-600", "text-white");
+          b.classList.add("bg-white", "text-gray-700");
         });
-      });
 
-      // Typing effect
-      const words = [
-        "Hey there! Welcome to my space on the web — feel free to explore my portfolio",
-      ];
-      let wordIndex = 0;
-      let charIndex = 0;
-      const typingElement = document.getElementById("typing");
+        // 🔥 INI YANG KURANG
+        btn.classList.remove("bg-white", "text-gray-700");
 
-      function type() {
-        if (charIndex < words[wordIndex].length) {
-          typingElement.textContent += words[wordIndex].charAt(charIndex);
-          charIndex++;
-          setTimeout(type, 50);
-        } else {
-          setTimeout(erase, 3000);
-        }
-      }
+        btn.classList.add("active-filter", "bg-purple-600", "text-white");
 
-      function erase() {
-        if (charIndex > 0) {
-          typingElement.textContent = words[wordIndex].substring(
-            0,
-            charIndex - 1
-          );
-          charIndex--;
-          setTimeout(erase, 20);
-        } else {
-          wordIndex = (wordIndex + 1) % words.length;
-          setTimeout(type, 500);
-        }
-      }
+        const filterVal = btn.getAttribute("data-filter");
 
-      document.addEventListener("DOMContentLoaded", () => {
-        setTimeout(type, 1000);
-
-        // Add active state to first filter button
-        document.querySelectorAll(".filter-btn").forEach((btn, index) => {
-          if (index === 0) {
-            btn.classList.add("active");
+        projects.forEach((proj) => {
+          if (
+            filterVal === "all" ||
+            proj.getAttribute("data-category") === filterVal
+          ) {
+            proj.style.display = "block";
+          } else {
+            proj.style.display = "none";
           }
         });
 
-        // Responsive adjustments
-        function handleResize() {
-          const isMobile = window.innerWidth < 768;
-
-          // Adjust project cards on mobile
-          document.querySelectorAll(".project-card").forEach((card) => {
-            if (isMobile) {
-              card.style.marginBottom = "20px";
-            } else {
-              card.style.marginBottom = "";
-            }
-          });
-        }
-
-        // Initial call
-        handleResize();
-
-        // Listen for resize
-        window.addEventListener("resize", handleResize);
+      });
+    });
+      // modal logic
+      const modal = document.getElementById("projectModal");
+      const modalTitle = document.getElementById("modalTitle");
+      const modalDesc = document.getElementById("modalDesc");
+      const modalVideo = document.getElementById("modalVideoContainer");
+      const iframe = document.getElementById("modalIframe");
+      function closeModalFunc() {
+        modal.classList.add("hidden");
+        modalVideo.classList.add("hidden");
+        iframe.src = "";
+      }
+      document.querySelectorAll(".detailBtn").forEach((btn) => {
+        btn.addEventListener("click", () => {
+          modalVideo.classList.add("hidden");
+          iframe.src = "";
+          modalTitle.innerText = btn.getAttribute("data-title") || "Project";
+          modalDesc.innerText =
+            btn.getAttribute("data-desc") || "No description available.";
+          modal.classList.remove("hidden");
+        });
+      });
+      document.querySelectorAll(".videoBtn").forEach((btn) => {
+        btn.addEventListener("click", () => {
+          const videoUrl = btn.getAttribute("data-video");
+          modalVideo.classList.remove("hidden");
+          iframe.src = videoUrl;
+          modalTitle.innerText = "Video Preview";
+          modalDesc.innerText = "Watch demo of the application.";
+          modal.classList.remove("hidden");
+        });
+      });
+      document.querySelectorAll(".loginInfoBtn").forEach((btn) => {
+        btn.addEventListener("click", () => {
+          modalVideo.classList.add("hidden");
+          iframe.src = "";
+          modalTitle.innerText = "Demo Credentials";
+          modalDesc.innerHTML = btn.getAttribute("data-login");
+          modal.classList.remove("hidden");
+        });
+      });
+      document
+        .getElementById("closeModal")
+        ?.addEventListener("click", closeModalFunc);
+      document
+        .getElementById("modalCloseBtn")
+        ?.addEventListener("click", closeModalFunc);
+      modal?.addEventListener("click", (e) => {
+        if (e.target === modal) closeModalFunc();
       });
 
-      // Contact form submission
-      document
-        .getElementById("contact-form")
-        .addEventListener("submit", function (event) {
-          event.preventDefault();
-
-          const button = this.querySelector('button[type="submit"]');
-          const originalText = button.innerHTML;
-
-          // Show loading state
-          button.innerHTML =
-            '<i class="fas fa-spinner fa-spin mr-2"></i>Sending...';
-          button.disabled = true;
-
-          emailjs.sendForm("service_t36llfs", "template_mx5yk8q", this).then(
-            function () {
-              // Success state
-              button.innerHTML =
-                '<i class="fas fa-check mr-2"></i>Message Sent!';
-              button.classList.remove("from-purple-600", "to-indigo-600");
-              button.classList.add("from-green-500", "to-green-600");
-
-              // Reset form
-              document.getElementById("contact-form").reset();
-
-              // Revert button after 3 seconds
-              setTimeout(() => {
-                button.innerHTML = originalText;
-                button.classList.remove("from-green-500", "to-green-600");
-                button.classList.add("from-purple-600", "to-indigo-600");
-                button.disabled = false;
-              }, 3000);
-            },
-            function (error) {
-              // Error state
-              button.innerHTML =
-                '<i class="fas fa-exclamation-triangle mr-2"></i>Error! Try Again';
-              button.classList.remove("from-purple-600", "to-indigo-600");
-              button.classList.add("from-red-500", "to-red-600");
-
-              // Revert button after 3 seconds
-              setTimeout(() => {
-                button.innerHTML = originalText;
-                button.classList.remove("from-red-500", "to-red-600");
-                button.classList.add("from-purple-600", "to-indigo-600");
-                button.disabled = false;
-              }, 3000);
-
-              console.error("Email send error:", error);
-            }
+      // mobile drawer
+      const menuBtn = document.getElementById("mobileMenuBtn");
+      const drawer = document.getElementById("mobileDrawer");
+      const closeDrawer = document.getElementById("closeDrawer");
+      if (menuBtn && drawer) {
+        menuBtn.onclick = () => drawer.classList.remove("translate-x-full");
+        closeDrawer.onclick = () => drawer.classList.add("translate-x-full");
+        document
+          .querySelectorAll(".mobile-link")
+          .forEach((link) =>
+            link.addEventListener("click", () =>
+              drawer.classList.add("translate-x-full"),
+            ),
           );
+      }
+      // back to top
+      const goTopBtn = document.getElementById("goTop");
+      window.addEventListener("scroll", () => {
+        if (window.scrollY > 400)
+          goTopBtn.classList.remove("opacity-0", "pointer-events-none");
+        else goTopBtn.classList.add("opacity-0", "pointer-events-none");
+      });
+      goTopBtn.addEventListener("click", () =>
+        window.scrollTo({ top: 0, behavior: "smooth" }),
+      );
+      // navbar scroll hide/show (simple)
+      let lastScrollY = 0;
+      window.addEventListener("scroll", () => {
+        let navbar = document.getElementById("navbar");
+        if (window.scrollY > lastScrollY && window.scrollY > 120)
+          navbar.style.transform = "translateY(-100%)";
+        else navbar.style.transform = "translateY(0)";
+        lastScrollY = window.scrollY;
+      });
+      // emailjs contact
+      const contactForm = document.getElementById("contactForm");
+      if (contactForm) {
+        contactForm.addEventListener("submit", function (e) {
+          e.preventDefault();
+          const btn = this.querySelector('button[type="submit"]');
+          const original = btn.innerHTML;
+          btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending...';
+          btn.disabled = true;
+          emailjs
+            .sendForm("service_t36llfs", "template_mx5yk8q", this)
+            .then(() => {
+              btn.innerHTML = '<i class="fas fa-check"></i> Sent!';
+              btn.classList.add("bg-green-600");
+              setTimeout(() => {
+                btn.innerHTML = original;
+                btn.classList.remove("bg-green-600");
+                btn.disabled = false;
+              }, 3000);
+              contactForm.reset();
+            })
+            .catch(() => {
+              btn.innerHTML =
+                '<i class="fas fa-exclamation-triangle"></i> Error';
+              btn.classList.add("bg-red-600");
+              setTimeout(() => {
+                btn.innerHTML = original;
+                btn.classList.remove("bg-red-600");
+                btn.disabled = false;
+              }, 3000);
+            });
         });
+      }
     </script>
   </body>
 </html>
