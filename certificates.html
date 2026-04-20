@@ -2,719 +2,351 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Certificates — Delfa</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@400;500&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>Certificates · Delfa Tamerawan</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;400;500;600;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
-  <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
-
+  <link rel="icon" type="image/png" href="assets/images/favicon.png" />
   <style>
-    :root {
-      --ink: #0e0e0e;
-      --paper: #f5f0e8;
-      --warm: #e8dfc8;
-      --accent: #c84b2f;
-      --muted: #7a7060;
-      --border: rgba(14,14,14,0.12);
-      --serif: "DM Serif Display", Georgia, serif;
-      --mono: "DM Mono", monospace;
-      --sans: "DM Sans", sans-serif;
-      --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
-    }
-
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
-    html { scroll-behavior: smooth; }
-
+    * { margin: 0; padding: 0; box-sizing: border-box; }
     body {
-      font-family: var(--sans);
-      background: var(--paper);
-      color: var(--ink);
-      line-height: 1.65;
-      min-height: 100vh;
+      font-family: "Inter", sans-serif;
+      scroll-behavior: smooth;
+      transition: background-color 0.2s ease, color 0.2s ease;
+      background-color: #ffffff;
+      color: #1e1e2f;
     }
-
-    /* Noise */
-    body::before {
-      content: "";
-      position: fixed;
-      inset: 0;
-      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
-      pointer-events: none;
-      z-index: 9999;
-      opacity: 0.4;
+    body.dark {
+      background-color: #0b0b14;
+      color: #eef2ff;
     }
-
-    ::-webkit-scrollbar { width: 6px; }
-    ::-webkit-scrollbar-track { background: var(--warm); }
-    ::-webkit-scrollbar-thumb { background: var(--accent); border-radius: 3px; }
-
-    .container { max-width: 1100px; margin: 0 auto; padding: 0 2rem; }
-
-    /* ── NAV ── */
-    #navbar {
-      position: fixed;
-      top: 0;
-      width: 100%;
-      z-index: 900;
-      transition: transform 0.4s var(--ease-out);
+    /* Light theme - putih bersih */
+    body:not(.dark) {
+      background-color: #ffffff;
     }
-
-    .nav-inner {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 1.1rem 2rem;
-      border-bottom: 1px solid transparent;
-      transition: border-color 0.3s, background 0.3s, backdrop-filter 0.3s;
+    body:not(.dark) .bg-white,
+    body:not(.dark) .bg-gray-50,
+    body:not(.dark) .bg-purple-50,
+    body:not(.dark) section {
+      background-color: #ffffff !important;
     }
-
-    #navbar.scrolled .nav-inner {
-      background: rgba(245,240,232,0.85);
-      backdrop-filter: blur(14px);
-      border-color: var(--border);
+    body:not(.dark) .text-gray-600,
+    body:not(.dark) .text-gray-500,
+    body:not(.dark) .text-gray-700,
+    body:not(.dark) .text-gray-800 {
+      color: #1f2937 !important;
     }
-
-    .nav-logo {
-      font-family: var(--serif);
-      font-size: 1.2rem;
-      letter-spacing: -0.02em;
-      text-decoration: none;
-      color: var(--ink);
+    body:not(.dark) .border-purple-100 {
+      border-color: #e9d5ff;
     }
-
-    .nav-logo span { color: var(--accent); font-style: italic; }
-
-    .nav-back {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.5rem;
-      font-family: var(--mono);
-      font-size: 0.78rem;
-      letter-spacing: 0.06em;
-      text-transform: uppercase;
-      padding: 0.5rem 1.2rem;
-      border: 1.5px solid var(--ink);
-      color: var(--ink);
-      text-decoration: none;
-      transition: background 0.2s, color 0.2s;
-    }
-
-    .nav-back:hover { background: var(--ink); color: var(--paper); }
-
-    /* ── PAGE HEADER ── */
-    .page-header {
-      padding: 10rem 0 4rem;
-      background: var(--ink);
-      color: var(--paper);
-      position: relative;
-      overflow: hidden;
-    }
-
-    .page-header-bg {
-      position: absolute;
-      inset: 0;
-      font-family: var(--serif);
-      font-size: 20rem;
-      line-height: 1;
-      color: transparent;
-      -webkit-text-stroke: 1px rgba(245,240,232,0.04);
-      display: flex;
-      align-items: flex-end;
-      padding-left: 1rem;
-      padding-bottom: -1rem;
-      pointer-events: none;
-      user-select: none;
-      overflow: hidden;
-    }
-
-    .page-header .container { position: relative; z-index: 2; }
-
-    .page-eyebrow {
-      font-family: var(--mono);
-      font-size: 0.72rem;
-      letter-spacing: 0.15em;
-      text-transform: uppercase;
-      color: var(--accent);
-      display: flex;
-      align-items: center;
-      gap: 0.75rem;
-      margin-bottom: 1.2rem;
-    }
-
-    .page-eyebrow::before {
-      content: "";
-      display: block;
-      width: 2rem;
-      height: 1px;
-      background: var(--accent);
-    }
-
-    .page-title {
-      font-family: var(--serif);
-      font-size: clamp(3rem, 6vw, 6rem);
-      line-height: 1;
-      letter-spacing: -0.03em;
-      margin-bottom: 1.5rem;
-    }
-
-    .page-title em { font-style: italic; color: transparent; -webkit-text-stroke: 1.5px var(--paper); }
-
-    .page-meta {
-      display: flex;
-      align-items: center;
-      gap: 2rem;
-      flex-wrap: wrap;
-    }
-
-    .page-meta-item {
-      display: flex;
-      align-items: center;
-      gap: 0.6rem;
-      font-family: var(--mono);
-      font-size: 0.75rem;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      color: rgba(245,240,232,0.45);
-    }
-
-    .page-meta-item strong {
-      color: var(--paper);
-      font-size: 1.1rem;
-      font-family: var(--serif);
-      font-weight: 400;
-    }
-
-    /* ── GRID SECTION ── */
-    #certs-section { padding: 5rem 0 6rem; }
-
-    .certs-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 1px;
-      background: var(--border);
-      border: 1px solid var(--border);
-    }
-
-    .cert-card {
-      background: var(--paper);
-      overflow: hidden;
-      cursor: pointer;
-      transition: background 0.2s;
-      opacity: 0;
-      transform: translateY(20px);
-      transition: opacity 0.5s var(--ease-out), transform 0.5s var(--ease-out), background 0.2s;
-    }
-
-    .cert-card.visible { opacity: 1; transform: none; }
-    .cert-card:hover { background: var(--warm); }
-
-    .cert-thumb {
-      aspect-ratio: 4/3;
-      background: var(--warm);
-      overflow: hidden;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      position: relative;
-    }
-
-    .cert-thumb img {
-      width: 100%;
-      height: 100%;
-      object-fit: contain;
-      padding: 0.75rem;
-      transition: transform 0.4s var(--ease-out);
-    }
-
-    .cert-card:hover .cert-thumb img { transform: scale(1.04); }
-
-    .cert-thumb-overlay {
-      position: absolute;
-      inset: 0;
-      background: rgba(14,14,14,0);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      transition: background 0.3s;
-    }
-
-    .cert-card:hover .cert-thumb-overlay { background: rgba(14,14,14,0.35); }
-
-    .cert-thumb-icon {
-      width: 2.5rem;
-      height: 2.5rem;
-      background: var(--paper);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 0.85rem;
-      color: var(--ink);
-      opacity: 0;
-      transform: scale(0.8);
-      transition: opacity 0.25s, transform 0.25s var(--ease-out);
-    }
-
-    .cert-card:hover .cert-thumb-icon { opacity: 1; transform: scale(1); }
-
-    .cert-body {
-      padding: 1rem 1.2rem 1.2rem;
-      border-top: 1px solid var(--border);
-    }
-
-    .cert-index {
-      font-family: var(--mono);
-      font-size: 0.65rem;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      color: var(--accent);
-      margin-bottom: 0.3rem;
-    }
-
-    .cert-name {
-      font-family: var(--serif);
-      font-size: 1rem;
-      line-height: 1.25;
-      color: var(--ink);
-    }
-
-    /* ── MODAL ── */
-    .modal-backdrop {
-      position: fixed;
-      inset: 0;
-      background: rgba(14,14,14,0.92);
-      z-index: 950;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 2rem;
-      opacity: 0;
-      pointer-events: none;
-      transition: opacity 0.3s;
-    }
-
-    .modal-backdrop.open {
-      opacity: 1;
-      pointer-events: all;
-    }
-
-    .modal-box {
-      background: var(--ink);
-      max-width: 900px;
-      width: 100%;
-      max-height: 90vh;
-      display: flex;
-      flex-direction: column;
-      position: relative;
-      transform: scale(0.96);
-      transition: transform 0.3s var(--ease-out);
-    }
-
-    .modal-backdrop.open .modal-box { transform: scale(1); }
-
-    .modal-topbar {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 1rem 1.5rem;
-      border-bottom: 1px solid rgba(245,240,232,0.1);
-      flex-shrink: 0;
-    }
-
-    .modal-cert-name {
-      font-family: var(--serif);
-      font-size: 1.1rem;
-      color: var(--paper);
-      letter-spacing: -0.01em;
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      max-width: 70%;
-    }
-
-    .modal-actions { display: flex; gap: 0.5rem; flex-shrink: 0; }
-
-    .modal-btn {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.4rem;
-      padding: 0.45rem 1rem;
-      font-family: var(--mono);
-      font-size: 0.7rem;
-      letter-spacing: 0.06em;
-      text-transform: uppercase;
-      border: 1px solid rgba(245,240,232,0.2);
-      color: rgba(245,240,232,0.6);
-      background: none;
-      cursor: pointer;
+    /* navbar */
+    .navbar-blur {
+      background: rgba(255, 255, 255, 0.96);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(139, 92, 246, 0.2);
       transition: all 0.2s;
-      text-decoration: none;
     }
-
-    .modal-btn:hover { border-color: var(--paper); color: var(--paper); }
-
-    .modal-btn.close-btn:hover { background: var(--accent); border-color: var(--accent); color: #fff; }
-
-    .modal-image-area {
-      flex: 1;
+    body.dark .navbar-blur {
+      background: rgba(17, 17, 34, 0.96);
+      border-bottom: 1px solid rgba(139, 92, 246, 0.4);
+    }
+    /* toggle switch */
+    .toggle-switch { position: relative; display: inline-block; width: 52px; height: 26px; }
+    .toggle-switch input { opacity: 0; width: 0; height: 0; }
+    .slider { position: absolute; cursor: pointer; top: 0; left: 0; right: 0; bottom: 0; background-color: #cbd5e1; transition: 0.3s; border-radius: 34px; }
+    .slider:before { position: absolute; content: ""; height: 20px; width: 20px; left: 3px; bottom: 3px; background-color: white; transition: 0.3s; border-radius: 50%; }
+    input:checked + .slider { background-color: #8b5cf6; }
+    input:checked + .slider:before { transform: translateX(26px); }
+    /* language select */
+    .lang-select { background: #ffffff; border-radius: 40px; padding: 6px 12px; font-size: 0.8rem; font-weight: 500; cursor: pointer; border: 1px solid #c084fc; color: #1f2937; }
+    body.dark .lang-select { background: #2d2a4a; color: white; border-color: #a855f7; }
+    /* back link */
+    .back-link { display: inline-flex; align-items: center; gap: 0.5rem; background: #f3e8ff; padding: 0.5rem 1.2rem; border-radius: 2rem; color: #6b21a5; font-weight: 500; transition: all 0.2s; }
+    body.dark .back-link { background: #2d2a4a; color: #d9c6ff; }
+    .back-link:hover { background: #e9d5ff; transform: translateX(-3px); }
+    /* card certificate */
+    .cert-card {
+      transition: all 0.3s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+      background: white;
+      border-radius: 1.5rem;
       overflow: hidden;
-      background: #0a0a0a;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      position: relative;
-      min-height: 0;
-      cursor: grab;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+      border: 1px solid #f3e8ff;
     }
-
-    .modal-image-area:active { cursor: grabbing; }
-
-    .modal-image-area img {
-      max-width: 100%;
-      max-height: 100%;
-      object-fit: contain;
-      user-select: none;
-      pointer-events: none;
-      transition: filter 0.2s;
+    body.dark .cert-card { background: #1e1e2a; border-color: #3b2a5c; box-shadow: 0 8px 20px -6px rgba(0,0,0,0.3); }
+    .cert-card:hover { transform: translateY(-6px); box-shadow: 0 20px 30px -12px rgba(139,92,246,0.2); }
+    .cert-thumb { aspect-ratio: 4/3; background: #faf9ff; display: flex; align-items: center; justify-content: center; padding: 1rem; cursor: pointer; border-bottom: 1px solid #f3e8ff; }
+    body.dark .cert-thumb { background: #252530; border-bottom-color: #3b2a5c; }
+    .cert-thumb img { max-width: 100%; max-height: 100%; object-fit: contain; transition: transform 0.2s; }
+    .cert-card:hover .cert-thumb img { transform: scale(1.02); }
+    /* toast */
+    .toast-alert { position: fixed; bottom: 28px; left: 50%; transform: translateX(-50%); background: #1e1b2c; color: white; padding: 12px 28px; border-radius: 60px; z-index: 200; backdrop-filter: blur(12px); font-weight: 500; box-shadow: 0 8px 20px rgba(0,0,0,0.2); transition: opacity 0.25s; pointer-events: none; font-size: 0.9rem; white-space: nowrap; }
+    body:not(.dark) .toast-alert { background: #2d2a4a; color: #f0e9ff; }
+    @media (max-width: 640px) { .toast-alert { white-space: normal; width: 90%; text-align: center; } }
+    /* modal */
+    .modal-backdrop {
+      position: fixed; inset: 0; background: rgba(0,0,0,0.85); backdrop-filter: blur(8px);
+      z-index: 1000; display: flex; align-items: center; justify-content: center;
+      opacity: 0; pointer-events: none; transition: opacity 0.25s;
     }
-
-    .modal-hint {
-      padding: 0.6rem 1.5rem;
-      font-family: var(--mono);
-      font-size: 0.65rem;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      color: rgba(245,240,232,0.2);
-      border-top: 1px solid rgba(245,240,232,0.06);
-      flex-shrink: 0;
+    .modal-backdrop.open { opacity: 1; pointer-events: auto; }
+    .modal-content {
+      max-width: 85vw; max-height: 85vh; background: #1e1e2a; border-radius: 1.5rem;
+      overflow: hidden; display: flex; flex-direction: column;
     }
-
-    /* ── FOOTER ── */
-    footer {
-      background: var(--ink);
-      color: var(--paper);
-      padding: 2.5rem 2rem;
+    body:not(.dark) .modal-content { background: #ffffff; box-shadow: 0 25px 40px rgba(0,0,0,0.2); }
+    .modal-header {
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 1rem 1.5rem; background: #f3f4f6; color: #1f2937;
+      border-bottom: 1px solid #e5e7eb;
     }
-
-    .footer-inner {
-      max-width: 1100px;
-      margin: 0 auto;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      flex-wrap: wrap;
-      gap: 1.5rem;
+    body.dark .modal-header { background: #2d2a4a; color: white; border-bottom-color: #3b2a5c; }
+    .modal-header h3 { font-weight: 600; font-size: 1.1rem; }
+    .modal-img-container {
+      flex: 1; display: flex; justify-content: center; align-items: center;
+      padding: 1.5rem; overflow: auto; background: #faf9ff;
     }
-
-    .footer-brand { font-family: var(--serif); font-size: 1.1rem; }
-    .footer-brand span { font-style: italic; color: var(--accent); }
-
-    .footer-links { display: flex; gap: 1.5rem; }
-    .footer-links a { color: rgba(245,240,232,0.4); font-size: 1rem; transition: color 0.2s; text-decoration: none; }
-    .footer-links a:hover { color: var(--paper); }
-
-    .footer-copy {
-      font-family: var(--mono);
-      font-size: 0.72rem;
-      color: rgba(245,240,232,0.25);
-      letter-spacing: 0.05em;
+    body.dark .modal-img-container { background: #0a0a12; }
+    .modal-img-container img { max-width: 100%; max-height: 65vh; object-fit: contain; border-radius: 0.75rem; }
+    .modal-close {
+      background: #8b5cf6; border: none; color: white; padding: 0.5rem 1.2rem;
+      border-radius: 2rem; cursor: pointer; font-weight: 500; transition: background 0.2s;
     }
-
-    /* ── BACK TO TOP ── */
-    #btt {
-      position: fixed;
-      bottom: 2rem;
-      right: 2rem;
-      z-index: 800;
-      width: 2.8rem;
-      height: 2.8rem;
-      background: var(--accent);
-      color: #fff;
-      border: none;
-      cursor: pointer;
-      font-size: 0.85rem;
-      opacity: 0;
-      transform: translateY(1rem);
-      transition: opacity 0.3s, transform 0.3s;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    #btt.visible { opacity: 1; transform: translateY(0); }
-
-    /* ── RESPONSIVE ── */
-    @media (max-width: 900px) {
-      .certs-grid { grid-template-columns: repeat(2, 1fr); }
-      .modal-backdrop { padding: 1rem; }
-    }
-
-    @media (max-width: 560px) {
-      .certs-grid { grid-template-columns: 1fr; }
-      .page-meta { gap: 1rem; }
-      .modal-cert-name { font-size: 0.9rem; }
-    }
+    .modal-close:hover { background: #7c3aed; }
+    /* footer */
+    footer { background: #f9fafb; color: #6b7280; border-top: 1px solid #f3e8ff; }
+    body.dark footer { background: #030712; color: #94a3b8; border-top-color: #1f2937; }
+    /* hero section */
+    .hero-bg-light { background: linear-gradient(135deg, #faf5ff 0%, #ffffff 100%); }
+    body.dark .hero-bg-light { background: linear-gradient(135deg, #1a1535 0%, #0f0f1a 100%); }
   </style>
 </head>
 <body>
+  <div id="toastMessage" class="toast-alert opacity-0 transition-opacity duration-300 pointer-events-none z-[999]"></div>
 
-  <!-- ── NAV ── -->
-  <header id="navbar">
-    <div class="nav-inner">
-      <a href="index.html" class="nav-logo">D.<span>T</span></a>
-      <a href="index.html" class="nav-back">
-        <i class="fas fa-arrow-left"></i> Back
-      </a>
+  <!-- NAVBAR -->
+  <header id="navbar" class="fixed top-0 w-full z-50 navbar-blur transition-all duration-300">
+    <div class="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between gap-3">
+      <a href="index.html" class="font-bold text-xl tracking-tight text-gray-800 dark:text-white">D.<span class="text-purple-600">T</span></a>
+      <div class="flex items-center gap-3">
+        <a href="index.html" class="back-link text-sm"><i class="fas fa-arrow-left"></i> <span data-i18n="back_home">Back to Home</span></a>
+        <label class="toggle-switch"><input type="checkbox" id="themeToggleCheckbox"><span class="slider"></span></label>
+        <select id="langSelect" class="lang-select outline-none"><option value="en">🇬🇧 EN</option><option value="id">🇮🇩 ID</option></select>
+      </div>
     </div>
   </header>
 
-  <!-- ── PAGE HEADER ── -->
-  <div class="page-header">
-    <div class="page-header-bg">★</div>
-    <div class="container">
-      <p class="page-eyebrow">Recognition</p>
-      <h1 class="page-title">My<br><em>Certificates</em></h1>
-      <div class="page-meta">
-        <div class="page-meta-item">
-          <strong id="cert-count">29</strong>
-          certificates earned
-        </div>
-        <div class="page-meta-item">
-          <i class="fas fa-mouse-pointer" style="font-size:.7rem"></i>
-          click any to enlarge
-        </div>
+  <!-- HERO section -->
+  <section class="hero-bg-light pt-32 pb-12 px-5">
+    <div class="max-w-5xl mx-auto text-center">
+      <div class="inline-block bg-purple-100 dark:bg-purple-900/40 text-purple-700 dark:text-purple-300 px-4 py-1 rounded-full text-sm mb-4"><i class="fas fa-award mr-1"></i> <span data-i18n="recognition">Recognition</span></div>
+      <h1 class="text-4xl md:text-5xl font-bold text-gray-800 dark:text-white"><span data-i18n="certs_title">My</span> <span class="text-transparent bg-clip-text bg-gradient-to-r from-purple-600 to-pink-500" data-i18n="certs_title_grad">Certificates</span></h1>
+      <div class="w-24 h-1 bg-purple-400 mx-auto mt-4 rounded-full"></div>
+      <p class="text-gray-600 dark:text-gray-300 mt-5 max-w-xl mx-auto" data-i18n="certs_desc">Course completions, workshops, and competition recognitions I've gathered along the way.</p>
+      <div class="flex justify-center gap-6 mt-6 text-sm text-gray-500 dark:text-gray-400">
+        <span><i class="fas fa-certificate text-purple-500"></i> <span id="certCount">0</span> <span data-i18n="certs_earned">certificates earned</span></span>
+        <span><i class="fas fa-mouse-pointer"></i> <span data-i18n="click_hint">click any to enlarge</span></span>
       </div>
-    </div>
-  </div>
-
-  <!-- ── CERTS ── -->
-  <section id="certs-section">
-    <div class="container">
-      <div class="certs-grid" id="certsGrid"></div>
     </div>
   </section>
 
-  <!-- ── FOOTER ── -->
-  <footer>
-    <div class="footer-inner">
-      <div class="footer-brand">Muhammad <span>Delfa</span> Tamerawan</div>
-      <div class="footer-links">
-        <a href="https://www.linkedin.com/in/delfa-tamerawan/" target="_blank"><i class="fab fa-linkedin"></i></a>
-        <a href="https://github.com/delfa-23" target="_blank"><i class="fab fa-github"></i></a>
-        <a href="https://www.instagram.com/delfa_tamerawan/" target="_blank"><i class="fab fa-instagram"></i></a>
-      </div>
-      <p class="footer-copy">© 2025 Delfa Tamerawan</p>
+  <!-- CERTIFICATES GRID -->
+  <section class="py-12 px-5 bg-white dark:bg-gray-900">
+    <div class="max-w-6xl mx-auto">
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-7" id="certsGrid"></div>
     </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="py-8 text-center">
+    <p class="text-sm">© 2026 Muhammad Delfa Tamerawan — <span data-i18n="footer_rights">Full-Stack Portfolio</span></p>
   </footer>
 
-  <button id="btt" onclick="window.scrollTo({top:0,behavior:'smooth'})" aria-label="Back to top">
-    <i class="fas fa-chevron-up"></i>
-  </button>
-
-  <!-- ── MODAL ── -->
-  <div class="modal-backdrop" id="modal" onclick="closeModal()">
-    <div class="modal-box" onclick="event.stopPropagation()">
-      <div class="modal-topbar">
-        <span class="modal-cert-name" id="modalName"></span>
-        <div class="modal-actions">
-          <a id="modalDownload" class="modal-btn" download>
-            <i class="fas fa-download"></i> Download
-          </a>
-          <button class="modal-btn close-btn" onclick="closeModal()">
-            <i class="fas fa-times"></i> Close
-          </button>
-        </div>
+  <!-- MODAL -->
+  <div id="modal" class="modal-backdrop">
+    <div class="modal-content w-full max-w-4xl">
+      <div class="modal-header">
+        <h3 id="modalTitle" class="truncate pr-4">Certificate</h3>
+        <button id="closeModalBtn" class="modal-close"><i class="fas fa-times mr-1"></i> <span data-i18n="close">Close</span></button>
       </div>
-      <div class="modal-image-area" id="modalImageArea">
-        <img id="modalImg" src="" alt="" />
+      <div class="modal-img-container">
+        <img id="modalImage" src="" alt="Certificate preview" />
       </div>
-      <p class="modal-hint">Scroll to zoom · Drag to pan · Esc to close</p>
     </div>
   </div>
 
   <script>
-    // ── Data ──────────────────────────────────────────────────
-    const certifs = [
-      { name: 'Internet Introduction',              file: '23. SERTIFIKAT INTERNET INTRODUCTION-1.png' },
-      { name: 'Front-End Development Introduction', file: '24. SERTIFIKAT FRONT-END DEVELOPMENT INTRODUCTION-1.png' },
-      { name: 'Back-End Development Introduction',  file: '25. SERTIFIKAT BACK END DEVELOPMENT INTRODUCTION-1.png' },
-      { name: 'API Introduction',                   file: '26. SERTIFIKAT API INTRODUCTION-1.png' },
-      { name: 'How WebDev Works',                   file: '27. SERTIFIKAT HOW WEBDEV WORKS-1.png' },
-      { name: 'Figma Community',                    file: 'SERTIFIKAT FIGMA COMMUNITY-1.png' },
-      { name: 'Operating FigJam',                   file: 'SERTIFIKAT OPERATING FIGJAM-1.png' },
-      { name: 'UI Design Improvement',              file: 'SERTIFIKAT UI DESIGN IMPROVEMENT-1.png' },
-      { name: 'Variant and Layout',                 file: 'SERTIFIKAT VARIANT AND LAYOUT-1.png' },
-      { name: 'Belajar Wireframing',                file: 'SERTIFIKAT BELAJAR WIREFRAMING-1.png' },
-      { name: 'Collaboration',                      file: 'SERTIFIKAT COLLABORATION-1.png' },
-      { name: 'Design Documentation',               file: 'SERTIFIKAT DESIGN DOCUMENTATION-1.png' },
-      { name: 'Design System',                      file: 'SERTIFIKAT DESIGN SYSTEM-1.png' },
-      { name: 'Designing Checkout Process',         file: 'SERTIFIKAT DESIGNING CHECKOUT PROCESS-1.png' },
-      { name: 'Designing Dashboard UI',             file: 'SERTIFIKAT DESIGNING DASHBOARD UI-1.png' },
-      { name: 'Designing Landing Page',             file: 'SERTIFIKAT DESIGNING LANDING PAGE-1.png' },
-      { name: 'Designing Onboarding',               file: 'SERTIFIKAT DESIGNING ONBOARDING-1.png' },
-      { name: 'FigJam Brainstorming & Ideation',    file: 'SERTIFIKAT FIGJAM BRAINSTORMING & IDEATION-1.png' },
-      { name: 'FigJam',                             file: 'SERTIFIKAT FIGJAM-1.png' },
-      { name: 'Figma Tools',                        file: 'SERTIFIKAT FIGMA TOOLS-1.png' },
-      { name: 'Hi-Fi',                              file: 'SERTIFIKAT HI-FI-1.png' },
-      { name: 'Introduction Figma',                 file: 'SERTIFIKAT INTRODUCTION FIGMA-1.png' },
-      { name: 'Plugin',                             file: 'SERTIFIKAT PLUGIN-1.png' },
-      { name: 'Profil Page',                        file: 'SERTIFIKAT PROFIL PAGE-1.png' },
-      { name: 'Prototyping FigJam Mirror',          file: 'SERTIFIKAT PROTOTYPING FIGMA MIRROR-1.png' },
-      { name: 'Prototyping',                        file: 'SERTIFIKAT PROTOTYPING-1.png' },
-      { name: 'Style Guide',                        file: 'SERTIFIKAT STYLE GUIDE-1.png' },
-      { name: 'Intro to Data Analytics',            file: 'data_analyst.png' },
-      { name: 'Flutter',                            file: 'flutter_sanbercode-1.png' },
+    // Data sertifikat
+    const certificatesData = [
+      { name_en: "Internet Introduction", name_id: "Pengantar Internet", file: "23. SERTIFIKAT INTERNET INTRODUCTION-1.png" },
+      { name_en: "Front-End Development Introduction", name_id: "Pengantar Pengembangan Front-End", file: "24. SERTIFIKAT FRONT-END DEVELOPMENT INTRODUCTION-1.png" },
+      { name_en: "Back-End Development Introduction", name_id: "Pengantar Pengembangan Back-End", file: "25. SERTIFIKAT BACK END DEVELOPMENT INTRODUCTION-1.png" },
+      { name_en: "API Introduction", name_id: "Pengantar API", file: "26. SERTIFIKAT API INTRODUCTION-1.png" },
+      { name_en: "How WebDev Works", name_id: "Cara Kerja WebDev", file: "27. SERTIFIKAT HOW WEBDEV WORKS-1.png" },
+      { name_en: "Figma Community", name_id: "Komunitas Figma", file: "SERTIFIKAT FIGMA COMMUNITY-1.png" },
+      { name_en: "Operating FigJam", name_id: "Mengoperasikan FigJam", file: "SERTIFIKAT OPERATING FIGJAM-1.png" },
+      { name_en: "UI Design Improvement", name_id: "Peningkatan Desain UI", file: "SERTIFIKAT UI DESIGN IMPROVEMENT-1.png" },
+      { name_en: "Variant and Layout", name_id: "Varian dan Tata Letak", file: "SERTIFIKAT VARIANT AND LAYOUT-1.png" },
+      { name_en: "Belajar Wireframing", name_id: "Belajar Wireframing", file: "SERTIFIKAT BELAJAR WIREFRAMING-1.png" },
+      { name_en: "Collaboration", name_id: "Kolaborasi", file: "SERTIFIKAT COLLABORATION-1.png" },
+      { name_en: "Design Documentation", name_id: "Dokumentasi Desain", file: "SERTIFIKAT DESIGN DOCUMENTATION-1.png" },
+      { name_en: "Design System", name_id: "Sistem Desain", file: "SERTIFIKAT DESIGN SYSTEM-1.png" },
+      { name_en: "Designing Checkout Process", name_id: "Merancang Proses Checkout", file: "SERTIFIKAT DESIGNING CHECKOUT PROCESS-1.png" },
+      { name_en: "Designing Dashboard UI", name_id: "Merancang UI Dashboard", file: "SERTIFIKAT DESIGNING DASHBOARD UI-1.png" },
+      { name_en: "Designing Landing Page", name_id: "Merancang Landing Page", file: "SERTIFIKAT DESIGNING LANDING PAGE-1.png" },
+      { name_en: "Designing Onboarding", name_id: "Merancang Onboarding", file: "SERTIFIKAT DESIGNING ONBOARDING-1.png" },
+      { name_en: "FigJam Brainstorming & Ideation", name_id: "Brainstorming & Ideation FigJam", file: "SERTIFIKAT FIGJAM BRAINSTORMING & IDEATION-1.png" },
+      { name_en: "FigJam", name_id: "FigJam", file: "SERTIFIKAT FIGJAM-1.png" },
+      { name_en: "Figma Tools", name_id: "Alat Figma", file: "SERTIFIKAT FIGMA TOOLS-1.png" },
+      { name_en: "Hi-Fi", name_id: "Hi-Fi", file: "SERTIFIKAT HI-FI-1.png" },
+      { name_en: "Introduction Figma", name_id: "Pengantar Figma", file: "SERTIFIKAT INTRODUCTION FIGMA-1.png" },
+      { name_en: "Plugin", name_id: "Plugin", file: "SERTIFIKAT PLUGIN-1.png" },
+      { name_en: "Profil Page", name_id: "Halaman Profil", file: "SERTIFIKAT PROFIL PAGE-1.png" },
+      { name_en: "Prototyping FigJam Mirror", name_id: "Prototyping FigJam Mirror", file: "SERTIFIKAT PROTOTYPING FIGMA MIRROR-1.png" },
+      { name_en: "Prototyping", name_id: "Prototyping", file: "SERTIFIKAT PROTOTYPING-1.png" },
+      { name_en: "Style Guide", name_id: "Panduan Gaya", file: "SERTIFIKAT STYLE GUIDE-1.png" },
+      { name_en: "Intro to Data Analytics", name_id: "Pengantar Analisis Data", file: "data_analyst.png" },
+      { name_en: "Flutter", name_id: "Flutter", file: "flutter_sanbercode-1.png" }
     ];
 
-    // ── Build grid ────────────────────────────────────────────
-    const grid = document.getElementById("certsGrid");
-    document.getElementById("cert-count").textContent = certifs.length;
+    let currentLang = localStorage.getItem("lang") || "en";
+    const gridContainer = document.getElementById("certsGrid");
 
-    certifs.forEach((cert, i) => {
-      const card = document.createElement("div");
-      card.className = "cert-card";
-      card.style.transitionDelay = `${(i % 6) * 60}ms`;
-      card.innerHTML = `
-        <div class="cert-thumb">
-          <img src="assets/certificates/${cert.file}" alt="${cert.name}" loading="lazy" />
-          <div class="cert-thumb-overlay">
-            <div class="cert-thumb-icon"><i class="fas fa-expand"></i></div>
+    function renderCertificates() {
+      gridContainer.innerHTML = "";
+      certificatesData.forEach((cert, idx) => {
+        const card = document.createElement("div");
+        card.className = "cert-card";
+        const certName = currentLang === "en" ? cert.name_en : cert.name_id;
+        card.innerHTML = `
+          <div class="cert-thumb" data-file="${cert.file}" data-name="${certName.replace(/"/g, '&quot;')}">
+            <img src="assets/certificates/${cert.file}" alt="${certName}" loading="lazy" onerror="this.src='assets/images/placeholder.png'">
           </div>
-        </div>
-        <div class="cert-body">
-          <p class="cert-index">Cert. ${String(i + 1).padStart(2, "0")}</p>
-          <p class="cert-name">${cert.name}</p>
-        </div>
-      `;
-      card.addEventListener("click", () => openModal(cert.file, cert.name));
-      grid.appendChild(card);
-    });
+          <div class="p-4">
+            <div class="text-xs font-mono text-purple-500 mb-1">${String(idx + 1).padStart(2, '0')}</div>
+            <h3 class="font-semibold text-gray-800 dark:text-white text-sm md:text-base">${certName}</h3>
+          </div>
+        `;
+        const thumb = card.querySelector(".cert-thumb");
+        thumb.addEventListener("click", () => {
+          const file = thumb.getAttribute("data-file");
+          const name = thumb.getAttribute("data-name");
+          openModal(file, name);
+        });
+        gridContainer.appendChild(card);
+      });
+      document.getElementById("certCount").innerText = certificatesData.length;
+    }
 
-    // ── Reveal on scroll ──────────────────────────────────────
-    const cards = document.querySelectorAll(".cert-card");
-    const revealObs = new IntersectionObserver((entries) => {
-      entries.forEach(e => { if (e.isIntersecting) e.target.classList.add("visible"); });
-    }, { threshold: 0.08 });
-    cards.forEach(c => revealObs.observe(c));
-
-    // ── Navbar scroll ─────────────────────────────────────────
-    let lastY = 0;
-    const navbar = document.getElementById("navbar");
-    const btt = document.getElementById("btt");
-    window.addEventListener("scroll", () => {
-      const y = window.pageYOffset;
-      navbar.style.transform = (y > 100 && y > lastY) ? "translateY(-100%)" : "translateY(0)";
-      if (y > 100) navbar.classList.add("scrolled"); else navbar.classList.remove("scrolled");
-      btt.classList.toggle("visible", y > 400);
-      lastY = y;
-    });
-
-    // ── Modal ─────────────────────────────────────────────────
+    // MODAL
     const modal = document.getElementById("modal");
-    const modalImg = document.getElementById("modalImg");
-    const modalName = document.getElementById("modalName");
-    const modalDownload = document.getElementById("modalDownload");
-    const imageArea = document.getElementById("modalImageArea");
-
-    let scale = 1, tx = 0, ty = 0, dragging = false, startX, startY;
-    let lastPinchDist = 0;
-
-    function applyTransform() {
-      modalImg.style.transform = `scale(${scale}) translate(${tx}px, ${ty}px)`;
-    }
-
-    function resetTransform() {
-      scale = 1; tx = 0; ty = 0;
-      modalImg.style.transform = "";
-      modalImg.style.transformOrigin = "center center";
-    }
+    const modalImage = document.getElementById("modalImage");
+    const modalTitle = document.getElementById("modalTitle");
+    const closeModalBtn = document.getElementById("closeModalBtn");
 
     function openModal(file, name) {
-      const path = "assets/certificates/" + file;
-      modalImg.src = path;
-      modalName.textContent = name;
-      modalDownload.href = path;
-      modalDownload.download = name + ".png";
-      resetTransform();
+      modalImage.src = "assets/certificates/" + file;
+      modalTitle.innerText = name;
       modal.classList.add("open");
       document.body.style.overflow = "hidden";
     }
-
     function closeModal() {
       modal.classList.remove("open");
       document.body.style.overflow = "";
-      setTimeout(() => { modalImg.src = ""; }, 300);
+      setTimeout(() => { modalImage.src = ""; }, 200);
+    }
+    closeModalBtn.addEventListener("click", closeModal);
+    modal.addEventListener("click", (e) => { if (e.target === modal) closeModal(); });
+    document.addEventListener("keydown", (e) => { if (e.key === "Escape") closeModal(); });
+
+    // THEME
+    const themeToggle = document.getElementById("themeToggleCheckbox");
+    function setTheme(theme) {
+      if (theme === "dark") document.body.classList.add("dark");
+      else document.body.classList.remove("dark");
+      localStorage.setItem("theme", theme);
+      if (themeToggle) themeToggle.checked = (theme === "dark");
+    }
+    function loadTheme() {
+      const saved = localStorage.getItem("theme");
+      const prefers = window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+      setTheme(saved ? saved : prefers);
+    }
+    themeToggle?.addEventListener("change", (e) => setTheme(e.target.checked ? "dark" : "light"));
+
+    // TRANSLATIONS
+    const translations = {
+      en: {
+        back_home: "Back to Home", recognition: "Recognition", certs_title: "My", certs_title_grad: "Certificates",
+        certs_desc: "Course completions, workshops, and competition recognitions I've gathered along the way.",
+        certs_earned: "certificates earned", click_hint: "click any to enlarge", close: "Close",
+        footer_rights: "Full-Stack Portfolio"
+      },
+      id: {
+        back_home: "Kembali ke Beranda", recognition: "Penghargaan", certs_title: "Sertifikat", certs_title_grad: "Saya",
+        certs_desc: "Penyelesaian kursus, workshop, dan penghargaan kompetisi yang saya kumpulkan.",
+        certs_earned: "sertifikat diperoleh", click_hint: "klik untuk memperbesar", close: "Tutup",
+        footer_rights: "Portofolio Full-Stack"
+      }
+    };
+
+    function setLanguage(lang) {
+      currentLang = lang;
+      localStorage.setItem("lang", lang);
+      document.querySelectorAll("[data-i18n]").forEach(el => {
+        const key = el.getAttribute("data-i18n");
+        if (translations[lang] && translations[lang][key]) {
+          el.innerText = translations[lang][key];
+        }
+      });
+      const langSelect = document.getElementById("langSelect");
+      if (langSelect) langSelect.value = lang;
+      renderCertificates();
+      showToast(lang === "en" ? "🌍 Language set to English" : "🌍 Bahasa diatur ke Indonesia", 2000);
     }
 
-    // Scroll to zoom
-    imageArea.addEventListener("wheel", (e) => {
-      e.preventDefault();
-      scale += e.deltaY < 0 ? 0.12 : -0.12;
-      scale = Math.min(Math.max(0.5, scale), 6);
-      applyTransform();
-    }, { passive: false });
+    function loadLanguage() {
+      const saved = localStorage.getItem("lang") || "en";
+      setLanguage(saved);
+    }
 
-    // Drag to pan
-    imageArea.addEventListener("mousedown", (e) => {
-      if (scale <= 1) return;
-      dragging = true;
-      startX = e.clientX - tx * scale;
-      startY = e.clientY - ty * scale;
-      imageArea.style.cursor = "grabbing";
-    });
-    window.addEventListener("mousemove", (e) => {
-      if (!dragging) return;
-      tx = (e.clientX - startX) / scale;
-      ty = (e.clientY - startY) / scale;
-      applyTransform();
-    });
-    window.addEventListener("mouseup", () => {
-      dragging = false;
-      imageArea.style.cursor = "";
-    });
+    function showToast(msg, duration = 2500) {
+      const toast = document.getElementById("toastMessage");
+      if (!toast) return;
+      toast.innerText = msg;
+      toast.classList.remove("opacity-0");
+      toast.classList.add("opacity-100");
+      setTimeout(() => {
+        toast.classList.remove("opacity-100");
+        toast.classList.add("opacity-0");
+      }, duration);
+    }
 
-    // Touch pinch + pan
-    imageArea.addEventListener("touchstart", (e) => {
-      if (e.touches.length === 2) {
-        lastPinchDist = Math.hypot(
-          e.touches[1].clientX - e.touches[0].clientX,
-          e.touches[1].clientY - e.touches[0].clientY
-        );
-      } else if (e.touches.length === 1 && scale > 1) {
-        dragging = true;
-        startX = e.touches[0].clientX - tx * scale;
-        startY = e.touches[0].clientY - ty * scale;
+    const langSelect = document.getElementById("langSelect");
+    langSelect?.addEventListener("change", (e) => setLanguage(e.target.value));
+
+    loadTheme();
+    loadLanguage();
+
+    // navbar hide/show on scroll
+    let lastScrollY = 0;
+    const navbar = document.getElementById("navbar");
+    window.addEventListener("scroll", () => {
+      if (window.scrollY > lastScrollY && window.scrollY > 120) {
+        navbar.style.transform = "translateY(-100%)";
+      } else {
+        navbar.style.transform = "translateY(0)";
       }
-    }, { passive: true });
-
-    imageArea.addEventListener("touchmove", (e) => {
-      e.preventDefault();
-      if (e.touches.length === 2) {
-        const dist = Math.hypot(
-          e.touches[1].clientX - e.touches[0].clientX,
-          e.touches[1].clientY - e.touches[0].clientY
-        );
-        if (lastPinchDist) {
-          scale += (dist - lastPinchDist) * 0.01;
-          scale = Math.min(Math.max(0.5, scale), 6);
-          applyTransform();
-        }
-        lastPinchDist = dist;
-      } else if (e.touches.length === 1 && dragging) {
-        tx = (e.touches[0].clientX - startX) / scale;
-        ty = (e.touches[0].clientY - startY) / scale;
-        applyTransform();
-      }
-    }, { passive: false });
-
-    imageArea.addEventListener("touchend", () => {
-      dragging = false;
-      lastPinchDist = 0;
+      lastScrollY = window.scrollY;
     });
 
-    document.addEventListener("keydown", (e) => { if (e.key === "Escape") closeModal(); });
+    // welcome toast
+    window.addEventListener("load", () => {
+      const themeStatus = document.body.classList.contains("dark") ? "Dark" : "Light";
+      const langStatus = localStorage.getItem("lang") === "id" ? "Indonesian" : "English";
+      showToast(`✨ Welcome! Theme: ${themeStatus} | Language: ${langStatus}`, 3500);
+    });
   </script>
 </body>
 </html>

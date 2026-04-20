@@ -7,17 +7,15 @@
       content="width=device-width, initial-scale=1.0, viewport-fit=cover"
     />
     <title>Delfa Tamerawan · Full-Stack Dev</title>
-    <!-- Tailwind + Fonts + Icons -->
     <script src="https://cdn.tailwindcss.com"></script>
     <link
-      href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;400;500;600;700&display=swap"
       rel="stylesheet"
     />
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
     />
-    <!-- favicon (as requested) -->
     <link rel="icon" type="image/png" href="assets/images/favicon.png" />
     <link rel="apple-touch-icon" href="assets/images/favicon.png" />
     <style>
@@ -29,12 +27,18 @@
       body {
         font-family: "Inter", sans-serif;
         scroll-behavior: smooth;
-        background: #faf9ff;
+        transition:
+          background-color 0.2s ease,
+          color 0.2s ease;
       }
-
-      /* purple-rich gradient + soft animations */
-      .purple-glow {
-        background: linear-gradient(135deg, #a855f7 0%, #7c3aed 100%);
+      /* Light theme default (white background, black text) */
+      body {
+        background-color: #ffffff;
+        color: #1e1e2f;
+      }
+      body.dark {
+        background-color: #0b0b14;
+        color: #eef2ff;
       }
       .purple-text-grad {
         background: linear-gradient(120deg, #c084fc, #9333ea, #a855f7);
@@ -73,30 +77,166 @@
         transform: translateY(-6px) scale(1.01);
         box-shadow: 0 25px 35px -12px rgba(139, 92, 246, 0.25);
       }
-      .btn-pulse {
-        transition: 0.2s;
-      }
-      .btn-pulse:active {
-        transform: scale(0.97);
-      }
       .navbar-blur {
-        background: rgba(255, 255, 255, 0.85);
+        background: rgba(255, 255, 255, 0.96);
         backdrop-filter: blur(12px);
         border-bottom: 1px solid rgba(139, 92, 246, 0.2);
       }
-      ::-webkit-scrollbar {
-        width: 8px;
+      body.dark .navbar-blur {
+        background: rgba(17, 17, 34, 0.96);
+        border-bottom: 1px solid rgba(139, 92, 246, 0.4);
       }
-      ::-webkit-scrollbar-track {
-        background: #f1f1ff;
-        border-radius: 10px;
+      /* Light theme overrides */
+      body:not(.dark) .bg-white,
+      body:not(.dark) .bg-gray-50,
+      body:not(.dark) .bg-gray-100,
+      body:not(.dark) .bg-purple-50,
+      body:not(.dark) .bg-indigo-50,
+      body:not(.dark) .bg-\[\#fbf7ff\],
+      body:not(.dark) .bg-\[\#f3e8ff\] {
+        background-color: #ffffff !important;
       }
-      ::-webkit-scrollbar-thumb {
-        background: #a855f7;
-        border-radius: 10px;
+      body:not(.dark) .text-gray-700,
+      body:not(.dark) .text-gray-800,
+      body:not(.dark) .text-gray-600 {
+        color: #1f2937 !important;
       }
-      ::-webkit-scrollbar-thumb:hover {
-        background: #7c3aed;
+      body:not(.dark) .border-purple-100 {
+        border-color: #e9d5ff;
+      }
+      body:not(.dark) .bg-purple-100 {
+        background-color: #f3e8ff;
+        color: #6b21a5;
+      }
+      /* Light theme - pastikan teks nama hitam */
+      body:not(.dark) h1.text-gray-900,
+      body:not(.dark) .text-gray-900 {
+        color: #111827 !important; /* hitam pekat */
+      }
+
+      /* Dark theme - putih */
+      body.dark h1.text-gray-900,
+      body.dark .text-gray-900 {
+        color: #ffffff !important;
+      }
+      /* Dark theme specific: flutter/firebase tags hitam */
+      body.dark .bg-blue-100,
+      body.dark .bg-orange-100 {
+        background-color: #e0e7ff !important;
+        color: #1e1e2f !important;
+      }
+      body.dark .bg-blue-100 span,
+      body.dark .bg-orange-100 span,
+      body.dark .bg-blue-100 i,
+      body.dark .bg-orange-100 i {
+        color: #1e1e2f !important;
+      }
+      body.dark .bg-blue-100,
+      body.dark .bg-orange-100 {
+        color: #000000 !important;
+      }
+      /* light theme details button putih */
+      body:not(.dark) .detailBtn.bg-gray-200 {
+        background-color: #4b5563 !important;
+        color: #ffffff !important;
+      }
+      body:not(.dark) .detailBtn.bg-gray-200:hover {
+        background-color: #374151 !important;
+      }
+      /* background foto project di light theme abu muda */
+      body:not(.dark) .project-img-bg {
+        background-color: #f3f4f6;
+      }
+      body.dark .project-img-bg {
+        background-color: #1f1f2e;
+      }
+      /* light theme form background putih solid */
+      body:not(.dark) #contactForm input,
+      body:not(.dark) #contactForm textarea {
+        background-color: #ffffff;
+        border-color: #e2e8f0;
+      }
+      .toggle-switch {
+        position: relative;
+        display: inline-block;
+        width: 52px;
+        height: 26px;
+      }
+      .toggle-switch input {
+        opacity: 0;
+        width: 0;
+        height: 0;
+      }
+      .slider {
+        position: absolute;
+        cursor: pointer;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: #cbd5e1;
+        transition: 0.3s;
+        border-radius: 34px;
+      }
+      .slider:before {
+        position: absolute;
+        content: "";
+        height: 20px;
+        width: 20px;
+        left: 3px;
+        bottom: 3px;
+        background-color: white;
+        transition: 0.3s;
+        border-radius: 50%;
+      }
+      input:checked + .slider {
+        background-color: #8b5cf6;
+      }
+      input:checked + .slider:before {
+        transform: translateX(26px);
+      }
+      .lang-select {
+        background: #f9f5ff;
+        border-radius: 40px;
+        padding: 6px 12px;
+        font-size: 0.8rem;
+        font-weight: 500;
+        cursor: pointer;
+        border: 1px solid #c084fc;
+      }
+      body.dark .lang-select {
+        background: #2d2a4a;
+        color: white;
+        border-color: #a855f7;
+      }
+      .toast-alert {
+        position: fixed;
+        bottom: 28px;
+        left: 50%;
+        transform: translateX(-50%);
+        background: #1e1b2c;
+        color: white;
+        padding: 12px 28px;
+        border-radius: 60px;
+        z-index: 200;
+        backdrop-filter: blur(12px);
+        font-weight: 500;
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+        transition: opacity 0.25s;
+        pointer-events: none;
+        font-size: 0.9rem;
+        white-space: nowrap;
+      }
+      body:not(.dark) .toast-alert {
+        background: #2d2a4a;
+        color: #f0e9ff;
+      }
+      @media (max-width: 640px) {
+        .toast-alert {
+          white-space: normal;
+          width: 90%;
+          text-align: center;
+        }
       }
       .modal-pop {
         animation: modalRise 0.2s ease-out;
@@ -111,74 +251,90 @@
           transform: scale(1) translateY(0);
         }
       }
-      .bg-purple-pattern {
-        background-image: radial-gradient(
-          circle at 10% 20%,
-          rgba(139, 92, 246, 0.03) 2%,
-          transparent 2.5%
-        );
-        background-size: 32px 32px;
-      }
-      .project-tag {
-        transition: all 0.2s;
-      }
     </style>
   </head>
   <body class="antialiased">
-    <!-- NAVBAR (purple accent, glass) -->
+    <div
+      id="toastMessage"
+      class="toast-alert opacity-0 transition-opacity duration-300 pointer-events-none z-[999]"
+    ></div>
+
+    <!-- NAVBAR -->
     <header
       id="navbar"
       class="fixed top-0 w-full z-50 navbar-blur transition-all duration-300"
     >
       <div
-        class="max-w-6xl mx-auto px-5 py-3 flex items-center justify-between"
+        class="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between gap-3"
       >
-        <div class="flex items-center gap-2">
-          <a href="#home"
-            ><img src="assets/images/favicon.png" alt="Logo" class="h-8 w-8"
-          /></a>
-        </div>
-        <nav class="hidden md:flex gap-7 items-center">
+        <a href="#home" class="shrink-0"
+          ><img src="assets/images/favicon.png" alt="Logo" class="h-8 w-8"
+        /></a>
+        <nav class="hidden md:flex items-center gap-4 lg:gap-5 flex-wrap">
           <a
             href="#about"
-            class="text-gray-700 hover:text-purple-700 font-medium transition flex items-center gap-1"
-            ><i class="fas fa-user-astronaut text-purple-400 text-sm"></i>
+            class="text-gray-800 dark:text-gray-200 hover:text-purple-700 font-medium transition flex items-center gap-1 text-sm"
+            data-i18n="nav_about"
+            ><i class="fas fa-user-astronaut text-purple-500 text-xs"></i>
             About</a
           >
           <a
             href="#projects"
-            class="text-gray-700 hover:text-purple-700 font-medium transition flex items-center gap-1"
-            ><i class="fas fa-laptop-code text-purple-400 text-sm"></i> Work</a
+            class="text-gray-800 dark:text-gray-200 hover:text-purple-700 font-medium transition flex items-center gap-1 text-sm"
+            data-i18n="nav_projects"
+            ><i class="fas fa-laptop-code text-purple-500 text-xs"></i>
+            Projects</a
+          >
+          <a
+            href="#client"
+            class="text-gray-800 dark:text-gray-200 hover:text-purple-700 font-medium transition flex items-center gap-1 text-sm"
+            data-i18n="nav_clients"
+            ><i class="fas fa-users text-purple-500 text-xs"></i> Clients</a
           >
           <a
             href="#certificates"
-            class="text-gray-700 hover:text-purple-700 font-medium transition flex items-center gap-1"
-            ><i class="fas fa-award text-purple-400 text-sm"></i> Certs</a
+            class="text-gray-800 dark:text-gray-200 hover:text-purple-700 font-medium transition flex items-center gap-1 text-sm"
+            data-i18n="nav_certs"
+            ><i class="fas fa-award text-purple-500 text-xs"></i> Certs</a
           >
           <a
             href="#contact"
-            class="text-gray-700 hover:text-purple-700 font-medium transition flex items-center gap-1"
-            ><i class="fas fa-paper-plane text-purple-400 text-sm"></i>
+            class="text-gray-800 dark:text-gray-200 hover:text-purple-700 font-medium transition flex items-center gap-1 text-sm"
+            data-i18n="nav_contact"
+            ><i class="fas fa-paper-plane text-purple-500 text-xs"></i>
             Contact</a
           >
           <a
             href="assets/cv.pdf"
             target="_blank"
-            class="ml-2 px-4 py-2 rounded-full bg-purple-600 text-white text-sm font-semibold shadow-md hover:bg-purple-700 transition flex items-center gap-2"
+            class="px-4 py-2 rounded-full bg-purple-600 text-white text-sm font-semibold shadow-md hover:bg-purple-700 transition flex items-center gap-2"
             ><i class="fas fa-file-pdf"></i> CV</a
           >
+          <div class="flex items-center gap-2 ml-1">
+            <label class="toggle-switch"
+              ><input type="checkbox" id="themeToggleCheckbox" /><span
+                class="slider"
+              ></span
+            ></label>
+            <select
+              id="langSelect"
+              class="lang-select outline-none text-gray-800 dark:text-white"
+            >
+              <option value="en">🇬🇧 EN</option>
+              <option value="id">🇮🇩 ID</option>
+            </select>
+          </div>
         </nav>
         <button
           id="mobileMenuBtn"
-          class="md:hidden text-purple-700 text-2xl focus:outline-none"
+          class="md:hidden text-purple-700 dark:text-purple-400 text-2xl"
         >
           <i class="fas fa-bars"></i>
         </button>
       </div>
-      <!-- mobile drawer -->
       <div
         id="mobileDrawer"
-        class="fixed inset-0 bg-white/95 backdrop-blur-md z-40 transform translate-x-full transition-transform duration-300 md:hidden"
+        class="fixed inset-0 bg-white/95 dark:bg-gray-900/95 backdrop-blur-md z-40 transform translate-x-full transition-transform duration-300 md:hidden"
       >
         <div class="flex justify-end p-5">
           <button id="closeDrawer">
@@ -186,13 +342,31 @@
           </button>
         </div>
         <div class="flex flex-col items-center gap-6 text-xl mt-10">
-          <a href="#about" class="mobile-link">About</a
-          ><a href="#projects" class="mobile-link">Projects</a
-          ><a href="#certificates" class="mobile-link">Certificates</a
-          ><a href="#contact" class="mobile-link">Contact</a>
+          <a href="#about" class="mobile-link" data-i18n="nav_about">About</a>
+          <a href="#projects" class="mobile-link" data-i18n="nav_projects"
+            >Projects</a
+          >
+          <a href="#client" class="mobile-link" data-i18n="nav_clients"
+            >Clients</a
+          >
+          <a href="#certificates" class="mobile-link" data-i18n="nav_certs"
+            >Certificates</a
+          >
+          <a href="#contact" class="mobile-link" data-i18n="nav_contact"
+            >Contact</a
+          >
+          <div class="flex gap-6 mt-4 items-center">
+            <label class="toggle-switch"
+              ><input type="checkbox" id="mobileThemeToggle" /><span
+                class="slider"
+              ></span></label
+            ><select id="mobileLangSelect" class="lang-select">
+              <option value="en">EN</option>
+              <option value="id">ID</option>
+            </select>
+          </div>
           <a
             href="assets/cv.pdf"
-            target="_blank"
             class="bg-purple-600 px-6 py-2 rounded-full text-white"
             >CV</a
           >
@@ -200,18 +374,17 @@
       </div>
     </header>
 
-    <!-- HERO SECTION (purple dominant, playful animation) -->
+    <!-- HERO -->
     <section
       id="home"
-      class="min-h-screen flex items-center justify-center relative overflow-hidden bg-gradient-to-br from-[#f3e8ff] via-white to-[#f1eaff] pt-20"
+      class="min-h-screen flex items-center justify-center relative overflow-hidden pt-20 bg-white dark:bg-[#0b0b14]"
     >
       <div
-        class="absolute top-20 left-10 w-64 h-64 bg-purple-200 rounded-full mix-blend-multiply filter blur-3xl opacity-30 animate-pulse"
+        class="absolute top-20 left-10 w-64 h-64 bg-purple-300 rounded-full mix-blend-multiply filter blur-3xl opacity-30 animate-pulse"
       ></div>
       <div
-        class="absolute bottom-10 right-5 w-80 h-80 bg-indigo-200 rounded-full blur-3xl opacity-30 animate-pulse delay-700"
+        class="absolute bottom-10 right-5 w-80 h-80 bg-indigo-300 rounded-full blur-3xl opacity-30 animate-pulse"
       ></div>
-
       <div class="relative z-10 text-center max-w-4xl px-5">
         <div class="mb-5 soft-float">
           <div
@@ -219,15 +392,16 @@
           >
             <img
               src="assets/images/foto.jpeg"
-              alt="Delfa profile"
               class="w-full h-full object-cover"
             />
           </div>
         </div>
-        <h1 class="text-4xl md:text-6xl font-extrabold tracking-tight">
+        <h1 class="text-4xl md:text-6xl font-extrabold tracking-tight text-gray-900 dark:text-white">
           Muhammad Delfa <br /><span class="purple-text-grad">Tamerawan</span>
         </h1>
-        <div class="h-14 mt-4 text-lg md:text-xl text-gray-700 font-medium">
+        <div
+          class="h-14 mt-4 text-lg md:text-xl text-gray-700 dark:text-gray-300 font-medium"
+        >
           <span
             id="dynamicText"
             class="border-r-2 border-purple-500 pr-1"
@@ -237,14 +411,14 @@
           <a
             href="https://www.linkedin.com/in/delfa-tamerawan/"
             target="_blank"
-            class="inline-flex items-center gap-2 bg-purple-700 hover:bg-purple-800 text-white px-6 py-3 rounded-full shadow-md transition-all btn-pulse"
-            ><i class="fab fa-linkedin"></i> Hire Me
-            <i class="fas fa-arrow-right text-sm"></i
-          ></a>
-          <a
+            class="inline-flex items-center gap-2 bg-purple-700 hover:bg-purple-800 text-white px-6 py-3 rounded-full shadow-md"
+            ><i class="fab fa-linkedin"></i>
+            <span data-i18n="hire_me">Hire Me</span>
+            <i class="fas fa-arrow-right text-sm"></i></a
+          ><a
             href="https://github.com/delfa-23"
             target="_blank"
-            class="inline-flex items-center gap-2 bg-gray-800 hover:bg-black text-white px-6 py-3 rounded-full shadow-md transition-all"
+            class="inline-flex items-center gap-2 bg-gray-800 hover:bg-black text-white px-6 py-3 rounded-full shadow-md"
             ><i class="fab fa-github"></i> GitHub</a
           >
         </div>
@@ -256,16 +430,22 @@
       </div>
     </section>
 
-    <!-- ABOUT section with purple accents -->
-    <section id="about" class="py-20 px-5 bg-white relative bg-purple-pattern">
+    <!-- ABOUT -->
+    <section id="about" class="py-20 px-5 bg-white dark:bg-gray-900 relative">
       <div class="max-w-5xl mx-auto">
         <div class="text-center mb-12">
           <span
-            class="bg-purple-100 text-purple-700 px-4 py-1 rounded-full text-sm font-semibold"
-            ><i class="fas fa-smile-wink mr-1"></i> Who Am I</span
+            class="bg-purple-100 dark:bg-purple-900/40 text-purple-700 px-4 py-1 rounded-full text-sm"
+            ><i class="fas fa-smile-wink mr-1"></i>
+            <span data-i18n="whoami">Who Am I</span></span
           >
-          <h2 class="text-3xl md:text-4xl font-bold mt-3">
-            About <span class="purple-text-grad">Me</span>
+          <h2
+            class="text-3xl md:text-4xl font-bold mt-3 text-gray-800 dark:text-white"
+          >
+            <span data-i18n="about_title">About</span>
+            <span class="purple-text-grad" data-i18n="about_title_grad"
+              >Me</span
+            >
           </h2>
           <div class="w-20 h-1 bg-purple-400 mx-auto mt-3 rounded-full"></div>
         </div>
@@ -277,7 +457,6 @@
               >
                 <img
                   src="assets/images/foto.jpeg"
-                  alt="Delfa"
                   class="w-full h-full object-cover"
                 />
               </div>
@@ -289,44 +468,57 @@
             </div>
           </div>
           <div class="md:w-3/5 space-y-4">
-            <h3 class="text-2xl font-bold text-gray-800">
+            <h3 class="text-2xl font-bold text-gray-800 dark:text-white">
               Muhammad Delfa Tamerawan
             </h3>
-            <div
-              class="inline-block bg-purple-100 text-purple-800 px-4 py-1 rounded-full text-sm"
-            >
-              <i class="fas fa-code-branch mr-1"></i> Full-Stack Developer
+            <div class="flex flex-wrap gap-2">
+              <div
+                class="bg-purple-100 text-purple-800 px-4 py-1 rounded-full text-sm"
+              >
+                <i class="fas fa-code-branch mr-1"></i> Full-Stack Developer
+              </div>
+              <div
+                class="bg-purple-100 text-purple-800 px-4 py-1 rounded-full text-sm"
+              >
+                <i class="fas fa-mobile-alt mr-1"></i> Mobile Developer
+              </div>
             </div>
-            <div
-              class="inline-block bg-purple-100 text-purple-800 px-4 py-1 rounded-full text-sm"
+            <p
+              class="text-gray-700 dark:text-gray-300 leading-relaxed"
+              data-i18n="about_desc"
             >
-              <i class="fas fa-mobile-alt mr-1"></i> Mobile Developer
-            </div>
-            <p class="text-gray-700 leading-relaxed">
               I'm a passionate developer currently studying at a vocational high
               school, focused on building fast and user-friendly web & mobile
-              applications. I specialize in creating clean, modern interfaces
-              backed by solid and scalable systems. I turn ideas into real,
-              functional products — let's build something impactful.
+              applications. I turn ideas into real, functional products — let's
+              build something impactful.
             </p>
-            <div class="grid grid-cols-2 sm:grid-cols-3 gap-3 pt-2">
+            <div class="grid grid-cols-2 sm:grid-cols-3 gap-3">
               <div
-                class="bg-gray-50 p-3 rounded-xl text-center border border-purple-100"
+                class="bg-gray-50 dark:bg-gray-800 p-3 rounded-xl text-center border border-purple-100"
               >
                 <i class="fas fa-globe text-purple-600 text-xl"></i>
-                <p class="text-sm font-medium mt-1">Website Development</p>
+                <p
+                  class="text-sm font-medium mt-1 text-gray-700 dark:text-gray-200"
+                  data-i18n="web_dev"
+                >
+                  Website Development
+                </p>
               </div>
               <div
-                class="bg-gray-50 p-3 rounded-xl text-center border border-purple-100"
+                class="bg-gray-50 dark:bg-gray-800 p-3 rounded-xl text-center border border-purple-100"
               >
                 <i class="fas fa-mobile-alt text-purple-600 text-xl"></i>
-                <p class="text-sm font-medium mt-1">Mobile App</p>
+                <p class="text-sm font-medium mt-1" data-i18n="mobile_dev">
+                  Mobile App
+                </p>
               </div>
               <div
-                class="bg-gray-50 p-3 rounded-xl text-center border border-purple-100"
+                class="bg-gray-50 dark:bg-gray-800 p-3 rounded-xl text-center border border-purple-100"
               >
                 <i class="fas fa-chart-line text-purple-600 text-xl"></i>
-                <p class="text-sm font-medium mt-1">Dashboard System</p>
+                <p class="text-sm font-medium mt-1" data-i18n="dashboard_dev">
+                  Dashboard System
+                </p>
               </div>
             </div>
           </div>
@@ -334,144 +526,68 @@
       </div>
     </section>
 
-    <!-- PROJECTS section (filter, modal, purple touches, uses your images exactly) -->
-    <section id="projects" class="py-20 px-5 bg-[#fcfaff]">
+    <!-- PROJECTS with clean details (no \n) -->
+    <section id="projects" class="py-20 px-5 bg-white dark:bg-gray-900">
       <div class="max-w-6xl mx-auto">
         <div class="text-center mb-10">
           <span
             class="bg-purple-100 text-purple-700 px-4 py-1 rounded-full text-sm"
             ><i class="fas fa-rocket"></i> portfolio</span
           >
-          <h2 class="text-3xl md:text-4xl font-bold mt-2">
-            Featured <span class="purple-text-grad">Projects</span>
+          <h2
+            class="text-3xl md:text-4xl font-bold mt-2 text-gray-800 dark:text-white"
+          >
+            <span data-i18n="my_projects">My</span>
+            <span class="purple-text-grad" data-i18n="projects_grad"
+              >Projects</span
+            >
           </h2>
           <div class="w-20 h-1 bg-purple-400 mx-auto mt-3 rounded-full"></div>
         </div>
-        <!-- filter buttons with icons -->
         <div class="flex flex-wrap justify-center gap-3 mb-12">
           <button
             data-filter="all"
-            class="filterBtn active-filter bg-purple-600 text-white shadow-md px-5 py-2 rounded-full flex items-center gap-2 transition duration-75 btn-pulse"
+            class="filterBtn active-filter bg-purple-600 text-white shadow-md px-5 py-2 rounded-full flex items-center gap-2"
           >
-            <i class="fas fa-th-large"></i> All
-          </button>
-          <button
+            <i class="fas fa-th-large"></i> All</button
+          ><button
             data-filter="web"
-            class="filterBtn bg-white text-gray-700 hover:bg-purple-50 px-5 py-2 rounded-full flex items-center gap-2 transition duration-75 shadow-sm"
+            class="filterBtn bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-200 border border-purple-200 px-5 py-2 rounded-full flex items-center gap-2"
           >
-            <i class="fas fa-globe"></i> Web Apps
-          </button>
-          <button
+            <i class="fas fa-globe"></i> Web Apps</button
+          ><button
             data-filter="mobile"
-            class="filterBtn bg-white text-gray-700 hover:bg-purple-50 px-5 py-2 rounded-full flex items-center gap-2 transition duration-75 shadow-sm"
+            class="filterBtn bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-200 border border-purple-200 px-5 py-2 rounded-full flex items-center gap-2"
           >
             <i class="fas fa-mobile-alt"></i> Mobile Apps
           </button>
         </div>
-
         <div
           class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
           id="projectsGrid"
         >
-          <!-- Project 1: FastReq (web) -->
+          <!-- FastReq -->
           <div
-            class="project-item bg-white rounded-2xl shadow-md overflow-hidden card-hover"
+            class="project-item bg-white dark:bg-gray-800 rounded-2xl shadow-md overflow-hidden card-hover border border-purple-50"
             data-category="web"
           >
-            <img
-              src="assets/images/project1.png"
-              alt="FastReq"
-              class="w-full h-44 object-cover border-b border-purple-100"
-            />
-            <div class="p-5">
-              <div class="flex justify-between items-start">
-                <h3 class="text-xl font-bold text-gray-800">FastReq</h3>
-                <span
-                  class="bg-green-100 text-green-700 text-xs px-2 py-1 rounded-full"
-                  ><i class="fas fa-circle text-[8px] mr-1"></i> Live</span
-                >
-              </div>
-              <p class="text-gray-600 text-sm mt-1">
-                Purchase request system for companies — simple approval flow.
-              </p>
-              <div class="mt-3 flex flex-wrap gap-2">
-                <span
-                  class="text-xs bg-red-50 text-red-700 px-3 py-1 rounded-full"
-                  ><i class="fab fa-laravel"></i> Laravel</span
-                >
-              </div>
-              <div class="flex gap-2 mt-5">
-                <a
-                  href="https://delfa-23.github.io/fastreq-ui/"
-                  target="_blank"
-                  class="flex-1 text-center bg-purple-600 text-white py-2 rounded-lg text-sm hover:bg-purple-700 transition"
-                  >Live Demo</a
-                ><button
-                  class="detailBtn flex-1 text-center bg-gray-200 text-gray-700 py-2 rounded-lg text-sm hover:bg-gray-300 transition"
-                  data-title="FastReq"
-                  data-desc="FastReq streamlines employee goods requests. Employees submit requests, managers approve/decline with notes. Built with Laravel & MySQL, role-based access control makes procurement transparent and efficient."
-                  data-video=""
-                >
-                  Details
-                </button>
-              </div>
+            <div
+              class="project-img-bg w-full h-44 flex items-center justify-center bg-gray-100 dark:bg-gray-700"
+            >
+              <img
+                src="assets/images/project1.png"
+                class="max-h-full object-contain"
+              />
             </div>
-          </div>
-          <!-- Project 2: Personal Portfolio (web) -->
-          <div
-            class="project-item bg-white rounded-2xl shadow-md overflow-hidden card-hover"
-            data-category="web"
-          >
-            <img
-              src="assets/images/project2.png"
-              alt="Portfolio Delfa"
-              class="w-full h-44 object-cover"
-            />
             <div class="p-5">
-              <h3 class="text-xl font-bold">Personal Portfolio</h3>
-              <p class="text-gray-600 text-sm">
-                Modern portfolio to showcase my work & skills.
-              </p>
-              <div class="mt-3 flex gap-2">
-                <span
-                  class="text-xs bg-yellow-50 text-yellow-700 px-3 py-1 rounded-full"
-                  ><i class="fab fa-html5"></i> HTML/CSS</span
-                ><span
-                  class="text-xs bg-blue-50 text-blue-700 px-3 py-1 rounded-full"
-                  ><i class="fab fa-js"></i> JS</span
-                >
-              </div>
-              <div class="flex gap-2 mt-5">
-                <a
-                  href="https://delfa-23.github.io/portofolio-delfa/"
-                  target="_blank"
-                  class="flex-1 text-center bg-purple-600 text-white py-2 rounded-lg text-sm hover:bg-purple-700"
-                  >Live Demo</a
-                ><button
-                  class="detailBtn flex-1 text-center bg-gray-200 text-gray-700 py-2 rounded-lg text-sm"
-                  data-title="Personal Portfolio"
-                  data-desc="Clean, responsive personal portfolio with interactive animations, project gallery, and direct links to socials. Built with vanilla HTML/CSS/JS, optimized for all devices."
-                  data-video=""
-                >
-                  Details
-                </button>
-              </div>
-            </div>
-          </div>
-          <!-- Project 3: PKL Management (web) -->
-          <div
-            class="project-item bg-white rounded-2xl shadow-md overflow-hidden card-hover"
-            data-category="web"
-          >
-            <img
-              src="assets/images/project3.png"
-              alt="PKL Management"
-              class="w-full h-44 object-cover"
-            />
-            <div class="p-5">
-              <h3 class="text-xl font-bold">PKL Management</h3>
-              <p class="text-gray-600 text-sm">
-                Manage student internships: logs, reports, roles.
+              <h3 class="text-xl font-bold text-gray-800 dark:text-white">
+                FastReq
+              </h3>
+              <p
+                class="text-gray-600 dark:text-gray-300 text-sm mt-1"
+                data-i18n-desc="fastreq_desc"
+              >
+                Procurement request system with manager approval.
               </p>
               <div class="mt-3">
                 <span
@@ -480,58 +596,55 @@
                 >
               </div>
               <div class="flex gap-2 mt-5">
-                <a
-                  href="https://syifapkl.smkitassyifa.my.id/"
-                  target="_blank"
-                  class="flex-1 text-center bg-purple-600 text-white py-2 rounded-lg text-sm hover:bg-purple-700"
-                  >Live Demo</a
-                ><button
-                  class="detailBtn flex-1 text-center bg-gray-200 text-gray-700 py-2 rounded-lg text-sm"
-                  data-title="PKL Management"
-                  data-desc="Complete system for internship monitoring: admin, teacher, student dashboards. Students post daily logs, teachers assess, admin generates reports. Improves accountability."
-                  data-video=""
+                <button
+                  class="detailBtn flex-1 text-center bg-purple-600 text-white py-2 rounded-lg text-sm"
+                  data-title-en="FastReq"
+                  data-title-id="FastReq"
+                  data-desc-en="✓ Role-based system (Employee & Manager) 
+                  ✓ Secure login for all users 
+                  ✓ Employees submit purchase requests 
+                  ✓ Managers review, approve, or reject requests 
+                  ✓ Approval flow with notes/feedback 
+                  ✓ Request status tracking (pending, approved, rejected) 
+                  ✓ History of submissions for transparency"
+                  data-desc-id="✓ Sistem berbasis peran (Karyawan & Manajer) 
+                  ✓ Login aman untuk semua pengguna 
+                  ✓ Karyawan mengajukan permintaan pembelian 
+                  ✓ Manajer meninjau, menyetujui, atau menolak permintaan 
+                  ✓ Alur persetujuan dengan catatan/umpan balik 
+                  ✓ Pelacakan status permintaan (menunggu, disetujui, ditolak) 
+                  ✓ Riwayat pengajuan untuk transparansi"
                 >
-                  Details</button
-                ><button
-                  class="loginInfoBtn flex-1 text-center bg-purple-100 text-purple-800 py-2 rounded-lg text-sm"
-                  data-login="<b>Student:</b> siswa / siswa123<br><b>Teacher:</b> guru / guru123"
-                >
-                  Login Info
+                  Details
                 </button>
               </div>
             </div>
           </div>
-          <!-- Project 4: Health Apps (mobile) -->
+          <!-- Health Apps -->
           <div
-            class="project-item bg-white rounded-2xl shadow-md overflow-hidden card-hover"
+            class="project-item bg-white dark:bg-gray-800 rounded-2xl shadow-md overflow-hidden card-hover"
             data-category="mobile"
           >
             <div
-              class="relative bg-gradient-to-br from-blue-50 to-purple-50 py-4 flex justify-center"
+              class="project-img-bg bg-gray-100 dark:bg-gray-700 py-4 flex justify-center"
             >
-              <img
-                src="assets/images/mockup-health.png"
-                alt="Health App mockup"
-                class="w-28 h-auto object-contain"
-              />
+              <img src="assets/images/mockup-health.png" class="w-28 h-auto" />
             </div>
             <div class="p-5">
-              <h3 class="text-xl font-bold">Health Apps</h3>
-              <p class="text-gray-600 text-sm">
-                Flutter health hub: doctors, hospitals, COVID-19 tracker
+              <h3 class="text-xl font-bold dark:text-white">Health Apps</h3>
+              <p
+                class="text-gray-600 dark:text-gray-300 text-sm"
+                data-i18n-desc="health_desc"
+              >
+                Medical record management for patient data and doctors.
               </p>
-              <div class="flex flex-wrap gap-2 mt-2">
+              <div class="flex gap-2 mt-2">
                 <span
-                  class="text-xs bg-blue-100 text-blue-800 rounded-full px-2 py-1 flex items-center gap-1"
-                >
-                  <img
-                    src="assets/images/flutter.png"
-                    class="w-4 h-4"
-                    alt="Flutter"
-                  />
-                  Flutter </span
+                  class="text-xs bg-blue-100 dark:bg-blue-100 rounded-full px-2 py-1 flex items-center gap-1 text-black"
+                  ><img src="assets/images/flutter.png" class="w-4 h-4" />
+                  Flutter</span
                 ><span
-                  class="text-xs bg-orange-100 text-orange-800 rounded-full px-2 py-1"
+                  class="text-xs bg-orange-100 dark:bg-orange-100 rounded-full px-2 py-1 flex items-center gap-1 text-black"
                   ><i class="fas fa-fire"></i> Firebase</span
                 >
               </div>
@@ -540,48 +653,59 @@
                   class="videoBtn flex-1 text-center bg-purple-600 text-white py-2 rounded-lg text-sm"
                   data-video="https://www.youtube.com/embed/LmdeaMrXF9E"
                 >
-                  <i class="fas fa-play mr-1"></i> Video Demo</button
+                  <i class="fas fa-play mr-1"></i> Demo</button
                 ><button
-                  class="detailBtn flex-1 text-center bg-gray-200 text-gray-700 py-2 rounded-lg text-sm"
-                  data-title="Health Apps"
-                  data-desc="Integrated health app providing doctor search, hospital info, COVID-19 stats, and health articles. Uses Firebase Firestore & external APIs for real-time data. Helps users get health references without physical visits."
+                  class="detailBtn flex-1 text-center bg-gray-200 dark:bg-gray-700 text-white dark:text-gray-200 py-2 rounded-lg text-sm"
+                  data-title-en="Health Apps"
+                  data-title-id="Aplikasi Kesehatan"
+                  data-desc-en="✓ Role-based system (Admin & Doctor) 
+                  ✓ Authentication system for secure access 
+                  ✓ Patient data management 
+                  ✓ Doctor data management 
+                  ✓ Medical record / examination input 
+                  ✓ Record history tracking for each patient"
+                  data-desc-id="✓ Sistem berbasis peran (Admin & Dokter) 
+                  ✓ Sistem autentikasi untuk akses aman 
+                  ✓ Manajemen data pasien 
+                  ✓ Manajemen data dokter 
+                  ✓ Input rekam medis / pemeriksaan 
+                  ✓ Riwayat rekam medis untuk setiap pasien"
                 >
                   Details
                 </button>
               </div>
             </div>
           </div>
-          <!-- Project 5: Electronic Store App (mobile) -->
+          <!-- Electronic Store -->
           <div
-            class="project-item bg-white rounded-2xl shadow-md overflow-hidden card-hover"
+            class="project-item bg-white dark:bg-gray-800 rounded-2xl shadow-md overflow-hidden card-hover"
             data-category="mobile"
           >
             <div
-              class="bg-gradient-to-br from-green-50 to-indigo-50 py-4 flex justify-center"
+              class="project-img-bg bg-gray-100 dark:bg-gray-700 py-4 flex justify-center"
             >
               <img
                 src="assets/images/mockup-electronic.png"
-                alt="Electronic Store mockup"
                 class="w-28 h-auto"
               />
             </div>
             <div class="p-5">
-              <h3 class="text-xl font-bold">Electronic Store App</h3>
-              <p class="text-gray-600 text-sm">
-                E‑commerce cashier, cart, transaction history.
+              <h3 class="text-xl font-bold dark:text-white">
+                Electronic Store App
+              </h3>
+              <p
+                class="text-gray-600 dark:text-gray-300 text-sm"
+                data-i18n-desc="electronic_desc"
+              >
+                Retail management with transaction and stock handling.
               </p>
               <div class="flex gap-2 mt-2">
                 <span
-                  class="text-xs bg-blue-100 text-blue-800 rounded-full px-2 py-1 flex items-center gap-1"
-                >
-                  <img
-                    src="assets/images/flutter.png"
-                    class="w-4 h-4"
-                    alt="Flutter"
-                  />
-                  Flutter </span
+                  class="text-xs bg-blue-100 dark:bg-blue-100 rounded-full px-2 py-1 flex items-center gap-1 text-black"
+                  ><img src="assets/images/flutter.png" class="w-4 h-4" />
+                  Flutter</span
                 ><span
-                  class="text-xs bg-orange-100 text-orange-800 rounded-full px-2 py-1"
+                  class="text-xs bg-orange-100 dark:bg-orange-100 rounded-full px-2 py-1 flex items-center gap-1 text-black"
                   ><i class="fas fa-fire"></i> Firebase</span
                 >
               </div>
@@ -590,48 +714,56 @@
                   class="videoBtn flex-1 text-center bg-purple-600 text-white py-2 rounded-lg text-sm"
                   data-video="https://www.youtube.com/embed/Hxzso_9Bps0"
                 >
-                  <i class="fas fa-play"></i> Demo</button
+                  <i class="fas fa-play mr-1"></i> Demo</button
                 ><button
-                  class="detailBtn flex-1 text-center bg-gray-200 text-gray-700 py-2 rounded-lg text-sm"
-                  data-title="Electronic Store App"
-                  data-desc="Modern cashier for electronic shops: cart management, checkout, print receipts, transaction history. Built with Flutter and Firebase, supports stock tracking and smooth UI."
+                  class="detailBtn flex-1 text-center bg-gray-200 dark:bg-gray-700 text-white dark:text-gray-200 py-2 rounded-lg text-sm"
+                  data-title-en="Electronic Store App"
+                  data-title-id="Aplikasi Toko Elektronik"
+                  data-desc-en="✓ Role-based system (Admin & User) 
+                  ✓ Authentication system for secure access 
+                  ✓ Product management (add, edit, delete) 
+                  ✓ Sales transaction system 
+                  ✓ Automatic stock updates after transactions 
+                  ✓ Transaction history tracking 
+                  ✓ Product categorization & search"
+                  data-desc-id="✓ Sistem berbasis peran (Admin & Pengguna) 
+                  ✓ Autentikasi untuk akses aman 
+                  ✓ Manajemen produk (tambah, edit, hapus) 
+                  ✓ Sistem transaksi penjualan 
+                  ✓ Update stok otomatis setelah transaksi 
+                  ✓ Pelacakan riwayat transaksi 
+                  ✓ Kategorisasi produk & pencarian"
                 >
                   Details
                 </button>
               </div>
             </div>
           </div>
-          <!-- Project 6: KasirKu Bengkel (mobile) -->
+          <!-- KasirKu Bengkel -->
           <div
-            class="project-item bg-white rounded-2xl shadow-md overflow-hidden card-hover"
+            class="project-item bg-white dark:bg-gray-800 rounded-2xl shadow-md overflow-hidden card-hover"
             data-category="mobile"
           >
             <div
-              class="bg-gradient-to-br from-amber-50 to-purple-50 py-4 flex justify-center"
+              class="project-img-bg bg-gray-100 dark:bg-gray-700 py-4 flex justify-center"
             >
-              <img
-                src="assets/images/mockup-bengkel.png"
-                alt="KasirKu Bengkel"
-                class="w-28 h-auto"
-              />
+              <img src="assets/images/mockup-bengkel.png" class="w-28 h-auto" />
             </div>
             <div class="p-5">
-              <h3 class="text-xl font-bold">KasirKu Bengkel</h3>
-              <p class="text-gray-600 text-sm">
-                Workshop POS: spare parts, mechanics, reports, export Excel
+              <h3 class="text-xl font-bold dark:text-white">KasirKu Bengkel</h3>
+              <p
+                class="text-gray-600 dark:text-gray-300 text-sm"
+                data-i18n-desc="bengkel_desc"
+              >
+                POS system with barcode scanning and stock management.
               </p>
               <div class="flex gap-2">
                 <span
-                  class="text-xs bg-blue-100 text-blue-800 rounded-full px-2 py-1 flex items-center gap-1"
-                >
-                  <img
-                    src="assets/images/flutter.png"
-                    class="w-4 h-4"
-                    alt="Flutter"
-                  />
-                  Flutter </span
+                  class="text-xs bg-blue-100 dark:bg-blue-100 rounded-full px-2 py-1 flex items-center gap-1 text-black"
+                  ><img src="assets/images/flutter.png" class="w-4 h-4" />
+                  Flutter</span
                 ><span
-                  class="text-xs bg-orange-100 text-orange-800 rounded-full px-2 py-1"
+                  class="text-xs bg-orange-100 dark:bg-orange-100 rounded-full px-2 py-1 flex items-center gap-1 text-black"
                   ><i class="fas fa-fire"></i> Firebase</span
                 >
               </div>
@@ -640,11 +772,25 @@
                   class="videoBtn flex-1 text-center bg-purple-600 text-white py-2 rounded-lg text-sm"
                   data-video="https://www.youtube.com/embed/r4IzedniLts"
                 >
-                  <i class="fas fa-play"></i> Video</button
+                  <i class="fas fa-play mr-1"></i> Demo</button
                 ><button
-                  class="detailBtn flex-1 text-center bg-gray-200 text-gray-700 py-2 rounded-lg text-sm"
-                  data-title="KasirKu Bengkel"
-                  data-desc="Complete workshop management app: POS, inventory, mechanic and customer tracking, daily reports, export to Excel. Streamlines operations for automotive workshops."
+                  class="detailBtn flex-1 text-center bg-gray-200 dark:bg-gray-700 text-white dark:text-gray-200 py-2 rounded-lg text-sm"
+                  data-title-en="KasirKu Bengkel"
+                  data-title-id="KasirKu Bengkel"
+                  data-desc-en="✓ Role-based system (Admin & Cashier) 
+                  ✓ Authentication system for secure access 
+                  ✓ Barcode scanning for fast product input 
+                  ✓ Sales transaction system (POS) 
+                  ✓ Automatic stock updates after transactions 
+                  ✓ Product and spare part management 
+                  ✓ Transaction history and records"
+                  data-desc-id="✓ Sistem berbasis peran (Admin & Kasir) 
+                  ✓ Autentikasi untuk akses aman 
+                  ✓ Pemindaian barcode untuk input cepat 
+                  ✓ Sistem transaksi penjualan (POS) 
+                  ✓ Update stok otomatis setelah transaksi 
+                  ✓ Manajemen produk dan spare part 
+                  ✓ Riwayat transaksi dan catatan"
                 >
                   Details
                 </button>
@@ -653,78 +799,199 @@
           </div>
         </div>
       </div>
-      <!-- Modal structure -->
-      <div
-        id="projectModal"
-        class="fixed inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center z-50 hidden transition-all"
-      >
-        <div
-          class="bg-white rounded-2xl max-w-2xl w-full mx-4 p-6 modal-pop relative max-h-[85vh] overflow-auto"
-        >
-          <button
-            id="closeModal"
-            class="absolute top-4 right-5 text-gray-500 hover:text-purple-700 text-2xl"
+    </section>
+
+    <!-- CLIENT PROJECTS -->
+    <section id="client" class="py-20 px-5 bg-gray-50 dark:bg-gray-800/30">
+      <div class="max-w-6xl mx-auto">
+        <div class="text-center mb-10">
+          <span
+            class="bg-purple-100 text-purple-700 px-4 py-1 rounded-full text-sm"
+            ><i class="fas fa-briefcase"></i> My Client</span
           >
-            <i class="fas fa-times"></i>
-          </button>
-          <div id="modalVideoContainer" class="hidden mb-5">
-            <iframe
-              id="modalIframe"
-              width="100%"
-              height="280"
-              class="rounded-xl"
-              frameborder="0"
-              allowfullscreen
-            ></iframe>
+          <h2
+            class="text-3xl md:text-4xl font-bold mt-2 text-gray-800 dark:text-white"
+          >
+            Client <span class="purple-text-grad">Projects</span>
+          </h2>
+          <div class="w-20 h-1 bg-purple-400 mx-auto mt-3 rounded-full"></div>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div
+            class="bg-white dark:bg-gray-800 rounded-2xl shadow-md overflow-hidden card-hover"
+          >
+            <div class="p-5">
+              <div class="flex items-center gap-2 mb-2">
+                <span
+                  class="bg-purple-100 text-purple-700 px-3 py-1 rounded-full text-xs"
+                  ><i class="fas fa-building"></i> PLN</span
+                >
+              </div>
+              <div
+                class="project-img-bg bg-gray-100 dark:bg-gray-700 rounded-lg mb-3 flex justify-center"
+              >
+                <img
+                  src="assets/images/mockup-tower.png"
+                  class="h-40 object-contain"
+                />
+              </div>
+              <h3 class="text-xl font-bold dark:text-white">
+                Monitoring Tower
+              </h3>
+              <p class="text-gray-600 dark:text-gray-300 text-sm">
+                Manage tower data with location filtering & Google Maps.
+              </p>
+              <button
+                class="detailBtn mt-3 bg-purple-600 text-white py-2 rounded-lg w-full text-sm"
+                data-title-en="Monitoring Tower"
+                data-title-id="Monitoring Tower"
+                data-desc-en="✓ Role-based access (Admin & User) 
+                  ✓ Admin manages user data and tower data 
+                  ✓ Users can view and search tower data 
+                  ✓ Advanced filtering (certificate, district, city) 
+                  ✓ Coordinates with direct Google Maps navigation"
+                data-desc-id="✓ Akses berbasis peran (Admin & Pengguna) 
+                  ✓ Admin mengelola data pengguna dan tower 
+                  ✓ Pengguna dapat melihat & mencari data tower 
+                  ✓ Filter lanjutan (sertifikat, kabupaten, kota) 
+                  ✓ Koordinat dengan navigasi Google Maps langsung"
+              >
+                Details
+              </button>
+            </div>
           </div>
-          <div id="modalTextContent">
-            <h3 class="text-2xl font-bold text-purple-800" id="modalTitle"></h3>
-            <p class="text-gray-700 mt-3 leading-relaxed" id="modalDesc"></p>
+          <div
+            class="bg-white dark:bg-gray-800 rounded-2xl shadow-md overflow-hidden card-hover"
+          >
+            <div class="p-5">
+              <div class="flex items-center gap-2 mb-2">
+                <span
+                  class="bg-purple-100 text-purple-700 px-3 py-1 rounded-full text-xs"
+                  ><i class="fas fa-building"></i> PLN</span
+                >
+              </div>
+              <div
+                class="project-img-bg bg-gray-100 dark:bg-gray-700 rounded-lg mb-3 flex justify-center"
+              >
+                <img
+                  src="assets/images/mockup-mager.png"
+                  class="h-40 object-contain"
+                />
+              </div>
+              <h3 class="text-xl font-bold dark:text-white">SI MAGER</h3>
+              <p class="text-gray-600 dark:text-gray-300 text-sm">
+                Multi-user work management with tasks & deadlines.
+              </p>
+              <button
+                class="detailBtn mt-3 bg-purple-600 text-white py-2 rounded-lg w-full text-sm"
+                data-title-en="SI MAGER"
+                data-title-id="SI MAGER"
+                data-desc-en="✓ Role-based system (Admin & User) 
+                  ✓ Authentication (login for all users) 
+                  ✓ Admin manages user accounts 
+                  ✓ Each user manages their own tasks independently 
+                  ✓ Create tasks with deadline, type, and status 
+                  ✓ Support for attaching links (resources & tutorials) 
+                  ✓ Filtering system to quickly find tasks"
+                data-desc-id="✓ Sistem berbasis peran (Admin & Pengguna) 
+                  ✓ Autentikasi login untuk semua pengguna 
+                  ✓ Admin mengelola akun pengguna 
+                  ✓ Setiap pengguna mengelola tugasnya sendiri 
+                  ✓ Buat tugas dengan tenggat, jenis, dan status 
+                  ✓ Dukungan tautan (sumber daya & tutorial) 
+                  ✓ Sistem filter untuk mencari tugas dengan cepat"
+              >
+                Details
+              </button>
+            </div>
           </div>
-          <div class="mt-6 text-right">
-            <button
-              id="modalCloseBtn"
-              class="bg-purple-100 text-purple-700 px-5 py-2 rounded-full"
-            >
-              Close
-            </button>
+          <div
+            class="bg-white dark:bg-gray-800 rounded-2xl shadow-md overflow-hidden card-hover"
+          >
+            <div class="p-5">
+              <div class="flex items-center gap-2 mb-2">
+                <span
+                  class="bg-purple-100 text-purple-700 px-3 py-1 rounded-full text-xs"
+                  ><i class="fas fa-school"></i> SMKIT As-Syifa</span
+                >
+              </div>
+              <div
+                class="project-img-bg bg-gray-100 dark:bg-gray-700 rounded-lg mb-3 flex justify-center"
+              >
+                <img
+                  src="assets/images/mockup-pkl.png"
+                  class="h-40 object-contain"
+                />
+              </div>
+              <h3 class="text-xl font-bold dark:text-white">PKL Management</h3>
+              <p class="text-gray-600 dark:text-gray-300 text-sm">
+                Internship management: reports, supervision, student progress.
+              </p>
+              <button
+                class="detailBtn mt-3 bg-purple-600 text-white py-2 rounded-lg w-full text-sm"
+                data-title-en="PKL Management"
+                data-title-id="Manajemen PKL"
+                data-desc-en="✓ Role-based system (Admin, Teacher, Student) 
+                  ✓ Authentication using ID 
+                  ✓ Admin manages users (students & teachers) 
+                  ✓ Students submit daily/periodic activity reports 
+                  ✓ Teachers monitor and review student reports 
+                  ✓ Approval / feedback system for reports 
+                  ✓ Internship data management (placement, company, duration)"
+                data-desc-id="✓ Sistem berbasis peran (Admin, Guru, Siswa) 
+                  ✓ Autentikasi menggunakan ID 
+                  ✓ Admin mengelola pengguna (siswa & guru) 
+                  ✓ Siswa mengirim laporan kegiatan harian/berkala 
+                  ✓ Guru memantau & meninjau laporan siswa 
+                  ✓ Sistem persetujuan / umpan balik untuk laporan 
+                  ✓ Manajemen data PKL (penempatan, perusahaan, durasi)"
+              >
+                Details
+              </button>
+            </div>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- CERTIFICATES SECTION (purple + button) -->
-    <section id="certificates" class="py-20 px-5 bg-white">
+    <!-- CERTIFICATES & CONTACT (form putih solid) -->
+    <section id="certificates" class="py-20 px-5 bg-white dark:bg-gray-900">
       <div class="max-w-4xl mx-auto text-center">
         <i class="fas fa-certificate text-5xl text-purple-400 mb-3"></i>
-        <h2 class="text-3xl font-bold">
-          Certificates & <span class="purple-text-grad">Achievements</span>
+        <h2 class="text-3xl font-bold text-gray-800 dark:text-white">
+          <span data-i18n="cert_title">Certificates &</span>
+          <span class="purple-text-grad" data-i18n="cert_grad"
+            >Achievements</span
+          >
         </h2>
         <div class="w-20 h-1 bg-purple-400 mx-auto my-4 rounded-full"></div>
-        <p class="text-gray-600 max-w-xl mx-auto">
+        <p
+          class="text-gray-600 dark:text-gray-300 max-w-xl mx-auto"
+          data-i18n="cert_desc"
+        >
           Course completions, workshops, and competition recognitions I've
-          gathered along the way.
+          gathered.
         </p>
         <div class="mt-8">
           <a
             href="certificates.html"
-            class="inline-flex items-center gap-3 bg-purple-600 hover:bg-purple-700 text-white px-7 py-3 rounded-full shadow-lg transition-all"
-            ><i class="fas fa-award"></i> Browse all certificates
+            class="inline-flex items-center gap-3 bg-purple-600 hover:bg-purple-700 text-white px-7 py-3 rounded-full shadow-lg"
+            ><i class="fas fa-award"></i>
+            <span data-i18n="browse_certs">Browse all certificates</span>
             <i class="fas fa-arrow-right"></i
           ></a>
         </div>
       </div>
     </section>
 
-    <!-- CONTACT with purple vibe -->
-    <section
-      id="contact"
-      class="py-20 px-5 bg-gradient-to-br from-purple-50 to-indigo-50"
-    >
+    <section id="contact" class="py-20 px-5 bg-gray-50 dark:bg-gray-800/30">
       <div class="max-w-3xl mx-auto">
         <div class="text-center mb-8">
-          <h2 class="text-3xl font-bold">
-            Let's <span class="purple-text-grad">Connect</span>
+          <h2 class="text-3xl font-bold text-gray-800 dark:text-white">
+            <span data-i18n="contact_lets">Let's</span>
+            <span class="purple-text-grad" data-i18n="contact_grad"
+              >Connect</span
+            >
           </h2>
           <div class="w-16 h-1 bg-purple-400 mx-auto mt-2 rounded-full"></div>
         </div>
@@ -732,66 +999,53 @@
           <a
             href="https://www.instagram.com/delfa_tamerawan/"
             target="_blank"
-            class="bg-white p-3 rounded-full shadow-md hover:shadow-purple-200 transition"
-            ><i class="fab fa-instagram text-3xl text-purple-600"></i
-          ></a>
-          <a
+            class="bg-white dark:bg-gray-800 p-3 rounded-full shadow-md"
+            ><i class="fab fa-instagram text-3xl text-purple-600"></i></a
+          ><a
             href="https://wa.me/628111443260"
             target="_blank"
-            class="bg-white p-3 rounded-full shadow-md hover:shadow-green-200 transition"
-          >
-            <i class="fab fa-whatsapp text-3xl text-green-500"></i>
-          </a>
+            class="bg-white dark:bg-gray-800 p-3 rounded-full shadow-md"
+            ><i class="fab fa-whatsapp text-3xl text-green-500"></i
+          ></a>
         </div>
-        <div class="bg-white rounded-2xl shadow-xl p-7">
+        <div class="bg-white dark:bg-gray-800 rounded-2xl shadow-xl p-7">
           <form id="contactForm">
-            <div class="mb-4">
-              <input
-                type="text"
-                name="name"
-                placeholder="Your name"
-                class="w-full border border-purple-200 rounded-xl p-3 focus:ring-2 focus:ring-purple-300 outline-none"
-                required
-              />
-            </div>
-            <div class="mb-4">
-              <input
-                type="email"
-                name="email"
-                placeholder="Email address"
-                class="w-full border border-purple-200 rounded-xl p-3 focus:ring-2 focus:ring-purple-300"
-                required
-              />
-            </div>
-            <div class="mb-5">
-              <textarea
-                name="message"
-                rows="4"
-                placeholder="Your message..."
-                class="w-full border border-purple-200 rounded-xl p-3 focus:ring-2 focus:ring-purple-300"
-                required
-              ></textarea>
-            </div>
-            <button
+            <input
+              type="text"
+              name="name"
+              placeholder="Your name"
+              class="w-full border border-purple-200 rounded-xl p-3 mb-4 focus:ring-2 focus:ring-purple-300 dark:bg-gray-700 bg-white"
+              required
+            /><input
+              type="email"
+              name="email"
+              placeholder="Email"
+              class="w-full border border-purple-200 rounded-xl p-3 mb-4 focus:ring-2 focus:ring-purple-300 dark:bg-gray-700 bg-white"
+              required
+            /><textarea
+              name="message"
+              rows="4"
+              placeholder="Your message..."
+              class="w-full border border-purple-200 rounded-xl p-3 mb-5 focus:ring-2 focus:ring-purple-300 dark:bg-gray-700 bg-white"
+              required
+            ></textarea
+            ><button
               type="submit"
-              class="w-full bg-purple-700 hover:bg-purple-800 text-white py-3 rounded-xl font-semibold transition flex items-center justify-center gap-2"
+              class="w-full bg-purple-700 hover:bg-purple-800 text-white py-3 rounded-xl font-semibold flex items-center justify-center gap-2"
             >
-              <i class="fas fa-paper-plane"></i> Send Message
+              <i class="fas fa-paper-plane"></i>
+              <span data-i18n="send_msg">Send Message</span>
             </button>
-            <p class="text-xs text-center text-gray-400 mt-4">
-              <i class="fas fa-lock"></i> I'll reply within 24h
-            </p>
           </form>
         </div>
       </div>
     </section>
-
     <footer class="bg-gray-900 text-gray-400 py-8 text-center">
       <p>© 2026 Muhammad Delfa Tamerawan</p>
     </footer>
     <button
       id="goTop"
-      class="fixed bottom-5 right-5 bg-purple-600 text-white p-3 rounded-full shadow-lg hover:bg-purple-700 transition opacity-0 pointer-events-none"
+      class="fixed bottom-5 right-5 bg-purple-600 text-white p-3 rounded-full shadow-lg hover:bg-purple-700 transition opacity-0 pointer-events-none z-50"
     >
       <i class="fas fa-chevron-up"></i>
     </button>
@@ -801,7 +1055,7 @@
       (function () {
         emailjs.init("LDgu6mHW1D5eaafDq");
       })();
-      // dynamic text
+      // dynamic text, filter, modal, etc (shortened for brevity but functional)
       const texts = ["Full-Stack Developer", "Mobile Developer"];
       let idx = 0,
         charIdx = 0,
@@ -825,76 +1079,73 @@
         setTimeout(typeEffect, isDeleting ? 40 : 80);
       }
       typeEffect();
-
-      // filter + modal
-      const filterBtns = document.querySelectorAll(".filterBtn");
-      const projects = document.querySelectorAll(".project-item");
+      const filterBtns = document.querySelectorAll(".filterBtn"),
+        projectsItems = document.querySelectorAll(".project-item");
       filterBtns.forEach((btn) => {
-      btn.addEventListener("click", () => {
-        
-        filterBtns.forEach((b) => {
-          b.classList.remove("active-filter", "bg-purple-600", "text-white");
-          b.classList.add("bg-white", "text-gray-700");
+        btn.addEventListener("click", () => {
+          filterBtns.forEach((b) => {
+            b.classList.remove("active-filter", "bg-purple-600", "text-white");
+            b.classList.add("bg-white", "text-gray-700");
+          });
+          btn.classList.remove("bg-white", "text-gray-700");
+          btn.classList.add("active-filter", "bg-purple-600", "text-white");
+          const val = btn.getAttribute("data-filter");
+          projectsItems.forEach((proj) => {
+            if (val === "all" || proj.getAttribute("data-category") === val)
+              proj.style.display = "block";
+            else proj.style.display = "none";
+          });
         });
-
-        // 🔥 INI YANG KURANG
-        btn.classList.remove("bg-white", "text-gray-700");
-
-        btn.classList.add("active-filter", "bg-purple-600", "text-white");
-
-        const filterVal = btn.getAttribute("data-filter");
-
-        projects.forEach((proj) => {
-          if (
-            filterVal === "all" ||
-            proj.getAttribute("data-category") === filterVal
-          ) {
-            proj.style.display = "block";
-          } else {
-            proj.style.display = "none";
-          }
-        });
-
       });
-    });
-      // modal logic
-      const modal = document.getElementById("projectModal");
-      const modalTitle = document.getElementById("modalTitle");
-      const modalDesc = document.getElementById("modalDesc");
-      const modalVideo = document.getElementById("modalVideoContainer");
-      const iframe = document.getElementById("modalIframe");
+      if (!document.getElementById("projectModal")) {
+        const div = document.createElement("div");
+        div.id = "projectModal";
+        div.className =
+          "fixed inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center z-50 hidden";
+        div.innerHTML = `<div class="bg-white dark:bg-gray-800 rounded-2xl max-w-2xl w-full mx-4 p-6 modal-pop relative max-h-[85vh] overflow-auto"><button id="closeModal" class="absolute top-4 right-5 text-gray-500 text-2xl"><i class="fas fa-times"></i></button><div id="modalVideoContainer" class="hidden mb-5"><iframe id="modalIframe" width="100%" height="280" class="rounded-xl" frameborder="0" allowfullscreen></iframe></div><div id="modalTextContent"><h3 class="text-2xl font-bold text-purple-800 dark:text-purple-300" id="modalTitle"></h3><p class="text-gray-700 dark:text-gray-300 mt-3 leading-relaxed whitespace-pre-line" id="modalDesc"></p></div><div class="mt-6 text-right"><button id="modalCloseBtn" class="bg-purple-100 dark:bg-purple-900 text-purple-700 px-5 py-2 rounded-full">Close</button></div></div>`;
+        document.body.appendChild(div);
+      }
+      const modalElem = document.getElementById("projectModal"),
+        modalTitle = document.getElementById("modalTitle"),
+        modalDesc = document.getElementById("modalDesc"),
+        modalVideoDiv = document.getElementById("modalVideoContainer"),
+        iframeModal = document.getElementById("modalIframe");
       function closeModalFunc() {
-        modal.classList.add("hidden");
-        modalVideo.classList.add("hidden");
-        iframe.src = "";
+        modalElem.classList.add("hidden");
+        modalVideoDiv.classList.add("hidden");
+        if (iframeModal) iframeModal.src = "";
+      }
+      let currentLang = localStorage.getItem("lang") || "en";
+      function updateModalText(btn) {
+        const titleKey =
+          btn.getAttribute(`data-title-${currentLang}`) ||
+          btn.getAttribute("data-title-en");
+        const descKey =
+          btn.getAttribute(`data-desc-${currentLang}`) ||
+          btn.getAttribute("data-desc-en");
+        modalTitle.innerText = titleKey || "Project";
+        modalDesc.innerText = descKey || "Details";
       }
       document.querySelectorAll(".detailBtn").forEach((btn) => {
         btn.addEventListener("click", () => {
-          modalVideo.classList.add("hidden");
-          iframe.src = "";
-          modalTitle.innerText = btn.getAttribute("data-title") || "Project";
-          modalDesc.innerText =
-            btn.getAttribute("data-desc") || "No description available.";
-          modal.classList.remove("hidden");
+          modalVideoDiv.classList.add("hidden");
+          iframeModal.src = "";
+          updateModalText(btn);
+          modalElem.classList.remove("hidden");
         });
       });
       document.querySelectorAll(".videoBtn").forEach((btn) => {
         btn.addEventListener("click", () => {
-          const videoUrl = btn.getAttribute("data-video");
-          modalVideo.classList.remove("hidden");
-          iframe.src = videoUrl;
-          modalTitle.innerText = "Video Preview";
-          modalDesc.innerText = "Watch demo of the application.";
-          modal.classList.remove("hidden");
-        });
-      });
-      document.querySelectorAll(".loginInfoBtn").forEach((btn) => {
-        btn.addEventListener("click", () => {
-          modalVideo.classList.add("hidden");
-          iframe.src = "";
-          modalTitle.innerText = "Demo Credentials";
-          modalDesc.innerHTML = btn.getAttribute("data-login");
-          modal.classList.remove("hidden");
+          const url = btn.getAttribute("data-video");
+          modalVideoDiv.classList.remove("hidden");
+          iframeModal.src = url;
+          modalTitle.innerText =
+            currentLang === "en" ? "Video Preview" : "Pratinjau Video";
+          modalDesc.innerText =
+            currentLang === "en"
+              ? "Watch demo of the application."
+              : "Tonton demo aplikasi.";
+          modalElem.classList.remove("hidden");
         });
       });
       document
@@ -903,26 +1154,23 @@
       document
         .getElementById("modalCloseBtn")
         ?.addEventListener("click", closeModalFunc);
-      modal?.addEventListener("click", (e) => {
-        if (e.target === modal) closeModalFunc();
+      modalElem?.addEventListener("click", (e) => {
+        if (e.target === modalElem) closeModalFunc();
       });
-
-      // mobile drawer
-      const menuBtn = document.getElementById("mobileMenuBtn");
-      const drawer = document.getElementById("mobileDrawer");
-      const closeDrawer = document.getElementById("closeDrawer");
-      if (menuBtn && drawer) {
+      const menuBtn = document.getElementById("mobileMenuBtn"),
+        drawer = document.getElementById("mobileDrawer"),
+        closeDr = document.getElementById("closeDrawer");
+      if (menuBtn) {
         menuBtn.onclick = () => drawer.classList.remove("translate-x-full");
-        closeDrawer.onclick = () => drawer.classList.add("translate-x-full");
+        closeDr.onclick = () => drawer.classList.add("translate-x-full");
         document
           .querySelectorAll(".mobile-link")
-          .forEach((link) =>
-            link.addEventListener("click", () =>
+          .forEach((l) =>
+            l.addEventListener("click", () =>
               drawer.classList.add("translate-x-full"),
             ),
           );
       }
-      // back to top
       const goTopBtn = document.getElementById("goTop");
       window.addEventListener("scroll", () => {
         if (window.scrollY > 400)
@@ -932,22 +1180,178 @@
       goTopBtn.addEventListener("click", () =>
         window.scrollTo({ top: 0, behavior: "smooth" }),
       );
-      // navbar scroll hide/show (simple)
-      let lastScrollY = 0;
+      let lastY = 0;
       window.addEventListener("scroll", () => {
         let navbar = document.getElementById("navbar");
-        if (window.scrollY > lastScrollY && window.scrollY > 120)
+        if (window.scrollY > lastY && window.scrollY > 120)
           navbar.style.transform = "translateY(-100%)";
         else navbar.style.transform = "translateY(0)";
-        lastScrollY = window.scrollY;
+        lastY = window.scrollY;
       });
-      // emailjs contact
+      const themeToggle = document.getElementById("themeToggleCheckbox"),
+        mobileThemeToggle = document.getElementById("mobileThemeToggle"),
+        langSelect = document.getElementById("langSelect"),
+        mobileLangSelect = document.getElementById("mobileLangSelect");
+      function setTheme(theme) {
+        if (theme === "dark") document.body.classList.add("dark");
+        else document.body.classList.remove("dark");
+        localStorage.setItem("theme", theme);
+        if (themeToggle) themeToggle.checked = theme === "dark";
+        if (mobileThemeToggle) mobileThemeToggle.checked = theme === "dark";
+      }
+      function loadTheme() {
+        const saved = localStorage.getItem("theme");
+        const prefers = window.matchMedia("(prefers-color-scheme: dark)")
+          .matches
+          ? "dark"
+          : "light";
+        setTheme(saved ? saved : prefers);
+      }
+      themeToggle?.addEventListener("change", (e) =>
+        setTheme(e.target.checked ? "dark" : "light"),
+      );
+      mobileThemeToggle?.addEventListener("change", (e) =>
+        setTheme(e.target.checked ? "dark" : "light"),
+      );
+      const translations = {
+        en: {
+          nav_about: "About",
+          nav_projects: "Projects",
+          nav_clients: "Clients",
+          nav_certs: "Certs",
+          nav_contact: "Contact",
+          hire_me: "Hire Me",
+          whoami: "Who Am I",
+          about_title: "About",
+          about_title_grad: "Me",
+          about_desc:
+            "I'm a passionate developer currently studying at a vocational high school, focused on building fast and user-friendly web & mobile applications. I turn ideas into real, functional products — let's build something impactful.",
+          web_dev: "Website Development",
+          mobile_dev: "Mobile App",
+          dashboard_dev: "Dashboard System",
+          my_projects: "My",
+          projects_grad: "Projects",
+          cert_title: "Certificates &",
+          cert_grad: "Achievements",
+          cert_desc:
+            "Course completions, workshops, and competition recognitions I've gathered.",
+          browse_certs: "Browse all certificates",
+          contact_lets: "Let's",
+          contact_grad: "Connect",
+          send_msg: "Send Message",
+        },
+        id: {
+          nav_about: "Tentang",
+          nav_projects: "Proyek",
+          nav_clients: "Klien",
+          nav_certs: "Sertifikat",
+          nav_contact: "Kontak",
+          hire_me: "Hubungi Saya",
+          whoami: "Siapa Saya",
+          about_title: "Tentang",
+          about_title_grad: "Saya",
+          about_desc:
+            "Saya pengembang yang bersemangat, saat ini belajar di SMK, fokus membangun aplikasi web & mobile cepat dan mudah digunakan. Saya mengubah ide menjadi produk fungsional — mari membangun sesuatu yang berdampak.",
+          web_dev: "Pengembangan Web",
+          mobile_dev: "Aplikasi Mobile",
+          dashboard_dev: "Sistem Dashboard",
+          my_projects: "Proyek",
+          projects_grad: "Saya",
+          cert_title: "Sertifikat &",
+          cert_grad: "Pencapaian",
+          cert_desc:
+            "Penyelesaian kursus, workshop, dan penghargaan kompetisi yang saya kumpulkan.",
+          browse_certs: "Lihat semua sertifikat",
+          contact_lets: "Mari",
+          contact_grad: "Terhubung",
+          send_msg: "Kirim Pesan",
+        },
+      };
+      function setLanguage(lang) {
+        currentLang = lang;
+        localStorage.setItem("lang", lang);
+        document.querySelectorAll("[data-i18n]").forEach((el) => {
+          const key = el.getAttribute("data-i18n");
+          if (translations[lang] && translations[lang][key]) {
+            if (el.tagName === "INPUT" || el.tagName === "TEXTAREA")
+              el.placeholder = translations[lang][key];
+            else el.innerText = translations[lang][key];
+          }
+        });
+        document.querySelectorAll("[data-i18n-desc]").forEach((el) => {
+          const key = el.getAttribute("data-i18n-desc");
+          const descMap = {
+            fastreq_desc:
+              lang === "en"
+                ? "Procurement request system with manager approval."
+                : "Sistem permintaan pengadaan dengan persetujuan manajer.",
+            health_desc:
+              lang === "en"
+                ? "Medical record management for patient data and doctors."
+                : "Manajemen rekam medis untuk data pasien dan dokter.",
+            electronic_desc:
+              lang === "en"
+                ? "Retail management with transaction and stock handling."
+                : "Manajemen ritel dengan transaksi dan stok.",
+            bengkel_desc:
+              lang === "en"
+                ? "POS system with barcode scanning and stock management."
+                : "Sistem POS dengan pemindaian barcode dan manajemen stok.",
+          };
+          if (descMap[key]) el.innerText = descMap[key];
+        });
+        if (langSelect) langSelect.value = lang;
+        if (mobileLangSelect) mobileLangSelect.value = lang;
+        showToast(
+          lang === "en"
+            ? "🌍 Language set to English | Theme: " +
+                (document.body.classList.contains("dark") ? "Dark" : "Light")
+            : "🌍 Bahasa diatur ke Indonesia | Tema: " +
+                (document.body.classList.contains("dark") ? "Gelap" : "Terang"),
+          2500,
+        );
+      }
+      function loadLanguage() {
+        const saved = localStorage.getItem("lang") || "en";
+        setLanguage(saved);
+      }
+      function showToast(msg, duration = 3000) {
+        const toast = document.getElementById("toastMessage");
+        if (toast) {
+          toast.innerText = msg;
+          toast.classList.remove("opacity-0");
+          toast.classList.add("opacity-100");
+          setTimeout(() => {
+            toast.classList.remove("opacity-100");
+            toast.classList.add("opacity-0");
+          }, duration);
+        }
+      }
+      langSelect?.addEventListener("change", (e) =>
+        setLanguage(e.target.value),
+      );
+      mobileLangSelect?.addEventListener("change", (e) =>
+        setLanguage(e.target.value),
+      );
+      loadTheme();
+      loadLanguage();
+      window.addEventListener("load", () => {
+        const themeStatus = document.body.classList.contains("dark")
+          ? "Dark"
+          : "Light";
+        const langStatus =
+          localStorage.getItem("lang") === "id" ? "Indonesian" : "English";
+        showToast(
+          `✨ Welcome Delfa! Theme: ${themeStatus} | Language: ${langStatus}`,
+          4000,
+        );
+      });
       const contactForm = document.getElementById("contactForm");
       if (contactForm) {
         contactForm.addEventListener("submit", function (e) {
           e.preventDefault();
           const btn = this.querySelector('button[type="submit"]');
-          const original = btn.innerHTML;
+          const orig = btn.innerHTML;
           btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending...';
           btn.disabled = true;
           emailjs
@@ -956,18 +1360,18 @@
               btn.innerHTML = '<i class="fas fa-check"></i> Sent!';
               btn.classList.add("bg-green-600");
               setTimeout(() => {
-                btn.innerHTML = original;
+                btn.innerHTML = orig;
                 btn.classList.remove("bg-green-600");
                 btn.disabled = false;
               }, 3000);
-              contactForm.reset();
+              this.reset();
             })
             .catch(() => {
               btn.innerHTML =
                 '<i class="fas fa-exclamation-triangle"></i> Error';
               btn.classList.add("bg-red-600");
               setTimeout(() => {
-                btn.innerHTML = original;
+                btn.innerHTML = orig;
                 btn.classList.remove("bg-red-600");
                 btn.disabled = false;
               }, 3000);
